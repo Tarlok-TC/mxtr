@@ -1,0 +1,19 @@
+version: 0.0
+os: windows
+files:
+  - source: \
+    destination: c:\inetpub\wwwroot\mxtr-automation
+  - source: \Scripts\deletewebsite.ps1
+    destination: c:\temp
+  - source: \Scripts\installwebsite.ps1
+    destination: c:\temp
+  - source: \Scripts\gacheck.ps1
+    destination: c:\temp
+hooks:
+  BeforeInstall:
+    - location: \Scripts\deletewebsite.bat
+      timeout: 600
+  AfterInstall:
+    - location: \Scripts\installwebsite.bat
+      timeout: 600
+ 
