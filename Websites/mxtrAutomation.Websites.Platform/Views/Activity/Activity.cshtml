@@ -1,0 +1,541 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Activity.ViewModels.ActivityViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+
+    <div id="DashboardContainer">
+
+        <div class="row top_tiles gent-bar">
+            @*  <div class="animated flipInY col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-building-o"></i>
+                    </div>
+                    <h3>Total Clients</h3>
+                    <div class="count">2500</div>
+                    <p><span><i class="fa fa-arrow-up"></i></span> 4% from last week</p>
+                </div>
+            </div>*@
+            <div id="campaigns" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats link-score-box" data-report="campaigns">
+                    <span>
+                        Total Web Visits
+                    </span>
+                    @*<div id="CampaignsCount" class="count">@Model.TotalCampaigns</div>*@
+                    <div class="count">63,899</div>
+                    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                    @*<p>
+                        <span>
+                            <i id="CampaignsDeltaCSS" class="@Model.TotalCampaignsDeltaArrowCss"></i>
+                        </span>
+                        <span id="CampaignsDelta">@Math.Abs(Model.TotalCampaignsDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+                </div>
+            </div>
+            <div id="leads" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats link-score-box" data-report="leads">
+                    <span>Behavior Interactions</span>
+                    <div class="count">22.5%</div>
+                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+                    @*<div id="LeadsCount" class="count">@Model.TotalLeads</div>*@
+                    @*<p>
+                        <span>
+                            <i id="LeadsDeltaCSS" class="@Model.TotalLeadsDeltaArrowCss"></i>
+                        </span>
+                        <span id="LeadsDelta">@Math.Abs(Model.TotalLeadsDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+                </div>
+            </div>
+            <div id="opportunity-value" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats link-score-box" data-report="opportunities">
+                    <span>Events Scheduled</span>
+                    <div class="count">7,653</div>
+                    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                    @*<div id="OpenOpportunityValue" class="count">@Model.OpenOpportunityValue.ToString("C0")</div>*@
+                    @*<p>
+                        <span>
+                            <i id="OpenOpportunityValueDeltaCSS" class="@Model.OpenOpportunityValueDeltaArrowCss"></i>
+                        </span>
+                        <span id="OpenOpportunityValueDelta">@Math.Abs(Model.OpenOpportunityValueDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+                </div>
+            </div>
+            <div class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats link-score-box" data-report="opportunities">
+                    <span>Average Score</span>
+                    <div class="count">43</div>
+                    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h3>Customer Journey</h3>
+                    </div>
+                    <div class="col-xs-9 nurturing-title">
+                        <span class="long-arrow long-left"></span>
+                        <h4>Nurturing</h4>
+                        <span class="long-arrow long-right"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body activity">
+                <div class="chart-bar"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Averages Across Your Enterprise</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#">Settings 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div id="echart_guage" style="height:370px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Lead Funnel</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="#">Settings 1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <div id="echart_pyramid" style="height:370px;"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="~/Scripts/controllers/activity.js"></script>
+        <script>
+            var theme = {
+                color: [
+                    '#26B99A', '#34495E', '#66FF00', '#3498DB',
+                    '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+                ],
+
+                title: {
+                    itemGap: 8,
+                    textStyle: {
+                        fontWeight: 'normal',
+                        color: '#408829'
+                    }
+                },
+
+                dataRange: {
+                    color: ['#1f610a', '#97b58d']
+                },
+
+                toolbox: {
+                    color: ['#408829', '#408829', '#408829', '#408829']
+                },
+
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    axisPointer: {
+                        type: 'line',
+                        lineStyle: {
+                            color: '#408829',
+                            type: 'dashed'
+                        },
+                        crossStyle: {
+                            color: '#408829'
+                        },
+                        shadowStyle: {
+                            color: 'rgba(200,200,200,0.3)'
+                        }
+                    }
+                },
+
+                dataZoom: {
+                    dataBackgroundColor: '#eee',
+                    fillerColor: 'rgba(64,136,41,0.2)',
+                    handleColor: '#408829'
+                },
+                grid: {
+                    borderWidth: 0
+                },
+
+                categoryAxis: {
+                    axisLine: {
+                        lineStyle: {
+                            color: '#408829'
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: ['#eee']
+                        }
+                    }
+                },
+
+                valueAxis: {
+                    axisLine: {
+                        lineStyle: {
+                            color: '#408829'
+                        }
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: ['#eee']
+                        }
+                    }
+                },
+                timeline: {
+                    lineStyle: {
+                        color: '#408829'
+                    },
+                    controlStyle: {
+                        normal: { color: '#408829' },
+                        emphasis: { color: '#408829' }
+                    }
+                },
+
+                k: {
+                    itemStyle: {
+                        normal: {
+                            color: '#68a54a',
+                            color0: '#a9cba2',
+                            lineStyle: {
+                                width: 1,
+                                color: '#408829',
+                                color0: '#86b379'
+                            }
+                        }
+                    }
+                },
+                map: {
+                    itemStyle: {
+                        normal: {
+                            areaStyle: {
+                                color: '#ddd'
+                            },
+                            label: {
+                                textStyle: {
+                                    color: '#c12e34'
+                                }
+                            }
+                        },
+                        emphasis: {
+                            areaStyle: {
+                                color: '#99d2dd'
+                            },
+                            label: {
+                                textStyle: {
+                                    color: '#c12e34'
+                                }
+                            }
+                        }
+                    }
+                },
+                force: {
+                    itemStyle: {
+                        normal: {
+                            linkStyle: {
+                                strokeColor: '#408829'
+                            }
+                        }
+                    }
+                },
+                chord: {
+                    padding: 4,
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            },
+                            chordStyle: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                }
+                            }
+                        },
+                        emphasis: {
+                            lineStyle: {
+                                width: 1,
+                                color: 'rgba(128, 128, 128, 0.5)'
+                            },
+                            chordStyle: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                }
+                            }
+                        }
+                    }
+                },
+                gauge: {
+                    startAngle: 225,
+                    endAngle: -45,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+                            width: 8
+                        }
+                    },
+                    axisTick: {
+                        splitNumber: 10,
+                        length: 12,
+                        lineStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    axisLabel: {
+                        textStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    splitLine: {
+                        length: 18,
+                        lineStyle: {
+                            color: 'auto'
+                        }
+                    },
+                    pointer: {
+                        length: '90%',
+                        color: 'auto'
+                    },
+                    title: {
+                        textStyle: {
+                            color: '#333'
+                        }
+                    },
+                    detail: {
+                        textStyle: {
+                            color: 'auto'
+                        }
+                    }
+                },
+                textStyle: {
+                    fontFamily: 'Arial, Verdana, sans-serif'
+                }
+            };
+
+            var echartGauge = echarts.init(document.getElementById('echart_guage'), theme);
+
+            echartGauge.setOption({
+                tooltip: {
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        restore: {
+                            show: true,
+                            title: "Restore"
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: "Save Image"
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Performance',
+                    type: 'gauge',
+                    center: ['50%', '50%'],
+                    startAngle: 140,
+                    endAngle: -140,
+                    min: 0,
+                    max: 100,
+                    precision: 0,
+                    splitNumber: 10,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: [
+                                [0.2, 'lightgreen'],
+                                [0.4, 'orange'],
+                                [0.8, 'skyblue'],
+                                [1, '#ff4500']
+                            ],
+                            width: 30
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        splitNumber: 5,
+                        length: 8,
+                        lineStyle: {
+                            color: '#eee',
+                            width: 1,
+                            type: 'solid'
+                        }
+                    },
+                    axisLabel: {
+                        show: true,
+                        formatter: function (v) {
+                            switch (v + '') {
+                                case '10':
+                                    return 'a';
+                                case '30':
+                                    return 'b';
+                                case '60':
+                                    return 'c';
+                                case '90':
+                                    return 'd';
+                                default:
+                                    return '';
+                            }
+                        },
+                        textStyle: {
+                            color: '#333'
+                        }
+                    },
+                    splitLine: {
+                        show: true,
+                        length: 30,
+                        lineStyle: {
+                            color: '#eee',
+                            width: 2,
+                            type: 'solid'
+                        }
+                    },
+                    pointer: {
+                        length: '80%',
+                        width: 8,
+                        color: 'auto'
+                    },
+                    title: {
+                        show: true,
+                        offsetCenter: ['-65%', -10],
+                        textStyle: {
+                            color: '#333',
+                            fontSize: 15
+                        }
+                    },
+                    detail: {
+                        show: true,
+                        backgroundColor: 'rgba(0,0,0,0)',
+                        borderWidth: 0,
+                        borderColor: '#ccc',
+                        width: 100,
+                        height: 40,
+                        offsetCenter: ['-60%', 10],
+                        formatter: '{value}%',
+                        textStyle: {
+                            color: 'auto',
+                            fontSize: 30
+                        }
+                    },
+                    data: [{
+                        value: 50,
+                        name: 'Performance'
+                    }]
+                }]
+            });
+
+            var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
+
+            echartFunnel.setOption({
+                title: {
+                    text: 'Echart Pyramid Graph',
+                    subtext: 'Subtitle'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c}%"
+                },
+                toolbox: {
+                    show: true,
+                    feature: {
+                        restore: {
+                            show: true,
+                            title: "Restore"
+                        },
+                        saveAsImage: {
+                            show: true,
+                            title: "Save Image"
+                        }
+                    }
+                },
+                legend: {
+                    data: ['Something #1', 'Something #2', 'Something #3', 'Something #4', 'Something #5'],
+                    orient: 'vertical',
+                    x: 'left',
+                    y: 'bottom'
+                },
+                calculable: true,
+                series: [{
+                    name: '漏斗图',
+                    type: 'funnel',
+                    width: '40%',
+                    data: [{
+                        value: 60,
+                        name: 'Something #1'
+                    }, {
+                        value: 40,
+                        name: 'Something #2'
+                    }, {
+                        value: 20,
+                        name: 'Something #3'
+                    }, {
+                        value: 80,
+                        name: 'Something #4'
+                    }, {
+                        value: 100,
+                        name: 'Something #5'
+                    }]
+                }]
+            });
+        </script>
+}

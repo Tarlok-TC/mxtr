@@ -1,0 +1,819 @@
+﻿var ProshredCustomers = {};
+ProshredCustomers.Buildings = "";
+var _ResponseARCode = "";
+var _ResponseNewCustomerID = "";
+var _ResponseNewBuildingID = "";
+var objEZShredDataModel = new Object();
+var _done = false;
+
+$(document).ready(function () {
+    $('#btnUpdate').hide();
+    ProshredCustomers.getAllTypes();
+    ProshredCustomers.CustomCustomerDropdown();
+    ProshredCustomers.getCustomerList(function callback(result) { ProshredCustomers.PopulateCustomers(result); });
+
+});
+
+ProshredCustomers.getAllTypes = function () {
+    $.ajax({
+        type: "post",
+        url: "/GetAllTypes",
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Data !== undefined) {
+                //Industry Type
+                $.each(response.Data.CustomerTypes, function (key, value) {
+                    $("#IndustryType").append('<option value="' + value.CustomerTypeID + '">' + value.CustomerType + '</option>');
+                });
+                //invoice Type
+                $.each(response.Data.InvoiceTypes, function (key, value) {
+                    $("#InvoiceType").append('<option value="' + value.InvoiceTypeID + '">' + value.InvoiceType + '</option>');
+                });
+                //Terms
+                $.each(response.Data.TermTypes, function (key, value) {
+                    $("#TermsDropDown").append('<option value="' + value.TermID + '">' + value.Terms + '</option>');
+                });
+                //Referral Source
+                $.each(response.Data.ReferralSources, function (key, value) {
+                    $("#ReferralSourceDropDown").append('<option value="' + value.ReferralSourceID + '">' + value.ReferralSource + '</option>');
+                });
+                //Building Type
+                $.each(response.Data.BuildingTypes, function (key, value) {
+                    $("#BuildingType").append('<option value="' + value.BuildingTypeID + '">' + value.BuildingType + '</option>');
+                });
+                //Service Type
+                $.each(response.Data.ServiceTypes, function (key, value) {
+                    $("#ServiceType").append('<option value="' + value.ServiceTypeID + '">' + value.ServiceType + '</option>');
+                });
+                //Frequency
+                $.each(response.Data.Frequencys, function (key, value) {
+                    $("#ScheduleFrequency").append('<option value="' + value.ScheduleFrequency + '">' + value.Frequency + '</option>');
+                });
+
+                $("#IndustryType").prepend("<option value='0'  selected='selected'></option>");
+                $("#InvoiceType").prepend("<option value='0'  selected='selected'></option>");
+                $("#TermsDropDown").prepend("<option value='0'  selected='selected'></option>");
+                $("#ReferralSourceDropDown").prepend("<option value='0'  selected='selected'></option>");
+                $("#BuildingType").prepend("<option value='0'  selected='selected'></option>");
+                $("#ServiceType").prepend("<option value='0'  selected='selected'></option>");
+                $("#ScheduleFrequency").prepend("<option value='0'  selected='selected'></option>");
+            }
+        }
+    });
+};
+ProshredCustomers.getCustomerList = function (callback) {
+    $.ajax({
+        type: "get",
+        url: "/GetCustomers",
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Data.length > 0) {
+                callback(response.Data);
+                //ProshredCustomers.PopulateCustomers(response.Data);
+            } else
+                console.log(response.FailureInformation);
+
+        }
+    });
+};
+ProshredCustomers.PopulateCustomers = function (customers) {
+    $('.chzn-select').empty();
+    var facb = '<option onclick="resetForm()" selected>Search for Customer</option>';
+    $.each(customers, function (i, customer) {
+        facb += '<option value="' + customer.CustomerID + '">' + customer.Company + " ~ " + customer.Street + " ~ " + customer.Zip + '</option>';
+    });
+    $('.chzn-select').append(facb);
+    $('.chzn-select').trigger("select:updated");
+};
+ProshredCustomers.CustomCustomerDropdown = function () {
+    $(".chzn-select").select2({
+
+        width: "100%",
+        search_contains: true,
+        allowClear: true
+    });
+};
+ProshredCustomers.getBuildingListByCustomer = function () {
+    $.ajax({
+        type: "post",
+        url: "/GetBuildingListByCustomer",
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Data !== undefined) {
+                console.log('Response Data');
+                console.log(response.Data.Buildings);
+            }
+        }
+    });
+};
+ProshredCustomers.AddNewCustomerOnServer = function () {
+
+    var _laddaSpinner = Ladda.create(document.querySelector('.ladda-button'));
+
+    var companyName = $("#CompanyName").val();
+    var attention = $("#Attention").val();
+    var street = $("#Street").val();
+    var city = $("#City").val();
+    var state = $("#State").val();
+    var zip = $("#Zip").val();
+    var first = $("#ContactFName").val();
+    var last = $("#ContactLName").val();
+    var phone = $("#ContactPhone").val();
+    var mobile = $("#MobileNumber").val();//needs concatenated onto phone, wasnt working last time i tried...
+    var fax = $("#Fax").val();
+    var CustomerType = $("#IndustryType option:selected").val();
+    var InvoiceType = $("#InvoiceType option:selected").val();
+    //need to add the other emails if they exist... 
+    var email = $("#Email").val();
+    var email2 = $("#Email2").val() || "";
+    var email3 = $("#Email3").val() || "";
+
+    if ($("#Email2").val() != null)
+        email = email + ";" + email2;
+
+    var emailInvoice = $("#EmailInvoices").prop('checked') === true;
+    var refSource = $("#ReferralSourceDropDown option:selected").val();
+    var terms = $("#TermsDropDown option:selected").val();
+    var notes = $("#Notes").val();
+
+    objEZShredDataModel.Customers = [{
+        "CustomerID": "",
+        "Company": companyName,
+        "Attention": attention,
+        "Street": street,
+        "City": city,
+        "State": state,
+        "Zip": zip,
+        "Contact": first + " " + last,
+        "Phone": phone,
+        "Fax": fax,
+        "Notes": notes,
+        "CustomerTypeID": CustomerType,
+        "InvoiceTypeID": InvoiceType,
+        "EmailAddress": email,
+        "EmailInvoice": emailInvoice,
+        "ReferralSourceID": refSource,
+        "TermID": terms,
+
+        //custom fields:
+        "PipelineStatus": $("#btnGroup input:checked").val(),
+        "NumberOfEmployees": $("#NumberOfEmployees").val(),
+        "Mobile": mobile
+    }];
+    $.ajax({
+        type: "post",
+        url: "http://hosting.proshred.com:4550/api/ezshred/getdata",
+        data: JSON.stringify({
+            'Request': JSON.stringify({
+                "Request": "AddCustomer",
+                "tblCustomers": [{
+                    "Company": companyName,
+                    "Attention": attention,
+                    "Street": street,
+                    "City": city,
+                    "State": state,
+                    "Zip": zip,
+                    "Contact": first + " " + last,
+                    "Phone": phone,
+                    "Fax": fax,
+                    "CustomerTypeID": CustomerType,
+                    "InvoiceTypeID": InvoiceType,
+                    "EmailAddress": email,
+                    "EmailInvoice": emailInvoice,
+                    "ReferralsourceID": refSource,
+                    "TermID": terms,
+                    "Notes": notes
+                }]
+            })
+        }),
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Success) {
+                var result = JSON.parse(response.Result);
+                var passed = result.status === "OK";
+                if (passed) {
+                    _ResponseNewCustomerID = result.CustomerID;
+                    objEZShredDataModel.Customers[0].CustomerID = _ResponseNewCustomerID;
+                    console.log("Adding Customer...");
+
+                    $("#CustomerID").val(_ResponseNewCustomerID);
+
+                    ProshredCustomers.AddNewBuildingOnServer(_ResponseNewCustomerID);
+                } else {
+                    alert("Warning! Customer not added, " + result.status);
+                    _laddaSpinner.stop();
+
+                }
+            } else {
+                console.log(response.FailureInformation);
+                alert("Could not contact API to Add Customer.. " + response.FailureInformation);
+                _laddaSpinner.stop();
+            }
+        },
+        error: function (response) {
+            alert('error');
+            _laddaSpinner.stop();
+
+        }
+    });
+};
+ProshredCustomers.AddNewBuildingOnServer = function (paramCustomerID) {
+
+    var _laddaSpinner = Ladda.create(document.querySelector('.ladda-button'));
+
+    var BuildingType = $("#BuildingType option:selected").val();
+    var BuildingName = $("#BuildingName").val();
+    var BuildingStreet = $("#BuildingStreet").val();
+    var BuildingCity = $("#BuildingCity").val();
+    var BuildingState = $("#BuildingState").val();
+    var BuildingZip = $("#BuildingZip").val();
+    var BuildingPhone = $("#BuildingPhone").val();
+    var BuildingPhone2 = $("#BuildingPhone2").val();
+    var Directions = $("#Directions").val();
+    var RouteInstructions = $("#RouteInstructions").val();
+    var ScheduleFrequency = $("#ScheduleFrequency option:selected").val();
+    var ServiceType = $("#ServiceType option:selected").val();
+    var BldgContact1 = $("#BldgContactFName").val() + " " + $('#BldgContactLName').val();
+
+    objEZShredDataModel.Buildings = [{
+        "CustomerID": paramCustomerID,
+        "BuildingID": "",
+        "CompanyName": BuildingName,
+        "BuildingTypeID": BuildingType,
+        "Street": BuildingStreet,
+        "City": BuildingCity,
+        "State": BuildingState,
+        "Zip": BuildingZip,
+        "Phone1": BuildingPhone,
+        "Phone2": BuildingPhone2,
+        "SalesmanID": "342", //will need to get these... 
+        "ScheduleFrequency": ScheduleFrequency,
+        "SiteContact1": BldgContact1,
+        "SiteContact2": "",
+        "RouteID": "113",
+        "Stop": "99",
+        "ServiceTypeID": ServiceType,
+        "Directions": Directions,
+        "RoutineInstructions": RouteInstructions,
+        "SalesTaxRegionID": 1
+    }];
+    $.ajax({
+        type: "post",
+        url: "http://hosting.proshred.com:4550/api/ezshred/getdata",
+        data: JSON.stringify({
+            'Request': JSON.stringify({
+                "Request": "AddBuilding",
+                "tblBuilding": [
+                    {
+                        "BuildingTypeID": BuildingType,
+                        "CustomerID": paramCustomerID,
+                        "CompanyName": BuildingName,
+                        "Street": BuildingStreet,
+                        "City": BuildingCity,
+                        "State": BuildingState,
+                        "Zip": BuildingZip,
+                        "Phone1": BuildingPhone,
+                        "Phone2": BuildingPhone2,
+                        "SalesmanID": "342",
+                        "Directions": Directions,
+                        "RoutineInstructions": RouteInstructions,
+                        "SiteContact1": BldgContact1,
+                        "SiteContact2": "",
+                        "RouteID": "113",
+                        "Stop": "99",
+                        "ScheduleFrequency": ScheduleFrequency,
+                        "ServiceTypeID": ServiceType,
+                        "SalesTaxRegionID": 1,
+                        "TimeTaken": 15 // found that this was causing issues when looking at the building in EZ-Shred... Basically it would yell at you if this was missing...
+                    }
+                ]
+            })
+        }),
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Success) {
+                var result = JSON.parse(response.Result);
+                var passed = result.status === "OK";
+                if (passed) {
+                    _ResponseNewBuildingID = result.BuildingID;
+                    objEZShredDataModel.Buildings[0].BuildingID = _ResponseNewBuildingID;
+                    console.log("Adding Building...");
+
+                    $("#BuildingID").val(_ResponseNewBuildingID);
+
+                    getCustomerInfo(_ResponseNewCustomerID,
+                        function (ARCode) {
+                            $("#ARCustomerCode").val(ARCode);
+                            objEZShredDataModel.Customers[0].ARCustomerCode = ARCode;
+                            console.log("Assigned ARCode...");
+                            submitToSS();
+                            ProshredCustomers.AddNewCustomerAndBuildingInDb(objEZShredDataModel);//this is being called before i can add the ARCode to the model...
+                        });
+
+                } else {
+                    alert("Error while adding building data! " + result.status);
+                    _laddaSpinner.stop();
+                }
+
+            } else {
+                console.log(response.FailureInformation);
+                alert("Error while adding building data! " + response.FailureInformation);
+                _laddaSpinner.stop();
+            }
+        }
+
+    });
+};
+ProshredCustomers.AddNewCustomerAndBuildingInDb = function (_customerBuildingDataModel) {
+    var _laddaSpinner = Ladda.create(document.querySelector('.ladda-button'));
+
+    $.ajax({
+        type: "post",
+        data: {
+            'objEZShredDataModel': _customerBuildingDataModel
+        },
+        url: "/AddCustomer",
+        async: false,
+        cache: false,
+        success: function (response) {
+            if (response) {
+                ProshredCustomers.getCustomerList(function callback(result) {
+                    ProshredCustomers.PopulateCustomers(result);
+                    console.log("Successfully added Building and Customer to DB!");
+                });
+            }
+        },
+        complete: function () {
+            _laddaSpinner.stop();
+            alert("Successfully added Customer and Building information.\nYou can now copy the AR Code!");
+        }
+    });
+};
+ProshredCustomers.PopulateFormFields = function (customer, building, form) {
+    form.reset();
+
+    var emails = [];
+    var contactName = []; //have to separate the first and last name...    
+
+    if (customer.Notes != null) {
+        if (customer.Notes.includes("="))
+            form.NumberOfEmployees.value = parseInt(customer.Notes.split("=")[1]); //will not work with no '='
+        else {
+            form.NumberOfEmployees.value = customer.NumberOfEmployees;
+        }
+    }
+
+    if (customer.EmailAddress != null) {
+        if (customer.EmailAddress.includes(";"))
+            emails = customer.EmailAddress.split(";");
+    }
+
+    if (emails.length > 1) {
+        $("#addMailBtn").click();
+        form.Email.value = emails[0];
+        form.Email[2].value = emails[1];
+    } else {
+        form.Email.value = customer.EmailAddress;
+    }
+
+    if (customer.CreditHold === "True") {
+        $('#CreditStatus').show();
+    } else {
+        $("#CreditStatus").hide();
+    }
+
+    form.ARCustomerCode.value = customer.ARCustomerCode;
+    form.CustomerID.value = customer.CustomerID;
+
+    form.CompanyName.value = customer.Company;
+    form.Attention.value = customer.Attention;
+
+    contactName = customer.Contact.split(" ");
+
+    form.ContactFName.value = contactName[0];
+    form.ContactLName.value = contactName[1];
+    form.ContactPhone.value = customer.Phone;
+    form.MobileNumber.value = customer.Mobile;
+    form.Fax.value = customer.Fax;
+
+    form.EmailInvoices.checked = customer.EmailInvoice;
+    form.Street.value = customer.Street;
+    form.City.value = customer.City;
+    form.State.value = customer.State;
+    form.Zip.value = customer.Zip;
+    form.Notes.value = customer.Notes;
+    form.InvoiceType.value = customer.InvoiceTypeID;
+    form.IndustryType.value = customer.CustomerTypeID;
+    form.TermsDropDown.value = customer.TermID;
+    form.ReferralSourceDropDown.value = customer.ReferralSourceID;
+
+    if (building != undefined) {
+        form.BuildingType.value = building.BuildingTypeID;
+        form.ServiceType.value = building.ServiceTypeID;
+        form.ScheduleFrequency.value = building.ScheduleFrequency;
+        if (building.NextServiceDate != undefined)
+            form.NextServiceDate.value = building.NextServiceDate;
+        form.BuildingName.value = building.CompanyName;
+        form.Directions.value = building.Directions;
+        form.RouteInstructions.value = building.RoutineInstructions;
+        form.BuildingStreet.value = building.Street;
+        form.BuildingCity.value = building.City;
+        form.BuildingState.value = building.State;
+        form.BuildingZip.value = building.Zip;
+        form.BuildingID.value = building.BuildingID;
+        form.ServiceType.value = building.ServiceTypeID;
+        form.LastSvcDate.value = building.LastServiceDate;
+        form.BuildingPhone.value = building.Phone1;
+        form.BuildingPhone2.value = building.Phone2;
+        if (building.SiteContact1 != undefined) {
+            form.BldgContactFName.value = building.SiteContact1.split(" ")[0];
+            form.BldgContactLName.value = building.SiteContact1.split(" ")[1];
+        }
+        if (building.SalesTaxRegionID === "0")
+            $('#TaxStatus').show();
+        else
+            $("#TaxStatus").hide();
+
+        //custom fields:
+        if (customer.PipelineStatus == null)
+            $('input[name=status][value=Lead]').click();
+        else
+            $('input[name=status][value=' + customer.PipelineStatus + ']').click();
+
+
+    } else {
+        alert("Could not locate building information for this customer! Some fields may be blank...");
+    }
+};
+//Pending Work---->12/06/2017-Anand -- Continued by zh 6-26-17
+ProshredCustomers.UpdateCustomersOnServer = function () {
+    var _laddaSpinner = Ladda.create(document.querySelector('.ladda-button'));
+
+    var ARCustomerCode = $("#ARCustomerCode").val();
+    var CustomerID = $('#CustomerID').val();
+
+    //Company Information
+    var companyName = $("#CompanyName").val();
+    //var NumberOfEmployees = $("#NumberOfEmployees option:selected").val();
+    var first = $("#ContactFName").val();
+    var last = $("#ContactLName").val();
+    var phone = $("#ContactPhone").val();
+    var fax = $("#Fax").val();
+    var attention = $("#Attention").val();
+    var email = $("#Email").val();
+    var emailInvoice = $("#EmailInvoices").prop('checked') === true;
+
+    //Billing Address
+    var street = $("#Street").val();
+    var city = $("#City").val();
+    var state = $("#State").val();
+    var zip = $("#Zip").val();
+
+    //Customer Profile
+    var CustomerType = $("#IndustryType option:selected").val();
+    var InvoiceType = $("#InvoiceType option:selected").val();
+    var terms = $("#TermsDropDown option:selected").val();
+    var ReferralSourceDropDown = $("#ReferralSourceDropDown option:selected").val();
+    var notes = $("#Notes").val();
+
+    //Building Info
+    var BuildingName = $("#BuildingName").val();
+    var BuildingType = $("#BuildingType option:selected").val();
+    var BuildingID = $("#BuildingID").val();
+    var BldgContact1 = $("#BldgContactFName").val() + " " + $('#BldgContactLName').val();
+    var BuildingPhone = $("#BuildingPhone").val();
+    var BuildingPhone2 = $("#BuildingPhone2").val();
+
+    //Direction Notes
+    var Directions = $("#Directions").val();
+    var RouteInstructions = $("#RouteInstructions").val();
+
+    //Company Location
+    var BuildingStreet = $("#BuildingStreet").val();
+    var BuildingCity = $("#BuildingCity").val();
+    var BuildingState = $("#BuildingState").val();
+    var BuildingZip = $("#BuildingZip").val();
+    var ScheduleFrequency = $("#ScheduleFrequency option:selected").val();
+    var ServiceType = $("#ServiceType option:selected").val();
+
+    //Custom Fields
+    var mobile = $("#MobileNumber").val();
+    var NumberOfEmployees = $("#NumberOfEmployees").val();
+    var PipelineStatus = $("#btnGroup input:checked").val();
+
+    var objEZShredDataModel = new Object();
+    //var test = objectifyForm(fields);
+
+    objEZShredDataModel.Customers = [{
+        "ARCustomerCode": ARCustomerCode,
+        "CustomerID": CustomerID,
+        "Company": companyName,
+        "Attention": attention,
+        "Street": street,
+        "City": city,
+        "State": state,
+        "Zip": zip,
+        "Contact": first + " " + last,
+        "Phone": phone,
+        "Fax": fax,
+        "Notes": notes,
+        "CustomerTypeID": CustomerType,
+        "InvoiceTypeID": InvoiceType,
+        "EmailAddress": email,
+        "EmailInvoice": emailInvoice,
+        "ReferralSourceID": ReferralSourceDropDown,
+        "TermID": terms,
+        //custom fields
+        "PipelineStatus": PipelineStatus,
+        "NumberOfEmployees": NumberOfEmployees,
+        "Mobile": mobile
+    }];
+    objEZShredDataModel.Buildings = [{
+        "BuildingID": BuildingID,
+        "CompanyName": BuildingName,
+        "BuildingTypeID": BuildingType,
+        "Street": BuildingStreet,
+        "City": BuildingCity,
+        "State": BuildingState,
+        "Zip": BuildingZip,
+        "Phone1": BuildingPhone,
+        "Phone2": BuildingPhone2,
+        "SiteContact1": BldgContact1,
+        "ScheduleFrequency": ScheduleFrequency,
+        "ServiceTypeID": ServiceType,
+        "Directions": Directions,
+        "RoutineInstructions": RouteInstructions
+    }];
+
+    $.ajax({
+        type: "post",
+        url: "http://hosting.proshred.com:4550/api/ezshred/getdata",
+        data: JSON.stringify({
+            'Request': JSON.stringify({
+                "Request": "UpdateCustomer",
+                "CustomerID": CustomerID,
+                "tblCustomers": [{
+                    "Company": companyName,
+                    "Attention": attention,
+                    "Street": street,
+                    "City": city,
+                    "State": state,
+                    "Zip": zip,
+                    "Contact": first + " " + last,
+                    "Phone": phone,
+                    "Fax": fax,
+                    "CustomerTypeID": CustomerType,
+                    "InvoiceTypeID": InvoiceType,
+                    "EmailAddress": email,
+                    "EmailInvoice": emailInvoice,
+                    "ReferralsourceID": ReferralSourceDropDown,
+                    "TermID": terms,
+                    "Notes": notes
+                }]
+            })
+        }),
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Success) {
+                var result = JSON.parse(response.Result);
+                var passed = result.status === "OK";
+                if (passed) {
+                    console.log("Successfully updated Customer in API.. ");
+                } else {
+                    alert("Warning! Customer not updated, " + result.status);
+                    _laddaSpinner.stop();
+                }
+            } else {
+                console.log(response.FailureInformation);
+                alert("Could not contact API to Update Customer.. " + response.FailureInformation);
+                _laddaSpinner.stop();
+            }
+        },
+        error: function (response) {
+            alert('error');
+            _laddaSpinner.stop();
+        }
+    });
+
+    //Update Building Request
+
+    $.ajax({
+        type: "post",
+        url: "http://hosting.proshred.com:4550/api/ezshred/getdata",
+        data: JSON.stringify({
+            'Request': JSON.stringify({
+                "Request": "UpdateBuilding",
+                "BuildingID": BuildingID,
+                "tblBuilding": [{
+                    "BuildingTypeID": BuildingType,
+                    "CustomerID": CustomerID,
+                    "CompanyName": BuildingName,
+                    "Street": BuildingStreet,
+                    "City": BuildingCity,
+                    "State": BuildingState,
+                    "Zip": BuildingZip,
+                    "Phone1": BuildingPhone,
+                    "Phone2": BuildingPhone2,
+                    "SalesmanID": "342",
+                    "Directions": Directions,
+                    "RoutineInstructions": RouteInstructions,
+                    "SiteContact1": BldgContact1,
+                    "SiteContact2": "",
+                    "RouteID": "113",
+                    "Stop": "99",
+                    "ScheduleFrequency": ScheduleFrequency,
+                    "ServiceTypeID": ServiceType,
+                    "SalesTaxRegionID": 1,
+                    "TimeTaken": 15
+                }]
+            })
+        }),
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Success) {
+                var result = JSON.parse(response.Result);
+                var passed = result.status === "OK";
+                if (passed) {
+                    console.log("Successfully updated Building in API.. ");
+                } else {
+                    alert("Warning! Building not updated, " + result.status);
+                    _laddaSpinner.stop();
+                }
+            } else {
+                console.log(response.FailureInformation);
+                alert("Could not contact API to Update Building.. " + response.FailureInformation);
+                _laddaSpinner.stop();
+            }
+        },
+        error: function (response) {
+            alert('error');
+            _laddaSpinner.stop();
+        }
+    });
+
+
+
+    ProshredCustomers.UpdateCustomerInDb(objEZShredDataModel);
+};
+ProshredCustomers.UpdateCustomerInDb = function (objEZShredDataModel) {
+    var _laddaSpinner = Ladda.create(document.querySelector('.ladda-button'));
+
+    $.ajax({
+        type: "post",
+        data: {
+            'objEZShredDataModel': objEZShredDataModel
+        },
+        url: "/UpdateCustomer",
+        async: false,
+        cache: false,
+        success: function (response) {
+            if (response) {
+                alert("Successfully updated customer!");
+                _laddaSpinner.stop();
+                //$('#Customers').trigger('change');
+            } else {
+                alert("Could not update customer in DB...");
+            }
+        }
+    });
+};
+//Event Functions
+$('#btnAddNewCustomer').click(function () {
+    var l;
+    var answer = confirm("Are you sure you want to add this customer?");
+    if (answer) {
+        l = Ladda.create(this);
+        l.start();
+        ProshredCustomers.AddNewCustomerOnServer();
+
+    }
+});
+$('#Customers').change(function () {
+    $('#btnUpdate').show();
+    $('#btnAddNewCustomer').hide();
+    $('#CustomerID').val($(this).val());
+    $("#copyOkIcon").removeClass("glyphicon-ok");
+    $("#copyOkIcon").addClass("glyphicon-paperclip");
+    var _buildings = "";
+    $.ajax({
+        type: "post",
+        data: {
+            'CustomerID': $(this).val()
+        },
+        url: "/GetCustomerAndBuildingInformations",
+        async: false,
+        cache: false,
+        success: function (response) {
+            if (response.Data !== undefined) {
+                _buildings = response.Data;
+            }
+        }
+    });
+    var form = document.getElementById("CustomerForm");
+    if (_buildings.Customers.length !== 0 && _buildings.Buildings.length !== 0) { // Added this because exception is caused when resetting the form. 
+        ProshredCustomers.PopulateFormFields(_buildings.Customers[0], _buildings.Buildings[0], form);
+        window.newCustomer = false;
+    } else {
+        //here is where clicking the 'x' the form resets... need to show the add new customer button and manually hide the tax/credit hold flags. 
+        form.reset();
+        $("#CreditStatus").hide();
+        $("#TaxStatus").hide();
+        $('input[name=status][value=Lead]').click();
+
+        window.newCustomer = true;
+        $("#availDatesList").empty();
+        $("#btnAddNewCustomer").show();
+        $("#btnUpdate").hide();
+    }
+});
+$("#billingCheckbox").change(function () {
+
+    var checked = $(this)[0].checked === true;
+
+    if (checked) {
+
+        $("#BuildingStreet").val($("#Street").val());
+        $("#BuildingCity").val($("#City").val());
+        $("#BuildingState").val($("#State").val());
+        $("#BuildingZip").val($("#Zip").val());
+
+    } else {
+        $("#BuildingStreet").val("");
+        $("#BuildingCity").val("");
+        $("#BuildingState").val("");
+        $("#BuildingZip").val("");
+    }
+});
+$("#Zip").change(function () {
+    if ($(this)[0].value.length === 5) {
+        $("#availDatesList").empty();
+        getAvailableDates(this.value, function callback(dates) {
+            //var availDates = dates;
+            $.each(dates,
+                function (i, date) {
+                    var spltDt = date.Date.split("-");
+                    var newDate = spltDt[1] + "-" + spltDt[2] + "-" + spltDt[0].slice(-2);
+
+                    $("#availDatesList").append("<li><h5>" + newDate + "</h5></li>");
+                });
+        });
+    }
+});
+
+$('#btnUpdate').on('click', function () {
+    var l;
+    var answer = confirm("Are you sure you want to edit this customer?");
+    if (answer) {
+        l = Ladda.create(this);
+        l.start();
+        ProshredCustomers.UpdateCustomersOnServer();
+    }
+});
+
+function getAvailableDates(zip, callback) {
+
+    var future = new Date();
+    future.setDate(future.getDate() + 30);
+
+    $.ajax({
+        type: "post",
+        url: "http://hosting.proshred.com:4550/api/ezshred/getdata",
+        data: JSON.stringify({
+            "Request": JSON.stringify({
+                "Request": "GetNextDatesByZip",
+                "zip": zip,
+                "upToDate": future.toLocaleDateString()
+            })
+        }),
+        async: true,
+        cache: false,
+        success: function (response) {
+            if (response.Success) {
+                var result = JSON.parse(response.Result);
+                var passed = result.status === "OK";
+                if (passed) {
+                    callback(result.NextDatesByZip);
+                }
+
+            } else {
+                console.log(response.FailureInformation);
+            }
+        }
+    });
+}
+
+function submitToSS() {// we must add form validation at some point... 
+    window.__ss_noform.push(['submit', null, 'b710c62c-9a8f-4b60-9486-fde0b896629f']);
+    console.log("Submitted to SS...");
+
+}
+
+
+// -- zdh 6-27-17 - 7:45 pm

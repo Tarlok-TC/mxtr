@@ -1,0 +1,686 @@
+﻿@using mxtrAutomation.Web.Common.Extensions;
+@using mxtrAutomation.Websites.Platform.Queries;
+@using mxtrAutomation.Websites.Platform.UI;
+@using mxtrAutomation.Web.Common.Helpers;
+@using mxtrAutomation.Web.Common.UI;
+@using mxtrAutomation.Websites.Platform.Enums;
+@using mxtrAutomation;
+@using mxtrAutomation.Corporate.Data.Enums;
+@using mxtrAutomation.Websites.Platform.Helpers
+@Model mxtrAutomation.Websites.Platform.Models.Customer.ViewModels.CustomerViewModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+@{
+//Html.IncludeCss(CssKind.Select2);
+//Html.IncludeJS(JSKind.Select2);
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="https://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+
+@section MainContent{
+    <div id="mainDiv">
+        <form name="CustomerForm" method="post" id="CustomerForm" onsubmit="return false" autocomplete="off">
+            <input type="hidden" id="CustomerID" name="CustomerID" value="" />
+            <input type="hidden" id="BuildingID" name="BuildingID" value="" />
+            <input type="hidden" id="LeadID" name="LeadID" value="" />
+            <input type="hidden" id="OpportunityID" name="OpportunityID" value="" />
+            <input type="hidden" id="BuildingSet" name="BuildingSet" value="" />
+            <input type="hidden" id="BuildingCount" name="BuildingCount" value="" />
+            @* Customer Properties *@
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h2 style="text-align:center">Add/Update Customer</h2>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-pull-2" id="CreditStatus" hidden style="float:left;width:auto">
+                                <h5><span class="label label-danger">Warning: Credit Hold!</span></h5>
+                            </div>
+                            <div class="col-sm-push-10" id="TaxStatus" hidden style="float:left;width:auto">
+                                <h5><span class="label label-success">Tax Exempt</span></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="ARAddOn" style="font-size:smaller">ARCustomer Code: </span>
+                                    <input class="input-sm form-control" type="text" placeholder="ARCustomer Code" name="ARCustomerCode" id="ARCustomerCode" readonly aria-describedby="ARAddOn">
+                                    <span class="input-group-btn">
+                                        <button id="btnCopyToClipboard" class="btn btn-sm btn-primary btn-round" onclick="copyToClipboard($('#ARCustomerCode').val())" type="button">Copy! <i id="copyOkIcon" class="glyphicon glyphicon-paperclip"></i></button>
+                                    </span>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6 pull-right">
+                                <div class="input-group pull-right" style="width:15px">
+                                    <span class="input-group-addon" id="NextSvcAddOn" style="font-size: smaller">Next Service Date:</span>
+                                    <input class="input-sm form-control" id="NextServiceDate" name="NextServiceDate" type="datetime" readonly="readonly" placeholder="mm/dd/yyyy" style="width: 117px;text-align: center;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row searchbar">
+                        <div class="container-fluid">
+                            @if (Model.EZShredAccountDataModel != null)
+                            {
+                                <div class="col-md-4">
+                                    <select class="form-control" id="Datasource" name="Datasource" data-placeholder="Database Location" display:selected style="width: auto">
+                                        @foreach (var item in Model.EZShredAccountDataModel)
+                                        {
+                                            <option value="@item.AccountName" id="@item.EZShredId" IP="@item.EZShredIP" Port="@item.EZShredPort" ObjectID="@item.AccountObjectId">@item.AccountName</option>
+                                        }
+                                    </select>
+                                </div>
+                            }
+                            <div class="col-md-8 col-sm-8 col-xs-12">
+                                @*<select class="chzn-select form-control" id="Customers" name="Customers" data-placeholder="Search for Customer..." style="width: 100%">
+                                        <option value="">Loading Customers Data...</option>
+                                    </select>*@
+                                <div class="selectRow customer-select">
+                                    <input type="hidden" id="hdnCustomerSearch" name='input' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-6 col-md-6 text-right">
+                            <input type="button" id="btnAddBuilding" class="btn btn-warning" style="display: none" value="Add Building" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Company Information</h4></div>
+                            <div class="panel-body">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="CompanyName" class="requiredLabel">Company Name</label><span class="required">*</span>
+                                        <input class="form-control" type="text" name="CompanyName" id="CompanyName" value="" tabindex="1" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="NumberOfEmployees">Number of Employees</label>
+                                        <input class="form-control" type="number" name="NumberOfEmployees" id="NumberOfEmployees" value="" tabindex="2" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ContactFName" class="requiredLabel">Main Contact First Name</label><span class="required">*</span>
+                                        <input class="form-control" type="text" name="ContactFName" id="ContactFName" value="" tabindex="3" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ContactFName" class="requiredLabel">Main Contact Last Name</label><span class="required">*</span>
+                                        <input class="form-control" type="text" name="ContactLName" id="ContactLName" value="" tabindex="4" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ContactPhone" class="requiredLabel">Phone Number</label><span class="required">*</span>
+                                        <input class="form-control" type="text" name="ContactPhone" id="ContactPhone" value="" tabindex="5" data-inputmask="'mask' : '(999) 999-9999'" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="" for="CompanyPhoneExtension">Extension</label>
+                                        <input class="form-control" type="text" name="CompanyPhoneExtension" id="CompanyPhoneExtension" value="" tabindex="6" data-inputmask="'mask' : '99999'" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Fax">Fax Number</label>
+                                        <input class="form-control" type="text" name="Fax" id="Fax" value="" tabindex="7" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="MobileNumber">Mobile Number</label>
+                                        <input class="form-control" type="text" name="MobileNumber" id="MobileNumber" value="" tabindex="8" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Attention">Attention</label>
+                                        <input class="form-control" type="text" name="Attention" id="Attention" value="" tabindex="9" />
+                                    </div>
+                                    <div class="input_fields_wrap">
+                                        <div class="form-group">
+                                            <label for="Email" class="requiredLabel">Email Address</label><span class="required">*</span>
+                                            <div class="input-group" id="emails">
+                                                <input class="form-control" name="Email[]" id="Email" type="email" tabindex="10" />
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-primary add_field_button" type="button" id="addMailBtn">+</button>
+                                                </span>
+                                            </div>
+                                            <span id="Email-error" class="is-error"></span>
+                                            <span id="EmailAddress-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox" style="float:right">
+                                            <label><input type="checkbox" name="EmailInvoices" id="EmailInvoices" tabindex="11" />Email Invoices?</label>
+                                            <label><input type="checkbox" name="EmailCOD" id="EmailCOD" tabindex="12" />Email COD from App</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Billing Address</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="checkbox"><label><input type="checkbox" name="mainCheckbox" id="mainCheckbox" tabindex="13">Same as Main Contact?</label></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="BillingContactFirstName">Billing Contact First Name</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BillingContactFirstName" id="BillingContactFirstName" value="" onchange="uncheckCheckBox('mainCheckbox')" tabindex="14" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="BillingContactLastName">Billing Contact Last Name</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BillingContactLastName" id="BillingContactLastName" onchange="uncheckCheckBox('mainCheckbox')" value="" tabindex="15" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="BillingContactPhone">Billing Phone Number</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BillingContactPhone" id="BillingContactPhone" onchange="uncheckCheckBox('mainCheckbox')" value="" tabindex="16" data-inputmask="'mask' : '(999) 999-9999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="" for="BillingContactExtension">Extension</label>
+                                    <input class="form-control" type="text" name="BillingContactExtension" id="BillingContactExtension" onchange="uncheckCheckBox('mainCheckbox')" value="" tabindex="17" data-inputmask="'mask' : '99999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="" for="Suite">Suite #</label>
+                                    <input class="form-control" type="text" name="Suite" id="Suite" value="" tabindex="18" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="Street">Street</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="Street" id="Street" value="" tabindex="19" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="City">City</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="City" id="City" value="" tabindex="20" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="State">State</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="State" id="State" value="" maxlength="2" tabindex="21" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="Zip">Zip Code</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="Zip" id="Zip" value="" tabindex="22" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="requiredLabel" for="BillingCountryCode">Country</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BillingCountryCode" id="BillingCountryCode" value="US" tabindex="23" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Customer Profile</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="IndustryType" class="requiredLabel">Industry Type</label><span class="required">*</span>
+                                    <select class="form-control" name="IndustryType" id="IndustryType" size="1" tabindex="24"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ServicesProfessionalType">Services: Professional Sub Menu</label>
+                                    <select class="form-control" name="ServicesProfessionalType" id="ServicesProfessionalType" size="1" tabindex="25">
+                                        <option value="">Select</option>
+                                        <option value="Accounting">Accounting </option>
+                                        <option value="Consulting">Consulting</option>
+                                        <option value="HR">HR</option>
+                                        <option value="IT">IT</option>
+                                        <option value="Legal">Legal</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="IndustryType">Travel/Tourism: Sub Menu</label>
+                                    <select class="form-control" name="TravelTourismType" id="TravelTourismType" size="1" tabindex="26">
+                                        <option value="">Select</option>
+                                        <option value="Airline">Airline</option>
+                                        <option value="Car Rental"> Car Rental</option>
+                                        <option value="Food Services">Food Services</option>
+                                        <option value="Hotel">Hotel</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="InvoiceType" class="requiredLabel">Invoice Type</label><span class="required">*</span>
+                                    <select class="form-control" name="InvoiceType" id="InvoiceType" size="1" tabindex="27"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="TermsDropDown" class="requiredLabel">Terms</label><span class="required">*</span>
+                                    <select class="form-control" name="TermsDropDown" id="TermsDropDown" size="1" tabindex="28"></select>
+                                </div>
+                                @*<div class="form-group">
+                                        <div class="checkbox"><label><input type="checkbox" name="TaxExempt" id="TaxExempt" tabindex="29">Tax Exempt</label></div>
+                                    </div>*@
+                                <div class="form-group">
+                                    <label for="ReferralSourceDropDown" class="requiredLabel">Referral Source</label><span class="required">*</span>
+                                    <select class="form-control" name="ReferralSourceDropDown" id="ReferralSourceDropDown" size="1" tabindex="29"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Notes">Additional Notes</label>
+                                    <textarea class="form-control" rows="3" name="Notes" id="Notes" tabindex="30"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Building Properties *@
+            <div class="panel panel-info building-box">
+                <div class="panel-heading">
+                    <h2 style="text-align:center">Building Properties</h2>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Building Info</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="BuildingName" class="requiredLabel">Building Name</label><span class="required">*</span>
+                                    <input class="form-control" type="text" id="BuildingName" name="BuildingName" tabindex="31" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BldgContactFName" class="requiredLabel">Building Contact First Name</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BldgContactFName" id="BldgContactFName" tabindex="32" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BldgContactLName" class="requiredLabel">Building Contact Last Name</label><span class="required">*</span>
+                                    <input class="form-control" type="text" name="BldgContactLName" id="BldgContactLName" tabindex="33" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BuildingPhone" class="requiredLabel">Building Contact Phone</label><span class="required">*</span>
+                                    <input class="form-control" type="text" id="BuildingPhone" name="BuildingPhone" tabindex="34" data-inputmask="'mask' : '(999) 999-9999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="" for="BuildingPhone1Extension">Phone 1 Extension</label>
+                                    <input class="form-control" type="text" name="BuildingPhone1Extension" id="BuildingPhone1Extension" value="" tabindex="35" data-inputmask="'mask' : '99999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BldgContactFName">Building Contact First Name 2</label>
+                                    <input class="form-control" type="text" name="BldgContactFName2" id="BldgContactFName2" tabindex="36" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BldgContactLName">Building Contact Last Name 2</label>
+                                    <input class="form-control" type="text" name="BldgContactLName2" id="BldgContactLName2" tabindex="37" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BuildingPhone2">Building Contact Phone 2</label>
+                                    <input class="form-control" type="text" id="BuildingPhone2" name="BuildingPhone2" tabindex="38" data-inputmask="'mask' : '(999) 999-9999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="" for="BuildingPhone2Extension">Phone 2 Extension</label>
+                                    <input class="form-control" type="text" name="BuildingPhone2Extension" id="BuildingPhone2Extension" value="" tabindex="39" data-inputmask="'mask' : '99999'" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="BuildingType" class="requiredLabel">Building Type</label><span class="required">*</span>
+                                    <select class="form-control" name="BuildingType" id="BuildingType" size="1" tabindex="40"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Salesman" class="requiredLabel">Account Manager</label><span class="required">*</span>
+                                    <select class="form-control" name="Salesman" id="Salesman" size="1" tabindex="41"></select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox"><label><input type="checkbox" name="TaxExempt" id="TaxExempt" tabindex="42">Tax Exempt</label></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Directions/Notes</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="Directions">Directions to location:</label>
+                                    <textarea class="form-control" rows="3" id="Directions" name="Directions" tabindex="43"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="RouteInstructions">Routine Instructions</label>
+                                    <textarea class="form-control" rows="3" id="RouteInstructions" name="RouteInstructions" tabindex="44"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><h4>Company Location</h4></div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <fieldset name="buildingAddress" id="buildingAddress">
+                                        <div class="form-group">
+                                            <div class="checkbox"><label><input type="checkbox" name="billingCheckbox" id="billingCheckbox" tabindex="45">Same as billing address?</label></div>@*<-- Checking this will copy address info from above*@
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="" for="BuildingSuite">Suite #</label>
+                                            <input class="form-control" type="text" name="BuildingSuite" id="BuildingSuite" onchange="uncheckCheckBox('billingCheckbox')" value="" tabindex="46" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BuildingStreet" class="requiredLabel">Street</label><span class="required">*</span>
+                                            <input class="form-control" type="text" id="BuildingStreet" name="BuildingStreet" onchange="uncheckCheckBox('billingCheckbox')" tabindex="47" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BuildingCity" class="requiredLabel">City</label><span class="required">*</span>
+                                            <input class="form-control" type="text" id="BuildingCity" name="BuildingCity" onchange="uncheckCheckBox('billingCheckbox')" tabindex="48" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BuildingState" class="requiredLabel">State</label><span class="required">*</span>
+                                            <input class="form-control" type="text" id="BuildingState" name="BuildingState" onchange="uncheckCheckBox('billingCheckbox')" maxlength="2" tabindex="49" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="BuildingZip" class="requiredLabel">Zip Code</label><span class="required">*</span>
+                                            <input class="form-control" type="text" id="BuildingZip" name="BuildingZip" onchange="getAvailableDateOnZIP('billingCheckbox')" tabindex="50" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="requiredLabel" for="CompanyCountryCode">Country</label><span class="required">*</span>
+                                            <input class="form-control" type="text" name="CompanyCountryCode" id="CompanyCountryCode" onchange="uncheckCheckBox('billingCheckbox')" value="US" tabindex="51" />
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* Service Information *@
+            <div class="panel panel-info opportunity-box">
+                <div class="panel-heading">
+                    <h2 style="text-align:center">Service Information</h2>
+                    <div class="row">
+                        <div class="col-md-6 pull-right">
+                            <div class="input-group pull-right" style="width:15px">
+                                <span class="input-group-addon" id="LastSvcDate" style="font-size: smaller">Last Service Date:</span>
+                                <input class="input-sm form-control" id="LastSvcDate" name="LastSvcDate" type="datetime" placeholder="mm/dd/yyyy" readonly="readonly" style="width: 117px;text-align: center;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h4>Service Properties</h4>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="ScheduleFrequency" class="requiredLabel">Schedule Frequency</label><span class="required">*</span>
+                                <select class="form-control" data-placeholder="Schedule Frequency" name="ScheduleFrequency" id="ScheduleFrequency" size="1" tabindex="52"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="ServiceType" class="requiredLabel">Service Type</label><span class="required">*</span>
+                                <select class="form-control" name="ServiceType" id="ServiceType" size="1" tabindex="53"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="ServiceType">Available Dates</label>
+                                <div class="list-group" id="availDatesGroup" style="height:100px;border:1px solid #ccc;overflow:auto;" tabindex="54">
+                                    <ul id="availDatesList"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="col-md-8 col-sm-12 col-xs-12"></div>
+                            <label class="col-md-2 col-sm-12 col-xs-12">YES</label>
+                            <label class="col-md-2 col-sm-12 col-xs-12">NO</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8 col-sm-12 col-xs-12" for="CertificateofInsurance">Certificate of Insurance</label>
+                            <div class="col-md-2 col-sm-12 col-xs-12"><input type="radio" name="CertificateofInsurance" id="CertificateofInsurance1" value="Yes" /></div>
+                            <div class="col-md-2 col-sm-12 col-xs-12"><input type="radio" name="CertificateofInsurance" id="CertificateofInsurance2" checked="checked" value="No" tabindex="55" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-8 col-sm-12 col-xs-12" for="Stairs">Stairs</label>
+                            <div class="col-md-2 col-sm-12 col-xs-12"><input type="radio" name="Stairs" id="Stairs1" value="Yes" /></div>
+                            <div class="col-md-2 col-sm-12 col-xs-12"><input type="radio" name="Stairs" id="Stairs2" value="No" checked="checked" tabindex="56" /></div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12" for="HoursOfBusiness">Hours of Business</label>
+                            <input class="col-md-12 form-control" type="text" name="HoursOfBusiness" id="HoursOfBusiness" value="" tabindex="57" />
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr class="col-xs-12">
+                    <h4>Service Profile</h4>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <fieldset class="panel panel-default">
+                            <legend class="scheduler-border">SCHEDULED</legend>
+                            <div class="panel-body">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="ProposedConsoleDeliveryDate">Proposed Console Delivery Date</label>
+                                        <div class="input-group">
+                                            <input class="form-control proshred-datepicker" type="text" id="ProposedConsoleDeliveryDate" name="ProposedConsoleDeliveryDate" tabindex="58" />
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar icon-proshred-datepicker"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="ProposedStartDate">Proposed Start Date</label>
+                                        <div class="input-group">
+                                            <input class="form-control proshred-datepicker" type="text" id="ProposedStartDate" name="ProposedStartDate" tabindex="59" />
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar icon-proshred-datepicker"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row form-group">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-3"><label>#UNITS</label></div>
+                                        <div class="col-md-3"><label>PRICE 1ST UNIT</label></div>
+                                        <div class="col-md-3"><label>PRICE ADDITIONAL</label></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-3"><label>EC</label></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="ECUnits" name="ECUnits" tabindex="60" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="ECPriceUnit" name="ECPriceUnit" tabindex="61" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="ECAdditionalPrice" name="ECAdditionalPrice" tabindex="62" /></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-3"><label>64 Gallon</label></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonUnits_64" name="GallonUnits_64" tabindex="63" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonPriceUnit_64" name="GallonPriceUnit_64" tabindex="64" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonAdditionalPrice_64" name="GallonAdditionalPrice_64" tabindex="65" /></div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-3"><label>94 Gallon</label></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonUnits_96" name="GallonUnits_96" tabindex="66" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonPriceUnit_96" name="GallonPriceUnit_96" tabindex="67" /></div>
+                                        <div class="col-md-3"><input class="form-control" type="number" id="GallonAdditionalPrice_96" name="GallonAdditionalPrice_96" tabindex="68" /></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" ">
+                                    <div class="row form-group">
+                                        <label for="SellerComments">Seller Comments</label>
+                                        <textarea class="form-control" id="SellerComments" name="SellerComments" rows="5" tabindex="69"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <fieldset class="panel panel-default">
+                            <legend class="scheduler-border">PURGE</legend>
+                            <div class="panel-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="ProposedDateOfService">Proposed Date of Service</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control proshred-datepicker" id="ProposedDateOfService" tabindex="70" />
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar icon-proshred-datepicker"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="PriceQuotedForFirstTip">Price Quoted For 1st Tip</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="PriceQuotedForFirstTip" id="PriceQuotedForFirstTip" tabindex="71" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="AdditionalTips">Price Quoted per Additional Tip</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="text" name="AdditionalTips" id="AdditionalTips" tabindex="72" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="JobQuantitySize">Job Size/Quantity</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="JobQuantitySize" id="JobQuantitySize" tabindex="73" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="NumberOfTips">Number Of Tips</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="NumberOfTips" id="NumberOfTips" tabindex="74" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="EstimatedValue">Estimated Value</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="EstimatedValue" id="EstimatedValue" tabindex="75" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <hr class="col-xs-10">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Material Description</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="BankerBoxes">Banker Box</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="BankerBoxes" id="BankerBoxes" tabindex="76" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="Skids">Skids</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="Skids" id="Skids" tabindex="77" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="FileBoxes">File Boxes</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="FileBoxes" id="FileBoxes" tabindex="78" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="HardDrivers">Hard Drives</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="HardDrivers" id="HardDrivers" tabindex="79" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="Bags">Bags</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="Bags" id="Bags" tabindex="80" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="Media">Media</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="Media" id="Media" tabindex="81" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="Cabinets">Cabinets</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="Cabinets" id="Cabinets" tabindex="82" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-8 col-sm-12 col-xs-12" for="Other">Other</label>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <input class="form-control" type="number" name="Other" id="Other" tabindex="83" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="HardDrive_Media_Other_Comment">Hard Drive/Media/Other Comments</label>
+                                        <textarea class="form-control" id="HardDrive_Media_Other_Comment" name="HardDrive_Media_Other_Comment" tabindex="84"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="text-center">
+                        <div class="row form-group" id="btnGroup" data-toggle="buttons">
+                            <label class="btn btn-round btn-danger btn-outline control-label">
+                                <input type="radio" name="status" id="option1" autocomplete="off" checked value="@PipelineKind.Lead" tabindex="85">@PipelineKind.Lead
+                            </label>
+                            <label class="btn btn-round btn-warning btn-outline control-label">
+                                <input type="radio" name="status" id="option2" autocomplete="off" value="@PipelineKind.Contact">@PipelineKind.Contact
+                            </label>
+                            <label class="btn btn-round btn-info btn-outline control-label">
+                                <input type="radio" name="status" id="option3" autocomplete="off" value="@PipelineKind.QuoteSent">@PipelineKind.QuoteSent
+                            </label>
+                            <label class="btn btn-round btn-primary btn-outline control-label">
+                                <input type="radio" name="status" id="option4" autocomplete="off" value="@PipelineKind.Scheduled">@Helper.GetEnumDescription(@PipelineKind.Scheduled)
+                            </label>
+                            <label id="lbl-oppourtunity-status-closed" class="btn btn-round btn-success btn-outline control-label">
+                                <input type="radio" name="status" id="option5" autocomplete="off" value="@PipelineStatus.Lost">@PipelineStatus.Lost
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row text-center">
+                    <button class="ladda-button btn btn-success" type="button" id="btnAddNewCustomer" data-style="expand-right" data-color="green" data-size="s">Add New Customer <i class="glyphicon glyphicon-plus-sign"></i></button>
+                    <button class="ladda-button btn btn-primary" data-color="mint" data-style="expand-right" data-size="s" name="btnUpdate" id="btnUpdate"> Update </button>
+                </div>
+                <br />
+            </div>
+        </form>
+    </div>
+    <div id="dvdata_processing" style="display:none; "></div>
+    <script type="text/javascript">
+        var __ss_noform = __ss_noform || [];
+        __ss_noform.push(['baseURI', 'https://app-3QNAMKTGPM.marketingautomation.services/webforms/receivePostback/MzawMDEzsDQxBgA/']);
+        __ss_noform.push(['form', 'CustomerForm', 'b710c62c-9a8f-4b60-9486-fde0b896629f']);
+        __ss_noform.push(['submitType', 'manual']);
+
+    </script>
+    <script type="text/javascript" src="https://koi-3QNAMKTGPM.marketingautomation.services/client/noform.js?ver=1.24"></script>
+
+}
+
+@section ScriptContent{
+    @{
+        var fileVersion = System.Configuration.ConfigurationManager.AppSettings["FileVersion"];
+        if (fileVersion == null)
+        {
+            fileVersion = "1.1." + DateTime.Now.ToString("ddMMyyyy") + ".1";
+        }
+    }
+    <script type="text/javascript" src="~/Scripts/ProShred/custom.js?ver=@fileVersion"></script>
+    <script type="text/javascript" src="~/Scripts/ProShred/updateCustomer.js"></script>
+    <script type="text/javascript" id="addEmails" src="~/Scripts/ProShred/addEmails.js"></script>
+    <script type="text/javascript" src="~/Scripts/ProShred/getCustomerInfo.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
+    <!-- jquery.inputmask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script src="~/Scripts/popupHandler.js"></script>
+    <link href="~/css/jquery-ui-1.12.1.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <link href="https://select2.github.io/select2/select2-3.5.1/select2.css" rel="stylesheet" />
+    @*<link href="~/css/select2-3.5.1.css" rel="stylesheet" />*@
+    <script src="~/Scripts/select2-3.5.1.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".proshred-datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'mm/dd/yy'
+            });
+        });
+
+        $(".icon-proshred-datepicker").click(function () {
+            $(this).parent().parent().find('input[type=text]').focus();
+        });
+        $(document).ready(function () {
+            $(":input").inputmask();
+            $('#ContactPhone')[0].checkValidity()
+        });
+    </script>
+}
+

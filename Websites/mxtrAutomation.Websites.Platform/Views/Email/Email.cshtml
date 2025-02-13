@@ -1,0 +1,92 @@
+﻿@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.Models.Email.ViewData
+
+@model mxtrAutomation.Websites.Platform.Models.Email.ViewModels.EmailViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeJS(JSKind.MomentJS);
+    Html.IncludeJS(JSKind.EmailOverview);
+}
+
+@{
+    HtmlString emailsJobStats = new HtmlString(JsonConvert.SerializeObject(Model.EmailChartViewData.EmailJobStatsViewData));
+    HtmlString emailsActivity = new HtmlString(JsonConvert.SerializeObject(Model.EmailChartViewData.EmailActivityViewDataMini));
+
+}
+
+@section MainContent {
+
+    <div class="row top_tiles gent-bar">
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12" onclick="whichChart(ChartTypeEnum.EmailsSent)">
+            <div class="tile-stats link-score-box" data-report="campaigns">
+                <span>
+                    Emails Sent
+                </span>
+                <div id="dvEmailsSentView" class="count">@Model.EmailChartViewData.TotalEmailSends</div>
+            </div>
+        </div>
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12" onclick="whichChart(ChartTypeEnum.OpenRate)">
+            <div class="tile-stats link-score-box" data-report="opportunities">
+                <span>Open Rate</span>
+                <div id="dvOpenRateView" class="count">@(Math.Round(Model.EmailChartViewData.OverallOpenRate, 2)) %</div>
+            </div>
+        </div>
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12" onclick="whichChart(ChartTypeEnum.ClickRate)">
+            <div class="tile-stats link-score-box" data-report="leads">
+                <span>Click Rate</span>
+                <div id="dvClickRateView" class="count">@(Math.Round(Model.EmailChartViewData.OverallClickRate, 2)) %</div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@(new IndexWebQuery())">Home</a></li>
+                    <li class="breadcrumb-item">Email</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Email Nurturing Report</h3>
+            </div>
+        </div>
+
+        <div class="row scorebox-chart-container page-section">
+            <div class="col-xs-12">
+                <div id="emails_Chart" style="height:350px;"></div>
+            </div>
+        </div>
+        <div class="row reset-inputs">
+            <table id="tblEmailActivity" class="table table-striped jambo_table bulk_action" width="100%">
+                <thead>
+                    <tr>
+                        <th class="column-title" style="display: table-cell;width:20%;">Client</th>
+                        <th class="column-title" style="display: table-cell">Sends</th>
+                        <th class="column-title" style="display: table-cell">Opens</th>
+                        <th class="column-title" style="display: table-cell">Open Rate</th>
+                        <th class="column-title" style="display: table-cell">Clicks</th>
+                        <th class="column-title" style="display: table-cell">Click Rate</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+}
+
+
+
+@section ScriptContent {
+    <script type="text/javascript">
+        var _emailsJobStats = @emailsJobStats;
+        var _emailsActivity = @emailsActivity;
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _emailsDataIdentifer='@ViewBag.DataTableIdentifier';
+    </script>
+    <script src="~/Scripts/workspace.filter.actions.js"></script>
+}

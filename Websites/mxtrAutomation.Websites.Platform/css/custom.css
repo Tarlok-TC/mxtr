@@ -1,0 +1,298 @@
+﻿.m-daterange .m-report-filter-click .grey-down-icon {
+    float: none;
+}
+
+.m-daterange .m-report-filter-click {
+    margin-right: 10px;
+}
+
+.btn.btn-default:active:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.top_nav .nav_menu {
+    margin-bottom: 0;
+}
+
+.container.body .right_col {
+    clear: both;
+}
+
+body.nav-sm .user-profile span.fa {
+    display: inline-block !important;
+}
+
+.nav.side-menu > li > a {
+    margin-bottom: 6px;
+    width: 100%;
+}
+
+body.nav-md .container.body .col-md-3.left_col {
+    position: absolute;
+    /* display: flex; */
+    padding: 0;
+    width: 230px;
+    display: inline-block;
+}
+/*---------------Responsive (19/06/2017)-------------------*/
+
+
+@media only screen and (max-width: 767px) {
+    body.nav-md .container.body .col-md-3.left_col {
+        position: relative;
+        width: 100%;
+    }
+
+    .right_col ul.bar_tabs > li a {
+        padding: 8px 10px;
+    }
+
+    .right_col .dashboard_graph .profile .col-md-9, .right_col .dashboard_graph .profile .col-md-3 {
+        padding: 0px 15px;
+    }
+
+    .m-report-filters-container .m-report-filter-drop-container {
+        width: 300px;
+    }
+
+    .date-filter div.m-daterange-menu {
+        min-width: 300px;
+        width: 100%;
+    }
+
+    div.m-daterange-slider {
+        float: none;
+        margin: 0 auto;
+        padding: 0 48px;
+        width: 100%;
+    }
+
+    /*.right_col .date-filter {
+        float: left;
+        width: 100%;
+    }*/
+
+    .row.top_tiles.gent-bar {
+        margin-top: 15px;
+    }
+
+    .dashboard_graph .dataTables_info {
+        width: 100%;
+    }
+
+    .dashboard_graph .table-responsive {
+        padding-bottom: 20px;
+    }
+
+    .table-responsive .dataTables_wrapper .deleteicon input[type="search"] {
+        width: 100% !important;
+    }
+
+    .dashboard_graph .table-responsive .dataTables_filter, .dashboard_graph .table-responsive .dataTables_length {
+        display: block;
+        float: left;
+    }
+
+    .dashboard_graph .dataTables_length {
+        padding-top: 25px;
+    }
+
+    #dvEdit form .form-group label {
+        min-width: 145px;
+    }
+
+    #dvEdit form .form-group {
+        margin-bottom: 0px;
+    }
+
+        #dvEdit form .form-group input {
+            margin-bottom: 10px;
+        }
+
+    .form-group.fld-wrap .btn .name {
+        display: none;
+    }
+
+    .form-group.fld-wrap .btn {
+        border-radius: 3px;
+        font-size: 13px;
+        margin: 0;
+        padding: 7px 4px 6px;
+        text-align: center;
+        width: 40px !important;
+    }
+
+    .ng-scope .form-control.ng-pristine.ng-valid {
+        font-size: 11px;
+        padding: 6px 1px;
+    }
+
+    .x_panel .form-group.fld-wrap .ng-binding {
+        color: #555555;
+        font-size: 12px;
+        margin-left: 0;
+    }
+
+    .form-group.fld-wrap.label-set {
+        font-size: 11px;
+    }
+
+    .header-set-n label {
+        font-size: 12px;
+    }
+
+    .ng-scope .form-group .ng-binding {
+        font-size: 10px !important;
+    }
+
+    .outerDivScroll {
+        float: left;
+        overflow: auto;
+        width: 100%;
+    }
+
+        .outerDivScroll .header-set-n, .outerDivScroll .row {
+            float: left;
+            min-width: 400px;
+            width: 100%;
+        }
+}
+
+/*******************-----------Responsive-----------**********************/
+
+code {
+    padding: 2px 4px;
+    color: #1A82C3;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    font-size: inherit;
+}
+
+    code.iframecode {
+        font-size: 80%;
+    }
+.alert-success {
+    color: #3c763d !important;
+}
+.alert-danger {
+    color: #a94442 !important;
+}
+
+
+#sharedImgApplicationLogo {
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+}
+.navbar.nav_title{
+    height: auto;
+    width: 100%
+}
+#sharedImgFavIcon {
+    max-width: 50px;
+    margin: 0 auto;
+    height: auto;
+    width: 100%;
+}
+
+.navbar .site_title{
+    padding: 0 10px;
+    margin: 12px 0;
+    height: auto;
+}
+.navbar .site_title.site-logo{
+    text-align: center;
+}
+
+.profile_pic .img-circle.profile_img{
+    margin-top: 0;
+}
+.profile .profile_info{
+    padding : 0 10px 10px
+}
+#CustomerForm input.is-error, select.is-error {
+    border: 1px solid #d43f3a;
+}
+
+#CustomerForm span.is-error {
+    color: #d43f3a;
+}
+
+#mainDiv {
+    position: relative;
+}
+
+.permissionOverlay {
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding-top: 200px;
+    background-color: rgba(42, 63, 84, 0.78);
+    color: white;
+    font-size: 20px;
+}
+#CustomerForm .required {
+    font-weight: bold;
+    font-size: 16px;
+    color: #d43f3a;
+}
+#CustomerForm .requiredLabel {
+    color: #73879C;
+}
+
+#CustomerForm .conditional-requiredLabel {
+    color: #d43f3a;
+}
+
+#CustomerForm .non-required {
+    font-weight: bold;
+    font-size: 16px;
+    color: #d43f3a;
+}
+
+.btn-primary.btn-outline {
+    color: #000;
+    border: 2px solid #1479B8;
+}
+
+#CustomerForm .error-control {
+    border: 1px solid #d43f3a;
+    background: #fbe0df;
+}
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    text-align: center !important;
+    width: auto;
+    padding: 0 10px;
+    border-bottom: none;
+}
+#EmailAddress-error {
+    color: #d43f3a;
+}
+#CustomerForm input:focus, #CustomerForm textarea:focus, #CustomerForm select:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    border: 1px solid rgba(81, 203, 238, 1);
+}
+#btnAddBuilding {
+    margin:0 15px 15px 0;
+}
+.searchbar {
+    margin-bottom:15px;
+}
+/*******************-----------Issue Collector JIRA tool-----------**********************/
+a#atlwdg-trigger {
+    box-shadow: none!important;
+    background: red!important;
+    color: #fff!important;
+    font-size: 12px!important;
+    left: 5px;
+    right: auto;
+    border: 0px;
+}
+/*******************-----------Issue Collector JIRA tool : END-----------**********************/

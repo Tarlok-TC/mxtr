@@ -1,0 +1,196 @@
+﻿@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.Retailers.ViewModels.RetailersViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeJS(JSKind.MomentJS);
+    Html.IncludeJS(JSKind.RetailerActivityReport);
+}
+
+@{
+    HtmlString data = new HtmlString(JsonConvert.SerializeObject(Model.RetailersChartViewData.RetailerActivityReportViewDataMini));
+    HtmlString leadsData = new HtmlString(JsonConvert.SerializeObject(Model.RetailersChartViewData.LeadsData));
+    HtmlString searchData = new HtmlString(JsonConvert.SerializeObject(Model.RetailersChartViewData.SearchData));
+    HtmlString emailData = new HtmlString(JsonConvert.SerializeObject(Model.RetailersChartViewData.EmailData));
+}
+
+
+@section MainContent {
+    <div class="row top_tiles gent-bar">
+        <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="campaigns">
+                <span>
+                    Total Listings Displayed
+                </span>
+                <div id="dvTotalPageviewsLocator" class="count">@Model.RetailersChartViewData.TotalPageviewsLocator</div>
+                <span class="count_bottom">Top Retailer: <i id="spTopAccountPageviewsLocator" class="green">@Model.RetailersChartViewData.TopAccountPageviewsLocator </i></span>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="leads">
+                <span>Total Contacts</span>
+                <div id="dvTotalLeads" class="count">@Model.RetailersChartViewData.TotalLeads</div>
+                <span class="count_bottom">Average Conversion Rate: <i id="spAverageConversionRate" class="green">@Model.RetailersChartViewData.AverageConversionRate % </i></span>
+            </div>
+        </div>
+        <div class="animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="opportunities">
+                <span>Total Landing Pageviews</span>
+                <div id="dvTotalPageviewsLP" class="count">@Model.RetailersChartViewData.TotalPageviewsLP</div>
+                <span class="count_bottom">Top Retailer: <i id="spTopAccountPageviewsLP" class="green">@Model.RetailersChartViewData.TopAccountPageviewsLP </i></span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@(new IndexWebQuery())">Home</a></li>
+                    <li class="breadcrumb-item">Retailer Performance</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Retailer Performance Report</h3>
+            </div>
+        </div>
+        <div class="row scorebox-chart-container page-section">
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Total Listings Displayed</h4>
+                <div id="LocatorSearches_Chart" style="height:350px;"></div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Contacts</h4>
+                <div id="Leads_Chart" style="height:350px;"></div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Emails Sent</h4>
+                <div id="Email_Chart" style="height:350px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 margin-btm20">
+                <div id="ddlShowHideColumn" class="dropdown pull-left filter-btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dvOption" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-th" aria-hidden="true"></i>
+                        Show/Hide Columns
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="filterMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <a id="aSelectAll" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Select All
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aLocatorPageviews" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="1" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Locator Pageviews
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aTotalClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="2" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Total Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aLandingPageviews" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="3" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Landing Pageviews
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aLeads" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="4" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Leads
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aEmailsSent" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="5" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Emails Sent
+                            </a>
+                        </li>
+
+                        <li>
+                            <a id="aDirectionClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="6" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Directions Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aHoursClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="7" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Hours Clicks
+                            </a>
+                        </li>
+                        @*<li>
+                                <a id="aMoreInfoClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="8" data-timeline-event="">
+                                    <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> More Info Clicks
+                                </a>
+                            </li>*@
+                        <li>
+                            <a id="aLogoClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="8" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Logo Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aWebsiteClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="9" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Website Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aPhoneClicks" onclick="MakeColumnSelection(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-column="10" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Phone Clicks
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="table-responsive col-md-12">
+                <div id="RetailerActivityReportHolder" class="table-responsive">
+                    <table id="RetailerActivityReport" class="table table-striped jambo_table retailers-table bulk_action" width="100%">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title text-center" style="display: table-cell; width:20%;">RETAILER</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Total Listings Displayed</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Total Clicks</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Retailer Landing Pageviews</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Emails Sent</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Directions Clicks</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;"> Hours Clicks</th>
+                                @*<th class="column-title" style="display: table-cell;padding-right: 20px;">More Info Clicks</th>*@
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Logo Clicks</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Website Clicks</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Phone Clicks</th>
+                            </tr>
+                        </thead>
+                        <tfoot id="footerRow">
+                            <tr>
+                                <th>Status</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <input id="hdnStatusFilter" type="hidden" value="0" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section ScriptContent {
+    <script type="text/javascript">
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _data = @data;
+        var _leadsData = @leadsData;
+        var _searchData = @searchData;
+        var _emailData = @emailData;
+        var _retailerUrl = '@(new RetailerWebQuery())';
+        var _retailersIdentifer='@ViewBag.DataTableIdentifier';
+
+    </script>
+    <script src="~/Scripts/workspace.filter.actions.js"></script>
+}

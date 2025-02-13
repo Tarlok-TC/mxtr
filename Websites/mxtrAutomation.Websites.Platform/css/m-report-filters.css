@@ -1,0 +1,882 @@
+﻿/* =======================
+    Author: Chris Dapkiewicz,
+    Calendar / Date Range Picker UI Module
+    ======================= */
+
+.m-report-filters-container {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 0px;
+    /* margin-bottom: 20px;*/
+    /*text-align: right;*/
+}
+
+.m-report-filters-accounts,
+.m-report-filters-campaigns,
+.m-report-filters-daterange {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.m-report-filters-accounts,
+.m-report-filters-campaigns,
+.m-report-filters-daterange {
+    position: relative;
+    margin-right: 10px;
+}
+
+.m-report-filters-daterange {
+    margin-right: 0;
+}
+
+.m-report-filter-click {
+    vertical-align: middle;
+    text-align: left;
+}
+
+.workspace-filter {
+    min-width: 210px !important;
+}
+
+.m-report-filter-click .grey-down-icon {
+    background-position: 0 0;
+    display: inline-block;
+    width: 12px;
+    height: 8px;
+    margin-top: 3px;
+    float: right;
+}
+
+.account-filter-icon {
+    display: inline-block;
+    margin: 2px 0 0;
+    background-position: -120px -60px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.campaign-filter-icon {
+    display: inline-block;
+    margin: 2px 0 0;
+    background-position: -140px -60px;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.daterange-filter-icon {
+    display: inline-block;
+    margin: 2px 0 0;
+    width: 20px;
+    height: 20px;
+    background-position: -160px -60px;
+    vertical-align: middle;
+}
+
+.m-report-filter-click:hover .account-filter-icon,
+.m-report-filter-click.is-active .account-filter-icon {
+    background-position: 0 -160px;
+}
+
+.m-report-filter-click:hover .campaign-filter-icon,
+.m-report-filter-click.is-active .campaign-filter-icon {
+    background-position: -20px -160px;
+}
+
+.m-report-filter-click:hover .daterange-filter-icon,
+.m-daterange-select.is-active .daterange-filter-icon {
+    background-position: -40px -160px;
+}
+
+.m-report-filter-click:hover .grey-down-icon {
+    background-position: -40px 0;
+}
+
+.m-report-filter-click.is-active .grey-down-icon {
+    background-position: -20px -120px;
+}
+
+/*  ==============
+	DROP DOWNS
+	============== */
+
+.m-report-filter-drop-container {
+    background: #ffffff none repeat scroll 0 0;
+    border-radius: 0 10px 10px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
+    display: none;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    top: -19px;
+    width: 420px;
+    z-index: 999;
+}
+
+.m-report-filter-drop-title {
+    display: block;
+    color: #282828;
+    font-weight: 600;
+    font-size: 1.125em;
+}
+
+.m-report-filter-drop-subtitle {
+    display: block;
+    color: #737373;
+    font-size: .875em;
+}
+
+.m-report-filter-search {
+    position: relative;
+    margin: 10px 0;
+}
+
+    .m-report-filter-search > label {
+        position: absolute;
+        top: 50%;
+        left: 28px;
+        display: inline-block;
+        height: 20px;
+        margin-top: -10px;
+        font: normal .875em/1.429em 'Open Sans', Verdana, sans-serif;
+        color: #737373;
+        z-index: 201;
+        cursor: text;
+    }
+
+        .m-report-filter-search > label.is-searching {
+            text-indent: -9999em;
+        }
+
+    .m-report-filter-search > .sprite {
+        position: absolute;
+        top: 50%;
+        left: 8px;
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-top: -10px;
+        background-position: 0 -40px;
+    }
+
+    .m-report-filter-search > input {
+        /* box sizing adjusted */
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px 5px 5px 28px;
+        border: 1px solid #c3c3c3;
+        outline: none;
+        border-radius: 3px;
+        background: #fff;
+        font: normal 1em/1.25em 'Open Sans', Verdana, sans-serif;
+        color: #5c5c5c;
+        /* css3 animation */
+        -webkit-transition: border linear .2s, box-shadow linear .2s;
+        -moz-transition: border linear .2s, box-shadow linear .2s;
+        -o-transition: border linear .2s, box-shadow linear .2s;
+        transition: border linear .2s, box-shadow linear .2s;
+    }
+
+        .m-report-filter-search > input:hover {
+            border-color: #b3b3b3;
+            -webkit-box-shadow: inset 0px 1px 1px 0px rgba(75, 75, 75, .2);
+            box-shadow: inset 0px 1px 1px 0px rgba(75, 75, 75, .2);
+        }
+
+        .m-report-filter-search > input:focus {
+            color: #282828;
+            border-color: #1eb9f0;
+            -webkit-box-shadow: inset 0px 1px 1px 0px rgba(50, 50, 50, .2), 0 0 3px rgba(0, 135, 186, .35);
+            box-shadow: inset 0px 1px 1px 0px rgba(50, 50, 50, .2), 0 0 3px rgba(0, 135, 186, .35);
+        }
+
+.m-report-filter-drop-content {
+    border: 1px solid #d9d9d9;
+}
+
+/* -- FILTER LIST CONTENT -- */
+
+ul.m-report-filter-list {
+    list-style: none;
+    height: 360px;
+    overflow-y: auto;
+    marging: 0;
+    padding: 0;
+    background: #fff;
+}
+
+    ul.m-report-filter-list > li {
+        /* box sizing adjusted */
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+        min-height: 30px;
+        line-height: 30px;
+        margin: -1px 0;
+        padding: 5px 0 5px 40px;
+        border-top: 1px solid #d9d9d9;
+        border-bottom: 1px solid #d9d9d9;
+        font-size: .875em;
+        color: #737373;
+        transition: background .2s;
+    }
+
+        ul.m-report-filter-list > li:hover {
+            color: #1eb9f0;
+            background: #e8f9fe;
+        }
+
+        ul.m-report-filter-list > li.has-children {
+            padding-bottom: 0px;
+        }
+
+        ul.m-report-filter-list > li.is-me:after {
+            content: "you";
+            position: absolute;
+            top: 50%;
+            right: 0px;
+            margin-top: -9px;
+            display: inline-block;
+            padding: 3px 5px;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 12px;
+            background: #37ca5d;
+            border-radius: 3px 0 0 3px;
+        }
+
+        ul.m-report-filter-list > li.has-children.is-me:after {
+            margin-top: -27px;
+        }
+
+        ul.m-report-filter-list > li > .filter-list-name {
+            display: inline-block;
+            line-height: 20px;
+        }
+
+            ul.m-report-filter-list > li > .filter-list-name:hover {
+                cursor: default;
+            }
+
+        /* -- FILTER LIST CHILDREN -- */
+
+        ul.m-report-filter-list > li.has-children > span.filter-list-children {
+            position: relative;
+            display: block;
+            margin-right: 10px;
+            padding: 0 0 0 25px;
+            line-height: 35px;
+            font-size: 12px;
+            border-top: 1px solid #f2f2f2;
+            transition: border-color .2s, background .2s, margin .2s;
+        }
+
+        ul.m-report-filter-list > li.has-children:hover > span.filter-list-children {
+            border-color: #d9d9d9;
+            color: #737373;
+        }
+
+        ul.m-report-filter-list > li.has-children > span.filter-list-children:hover {
+            color: #1eb9f0;
+        }
+
+        ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-check {
+            top: 9px;
+            left: 0;
+            width: 15px;
+            height: 15px;
+        }
+
+        ul.m-report-filter-list > li.has-children > span.filter-list-children:hover > .filter-check {
+            border-color: #1eb9f0;
+        }
+
+        ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-list-children-view {
+            float: right;
+            height: 20px;
+            line-height: 20px;
+            margin-top: 8px;
+            padding: 0 20px 0 10px;
+            color: #737373;
+            background: #fff;
+            border-radius: 3px;
+            transition: background .2s;
+        }
+
+            ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-list-children-view > .sprite {
+                position: absolute;
+                top: 50%;
+                right: 5px;
+                width: 10px;
+                height: 10px;
+                margin-top: -5px;
+                background-position: -180px -20px;
+            }
+
+            ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-list-children-view:hover {
+                cursor: pointer;
+                color: #fff;
+                background: #1eb9f0;
+            }
+
+                ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-list-children-view:hover > .sprite {
+                    background-position: -200px -100px;
+                }
+
+/* -- FILTER LIST CHECKS -- */
+.filter-check {
+    position: absolute;
+    display: block;
+    top: 10px;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
+    /*border-radius:50%;
+    border:1px solid #d9d9d9;
+    background-color:#fff;
+    background-position:2000px 2000px;*/
+    vertical-align: middle;
+    transition: background-color .2s, border-color .2s;
+    color: #37ca5d;
+}
+
+ul.m-report-filter-list > li:hover > .filter-check {
+    cursor: pointer;
+    border-color: #1eb9f0;
+}
+
+.filter-check:hover {
+    cursor: pointer !important;
+}
+
+.filter-check-all {
+    /*background-color:#37ca5d;
+    background-position:-180px -60px;
+    border-color:#37ca5d;*/
+}
+
+.filter-check-some {
+    border-color: #37ca5d;
+}
+
+    .filter-check-some:before {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #37ca5d;
+    }
+
+ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-check-all {
+    background-position: -182px -62px;
+}
+
+ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-check-some:before {
+    top: 3px;
+    left: 3px;
+    width: 9px;
+    height: 9px;
+}
+
+/* -- FILTER CHILD CONTAINER -- */
+
+.m-report-filter-child-container {
+    background: #f2f2f2;
+    padding: 3px 3px 0;
+}
+
+    .m-report-filter-child-container ul.m-report-filter-list {
+        height: 317px;
+    }
+
+.m-report-filter-parent {
+    position: relative;
+    margin: -3px -3px 0;
+    padding: 10px;
+    font-size: .875em;
+    font-weight: 600;
+    background: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, .5);
+}
+
+    .m-report-filter-parent .filter-check {
+    }
+
+    .m-report-filter-parent .filter-list-name {
+        display: inline-block;
+        margin-left: 25px;
+        line-height: 20px;
+    }
+
+    .m-report-filter-parent .back {
+        float: right;
+        font-size: 12px;
+        color: #1eb9f0;
+        text-transform: uppercase;
+    }
+
+        .m-report-filter-parent .back .grey-left-arrow {
+            position: relative;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 5px;
+            border-radius: 50%;
+            padding: 4px;
+            vertical-align: middle;
+            border: 1px solid #d0d0d0;
+            background: #f1f1f1;
+        }
+
+        .m-report-filter-parent .back:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+            .m-report-filter-parent .back:hover .grey-left-arrow {
+                cursor: pointer;
+                border-color: #aeaeae;
+                text-decoration: none;
+            }
+
+        .m-report-filter-parent .back .grey-left-arrow:after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 14px;
+            height: 14px;
+            top: 1px;
+            left: 0;
+            background: url(/images/sprite.png) no-repeat -156px -17px;
+        }
+
+.m-report-filter-child-container ul.m-report-filter-list {
+}
+
+/* -- FILTER ACTIONS -- */
+
+.m-report-filter-actions {
+    margin-top: 10px;
+}
+
+    .m-report-filter-actions > .select-all {
+        float: left;
+        font-size: 12px;
+        color: #1eb9f0;
+    }
+
+        .m-report-filter-actions > .select-all:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .m-report-filter-actions > .select-all > .select-all-unchecked,
+        .m-report-filter-actions > .select-all > .select-all-checked {
+            display: inline-block;
+            margin-right: 5px;
+            width: 15px;
+            height: 15px;
+            /*border-radius:3px;
+    background-color:#fff;
+    border:1px solid #d9d9d9;
+    background-position:2000px 2000px;*/
+            vertical-align: middle;
+            font-size: 16px;
+        }
+
+        .m-report-filter-actions > .select-all > .select-all-checked {
+            /*background-color:#1eb9f0;
+    border-color:#1eb9f0;
+    background-position:-182px -62px;*/
+        }
+
+/* =======================
+    m-daterange.css
+    Author: Chris Dapkiewicz,
+    Calendar / Date Range Picker UI Module
+    ======================= */
+
+/* -- DATE PICKER IN CHOSEN STYLE -- */
+
+.m-daterange {
+    position: relative;
+    z-index: 998;
+}
+
+.btn-datepicker {
+    font-size: 12px !important;
+}
+
+.m-daterange-select:hover {
+    text-decoration: none;
+}
+
+.m-daterange-select span.grey-down-icon {
+    margin-left: 8px;
+}
+
+.m-daterange-select.is-active span.grey-down-icon {
+    background-position: -60px 0;
+}
+
+.m-daterange-select.is-active {
+    border-color: #189ccc;
+}
+
+/* -- MENU CONTAINER -- */
+div.m-daterange-menu {
+    top: 37px;
+    position: absolute;
+    right: 0;
+    display: none;
+    width: 700px;
+    padding: 10px;
+    background: #fff;
+    /*background: -moz-linear-gradient(top,  #f16127 0%, #f6901e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f16127), color-stop(100%,#f6901e));
+    background: -webkit-linear-gradient(top,  #f16127 0%,#f6901e 100%);
+    background: -o-linear-gradient(top,  #f16127 0%,#f6901e 100%);
+    background: -ms-linear-gradient(top,  #f16127 0%,#f6901e 100%);
+    background: linear-gradient(to bottom,  #f16127 0%,#f6901e 100%);*/
+    border-radius: 10px 0 10px 10px;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, .35);
+    z-index: 999;
+}
+
+/* -- MONTHS SLIDER --*/
+div.m-daterange-month-slider-container {
+    position: relative;
+    height: 230px;
+    border-radius: 5px 5px 0 0;
+    background: #fff;
+    /*overflow: hidden;*/
+}
+
+div.m-daterange-slider {
+    float: right;
+    width: 690px;
+    padding: 0 5px;
+    height: 230px;
+    overflow: hidden;
+}
+
+ul.m-daterange-months {
+    position: relative;
+    left: -240px;
+    width: 9999px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li.m-daterange-month-container {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    width: 230px;
+    margin-right: 5px;
+    padding: 10px 8px;
+    vertical-align: top;
+}
+
+/* -- MONTHS TABLE -- */
+table.m-month {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    vertical-align: top;
+}
+
+    table.m-month th {
+        height: 30px;
+        text-align: center;
+        font-size: .875em;
+        font-weight: 600;
+        vertical-align: top;
+        color: #333;
+    }
+
+    table.m-month td {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+        table.m-month td a.m-day {
+            -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+            -moz-box-sizing: border-box; /* Firefox, other Gecko */
+            box-sizing: border-box; /* Opera/IE 8+ */
+            display: block;
+            width: 28px;
+            height: 28px;
+            margin: 1px;
+            color: #282828;
+            text-align: center;
+            font-size: .75em;
+            line-height: 26px;
+            background: #fff;
+            border: 1px solid #f2f2f2;
+            border-radius: 50%;
+            cursor: default;
+            -moz-transition: background-color .2s ease-in-out;
+            -webkit-transition: background-color .2s ease-in-out;
+            transition: background-color .2s ease-in-out;
+        }
+
+            table.m-month td a.m-day.m-today {
+                background: #cfcfcf;
+            }
+
+            table.m-month td a.m-day:hover {
+                text-decoration: none;
+                background-color: #1eb9f0;
+                border-color: #1eb9f0;
+                color: #fff;
+            }
+
+        table.m-month td a.m-day-selected,
+        table.m-month td a.m-day-selected-first,
+        table.m-month td a.m-day-selected-last {
+            width: 30px;
+            margin-left: 0;
+            margin-right: 0;
+            font-weight: bold;
+            color: #fff;
+            background: #26B99A !important; /*#faa21f;  !important;*/
+            border-color: #26B99A; /*#faa21f;*/
+            border-radius: 0px;
+            opacity: .6;
+        }
+
+        table.m-month td a.m-day-selected-first {
+            width: 29px;
+            margin-left: 1px;
+            border-radius: 50% 0 0 50%;
+        }
+
+        table.m-month td a.m-day-selected-last {
+            width: 29px;
+            margin-right: 1px;
+            border-radius: 0 50% 50% 0;
+        }
+
+        table.m-month td a.m-day-selected-same {
+            border-radius: 50%;
+        }
+
+        table.m-month td a.m-day.is-disabled {
+            opacity: .3;
+        }
+
+.m-daterange-prev,
+.m-daterange-next {
+    position: absolute;
+    top: 10px;
+    display: inline-block;
+    min-width: 0;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 20px;
+    border-radius: 50%;
+}
+
+.m-daterange-prev {
+    left: 10px;
+}
+
+.m-daterange-next {
+    right: 10px;
+}
+
+    .m-daterange-prev > .icon,
+    .m-daterange-next > .icon {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-top: 5px;
+    }
+
+.m-daterange-prev > .icon {
+    background-position: -160px -20px;
+    margin-left: 2px;
+}
+
+.m-daterange-next > .icon {
+    background-position: -180px -20px;
+    margin-left: 3px;
+}
+
+.m-daterange-prev:hover > .icon,
+.m-daterange-prev:active > .icon {
+    background-position: -200px -80px;
+    margin-left: 2px;
+}
+
+.m-daterange-next:hover > .icon,
+.m-daterange-next:active > .icon {
+    background-position: -200px -100px;
+    margin-left: 3px;
+}
+
+/* -- CONTROLS / INPUTS -- */
+.m-daterange-controls {
+    clear: both;
+    margin: 0 -10px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #d9d9d9;
+}
+
+    .m-daterange-controls .chosen-container {
+        display: block;
+    }
+
+    .m-daterange-controls input,
+    .m-daterange-controls select,
+    #DateRangePresets_chosen,
+    #DateRangePresets_chzn {
+        width: 100% !important;
+        font-size: .875em;
+    }
+
+    .m-daterange-controls label {
+        font-size: .75em;
+        color: #737373;
+        line-height: 16px;
+    }
+
+    /* make sure forms style is duplicated here incase we don't have forms module loaded */
+    .m-daterange-controls input {
+        /* box sizing adjusted */
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        /* css */
+        padding: 7px 5px;
+        border: 1px solid #c3c3c3;
+        outline: none;
+        border-radius: 3px;
+        background: #fff;
+        /* css3 */
+        -webkit-box-shadow: inset 0px 1px 2px 0px rgba(195, 195, 195, .35), 0px 1px 1px 0px #fff;
+        box-shadow: inset 0px 1px 2px 0px rgba(195, 195, 195, .35), 0px 1px 1px 0px #fff;
+        /* css3 animation */
+        -webkit-transition: border linear .2s, box-shadow linear .2s;
+        -moz-transition: border linear .2s, box-shadow linear .2s;
+        -o-transition: border linear .2s, box-shadow linear .2s;
+        transition: border linear .2s, box-shadow linear .2s;
+    }
+
+        .m-daterange-controls input:focus {
+            border-color: #1eb9f0;
+            -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .2), 0 0 5px rgba(0, 135, 186, .35);
+            box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .2), 0 0 5px rgba(0, 135, 186, .35);
+        }
+
+.m-daterange-presets {
+    float: left;
+    width: 220px;
+    margin-right: 20px;
+}
+
+#DateRangePresets_chzn {
+    width: 235px;
+}
+
+.m-daterange-inputs {
+    float: left;
+    width: 235px;
+    margin-right: 10px;
+}
+
+    .m-daterange-inputs .m-daterange-start,
+    .m-daterange-inputs .m-daterange-end {
+        float: left;
+        width: 100px;
+    }
+
+#DateRangeStart.is-error,
+#DateRangeEnd.is-error {
+    border-color: #c12100;
+}
+
+    #DateRangeStart.is-error:focus,
+    #DateRangeEnd.is-error:focus {
+        -webkit-box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .2), 0 0 5px rgba(193, 33, 0, .35);
+        box-shadow: inset 0px 1px 2px 0px rgba(0, 0, 0, .2), 0 0 5px rgba(193, 33, 0, .35);
+    }
+
+label.is-error {
+    color: #c12100;
+    font-weight: bold;
+}
+
+.m-daterange-inputs .m-daterange-divider {
+    float: left;
+    margin: 8px 10px 0;
+    font-size: .75em;
+    color: #737373;
+}
+
+.m-daterange-btns {
+    float: right;
+}
+
+input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"]::-webkit-input-placeholder {
+    visibility: hidden !important;
+    display: none !important;
+}
+
+.m-daterange-error {
+    display: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: .875em;
+    border-radius: 15px;
+    height: 20px;
+    padding: 5px 15px;
+    margin-bottom: 1em;
+    background: #c12100;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .35);
+}
+
+.filter-drp {
+    margin-bottom: 20px;
+}
+
+ul.m-report-filter-list > li.has-children > span.filter-list-children > .filter-list-children-view > .sprite.sprite-arrow {
+    right: 3px;
+    top: 9px;
+    margin-top: 0;
+}
+
+.static-position {
+    position:static;
+}

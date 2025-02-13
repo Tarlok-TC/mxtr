@@ -1,0 +1,170 @@
+﻿.white-box {
+    background: #fff;
+    border: 1px solid #ddd;
+    min-height: 135px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.enterprise .white-box {
+    padding-right: 150px;
+    position: relative;
+    min-height: 178px;
+}
+
+    .enterprise .white-box.padding-right-10 {
+        padding-right: 10px;
+    }
+
+.enterprise h3 {
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0;
+}
+
+    .enterprise h3 .span-count {
+        float: right;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+.enterprise h5 {
+    font-size: 17px;
+    font-weight: 400;
+    min-height: 45px;
+}
+
+.enterprise h3 small {
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    color: #73879C;
+}
+
+.enterprise .white-box .icons-new {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    text-align: right;
+    width: 150px;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+}
+
+.enterprise .white-box p{
+    min-height: 38px;
+}
+
+.enterprise .white-box .fa {
+    font-size: 40px;
+    line-height: 80px;
+}
+.enterprise .white-box.big-icon-fa .fa {
+    font-size: 110px;
+    line-height: 80px;
+}
+
+.enterprise .white-box .icons-new img {
+    max-width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.chart img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gauge-text {
+    padding-left: 15px;
+}
+
+#goal-text {
+    padding-right: 15px;
+}
+
+
+.chart {
+    width: 113px;
+    height: 112px;
+}
+
+.percent {
+    line-height: 110px;
+}
+
+#dvDealerLeads .dashboard_graph {
+    float: left;
+    width: 100%;
+}
+
+.enterprise .white-box-full.white-box {
+    text-align: center;
+    padding-right: 0;
+}
+
+    .enterprise .white-box-full.white-box h3 {
+        margin-top: 38px;
+    }
+
+.enterprise h5.count_top, .count_bottom {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.enterprise h3.count {
+    font-size: 40px;
+    margin: 0px;
+}
+
+#dvShawMapLegend .legendMap {
+	float: left;
+	padding: 15px 0;
+    width:100%;
+}
+
+#dvShawMapLegend .legendMap span {
+	width: 20px;
+	height: 15px;
+	float: left;
+	margin-right: 10px;
+}
+
+#dvShawMapLegend .legendMap ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 50px;
+}
+
+.color-divs {
+    width:100%;
+    display:inline-block;
+    margin-top:18px;
+}
+.colorLable{
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+.colorLable span {
+	float: left;
+	width: 16px;
+	height: 16px;
+	border-radius: 3px;
+	background-color: red;
+	margin: 0 3px;
+}
+
+.colorLable span.cold{background:#40a6b1;}
+.colorLable span.warm{background:#fc9e00;}
+.colorLable span.hot{background:#e04b35;}
+
+.colorLable span.cold:hover{background:#46b6c2;}
+.colorLable span.warm:hover{background:#ffad00;}
+.colorLable span.hot:hover{background:#f6523a;}

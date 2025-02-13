@@ -1,0 +1,155 @@
+﻿
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.Profile.ViewModels.ProfileViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+
+@section MainContent {
+    <div id="dvProfileInfo">
+        <h2>Personal Information</h2>
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-md-4"><h5>Name</h5></div>
+                <div class="col-md-8"><h5>@Model.FullName</h5></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>User Name</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.UserName</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Email</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.Email</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Phone/Cell</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>
+                        @if (string.IsNullOrEmpty(Model.Phone) && string.IsNullOrEmpty(Model.CellPhone))
+                        {
+                            @:N/A
+                                }
+                        else
+                        {
+                            @(Model.Phone == "" ? "N/A" : Model.Phone)<span>,</span> @(Model.CellPhone == "" ? "N/A" : Model.CellPhone)
+                        }
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Role</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.Role</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Date Created</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.CreateDate</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Permission</h5>
+                </div>
+                <div class="col-md-8">
+                    @foreach (var item in Model.Permissions)
+                    {
+                        <h5>@item</h5>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Sharpspring UserName</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.SharpspringUserName</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Sharpspring Password</h5>
+                </div>
+                <div class="col-md-8">
+                    <h5>@Model.SharpspringPassword</h5>
+                </div>
+            </div>
+            <div class="row">
+                <input type="button" onclick="showHideEdit(true)" class="btn btn-primary" value="Change Password" />
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+    </div>
+    <div class="col-lg-9" id="dvEdit" style="display:none">
+        <form id="frmEditProfile" action="@(new ProfileEditSubmitWebQuery())" method="post">
+            <div class="row">
+                <h3>User Information</h3>
+                <div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="col-md-6">Email</label>
+                            <label>@Model.Email</label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="col-md-6">Current password</label>
+                            <input name="txtPassword" id="txtPassword" type="password" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="col-md-6">New Password</label>
+                            <input name="txtNewPassword" id="txtNewPassword" type="password" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-6">Confirm Password</label>
+                            <input name="txtConfirmPassword" id="txtConfirmPassword" type="password" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <input type="button" id="submit-button" name="submit-button" value="Save" class="btn btn-primary" />
+                            <input type="button" onclick="showHideEdit(false)" value="Cancel" class="btn" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="user-message col-lg-12 margin-top-10"></div>
+}
+
+@section ScriptContent {
+    <script>
+        function showHideEdit(isShow) {
+            if (isShow) {
+                $("#dvEdit").show();
+                $("#dvProfileInfo").hide();
+            }
+            else {
+                $("#dvEdit").hide();
+                $("#dvProfileInfo").show();
+            }
+        }
+    </script>
+    <script src="~/Scripts/profile.js"></script>
+}

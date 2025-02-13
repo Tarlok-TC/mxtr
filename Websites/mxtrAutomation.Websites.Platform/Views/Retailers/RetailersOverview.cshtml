@@ -1,0 +1,307 @@
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.Models.Retailers.ViewData
+
+@model mxtrAutomation.Websites.Platform.Models.Retailers.ViewModels.RetailersOverviewViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeJS(JSKind.MomentJS);
+
+}
+
+ @{
+     HtmlString leadsData = new HtmlString(JsonConvert.SerializeObject(Model.LeadsData));
+     HtmlString searchData = new HtmlString(JsonConvert.SerializeObject(Model.SearchData));
+     HtmlString emailData = new HtmlString(JsonConvert.SerializeObject(Model.EmailData));
+ }
+
+@section MainContent {
+
+<div class="row top_tiles gent-bar">
+    <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box">
+            <span>
+                Total Groups
+            </span>
+            <div class="count">@Model.TotalGroups</div>
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box">
+            <span>Total Retailers</span>
+            <div class="count">@Model.TotalRetailers</div>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard_graph">
+    <div class="row page-header">
+        <div class="col-xs-6">
+            <h3 class="main-title">Retailer Performance</h3>
+        </div>
+        <div class="col-xs-6">
+            <div class="date-filter pull-right">
+                <div class="m-report-filters-daterange"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row scorebox-chart-container page-section">
+
+        <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12">
+                <h4 class="graph_title">Locator Pageviews</h4>
+            </div>
+            <div class="col-xs-12">
+                <canvas id="LocatorSearchesChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12">
+                <h4 class="graph_title">Leads</h4>
+            </div>
+            <div class="col-xs-12">
+                <canvas id="LeadsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12">
+                <h4 class="graph_title">Emails Sent</h4>
+            </div>
+            <div class="col-xs-12">
+                <canvas id="EmailChart"></canvas>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+}
+
+
+@section ScriptContent {
+    <script type="text/javascript">
+        var _leadsData = @leadsData;
+        var _searchData = @searchData;
+        var _emailData = @emailData;
+
+        $(document).ready(function () {
+            c1 = 'rgba(179,179,179,0.9)';
+            function buildChart(){
+                var slabel = [];
+                var sdata = [];
+                var llabel = [];
+                var ldata = [];
+                var elabel = [];
+                var edata = [];
+                $.each(_searchData, function (i, item) {
+                    slabel.push(item.CreateDate);
+                    sdata.push(item.LocatorPageviews);
+                });
+                $.each(_leadsData, function (i, item) {
+                    llabel.push(item.CreateDate);
+                    ldata.push(item.LeadCount);
+                });
+                $.each(_emailData, function (i, item) {
+                    elabel.push(item.CreateDate);
+                    edata.push(item.EmailSends);
+                });
+                var config = {
+                    type: 'line',
+                    data: {
+                        labels: elabel,
+                        datasets:[
+                            {
+                                label: 'Locator Pageviews',
+                                data: sdata,
+                                spanGaps: true
+                            },
+                            {
+                                label: 'Leads',
+                                data: ldata,
+                                spanGaps: true
+                            },
+                            {
+                                label: 'Email Sends',
+                                data: edata,
+                                spanGaps: true,
+                                pointBackgroundColor: c1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                type: 'linear'
+                            }],
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'week',
+                                    displayFormats: {
+                                        week: 'MM-DD-YY'
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+                ctx = $("#DataChart");
+                window.myLine1 = new Chart(ctx, config);
+            }
+
+            function buildSearchChart(){
+                var label = [];
+                var data = [];
+                $.each(_searchData, function (i, item) {
+                    label.push(item.CreateDate);
+                    data.push(item.LocatorPageviews);
+                });
+                var config = {
+                    type: 'line',
+                    data: {
+                        labels: label,
+                        datasets:[
+                            {
+                                label: 'Locator Pageviews',
+                                data: data
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                type: 'linear'
+                            }],
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'week',
+                                    displayFormats: {
+                                        week: 'MM-DD-YY'
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+                ctx = $("#LocatorSearchesChart");
+                window.myLine1 = new Chart(ctx, config);
+            }
+           
+            function buildLeadsChart(){
+                var label = [];
+                var data = [];
+                $.each(_leadsData, function (i, item) {
+                    label.push(item.CreateDate);
+                    data.push(item.LeadCount);
+                });
+                var config = {
+                    type: 'line',
+                    data: {
+                        labels: label,
+                        datasets:[
+                            {
+                                label: 'Leads',
+                                data: data
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                type: 'linear'
+                            }],
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'week',
+                                    displayFormats: {
+                                        week: 'MM-DD-YY'
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+                ctx = $("#LeadsChart");
+                window.myLine1 = new Chart(ctx, config);
+            }
+
+            function buildEmailChart(){
+                var label = [];
+                var data = [];
+                $.each(_emailData, function (i, item) {
+                    label.push(item.CreateDate);
+                    data.push(item.EmailSends);
+                });
+                var config = {
+                    type: 'line',
+                    data: {
+                        labels: label,
+                        datasets:[
+                            {
+                                label: 'Email Sends',
+                                data: data
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                type: 'linear'
+                            }],
+                            xAxes: [{
+                                type: 'time',
+                                time: {
+                                    unit: 'week',
+                                    displayFormats: {
+                                        week: 'MM-DD-YY'
+                                    }
+                                }
+                            }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                }
+                ctx = $("#EmailChart");
+                window.myLine1 = new Chart(ctx, config);
+            }
+
+            buildSearchChart();
+            buildLeadsChart();
+            buildEmailChart();
+
+        });
+
+    </script>
+}

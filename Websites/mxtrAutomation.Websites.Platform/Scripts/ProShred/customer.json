@@ -1,0 +1,33 @@
+[
+    {
+        "CustomerID": "1234",
+        "Company": "US Department of Labor",
+        "Attention": "Accounts Payable",
+        "Street": "1 Clinton Ave LOB#822",
+        "City": "Albany",
+        "State": "NY",
+        "Zip": "12207",
+        "Contact": "",
+        "Phone": "",
+        "Fax": "",
+        "Notes": "#employees=15",
+        "PurchaseOrder": "",
+        "PurchaseOrderExpire": "",
+        "ARCustomerCode": "19003163 US Department of Labor",
+        "CustomerTypeID": "6",
+        "ReferralSourceID": "181",
+        "InvoiceTypeID": "23",
+        "EmailAddress": "",
+        "EmailInvoice": "False",
+        "EmailCOD": "False",
+        "CertificateDestruction": "False",
+        "AllowZeroInvoices": "False",
+        "CreditHold": "False",
+        "PaidInFull": "False",
+        "InvoiceNote": "",
+        "TermID": "1",
+        "ezTimestamp": "2012-10-06",
+        "operation": "Nw",
+        "userID": "2"
+    }
+]

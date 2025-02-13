@@ -1,0 +1,64 @@
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Helpers
+@using mxtrAutomation.Web.Common.UI
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.Login.ViewModels.LoginViewModel
+
+@{ Layout = "~/Views/Shared/PublicLayout.cshtml"; }
+
+@{
+Html.IncludeCss(CssKind.ModuleForms);
+
+Html.IncludeJS(JSKind.KlipFolio);
+Html.IncludeJS(JSKind.Login);
+}
+
+@section MainContent {
+<div id="wrapper">
+    <div id="login" class="animate form">
+        <section class="login_content">
+            <h1>
+                @if (!String.IsNullOrEmpty(Model.BrandingLogoURL))
+                {
+                <img src="@(Model.BrandingLogoURL)" alt="" class="no-cache">
+                }
+                else
+                {
+                <img src="~/Images/Header/logo.png" alt="" class="no-cache">
+                }
+            </h1>
+            <form method="post" id="login-form" action="@(new LoginSubmitWebQuery())" class="form login-form">
+                <h1>Login</h1>
+                <div>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Username" required="" />
+                </div>
+                <div>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="" />
+                </div>
+                <div>
+                    <button id="submit-button" name="submit-button" type="button" class="btn btn-default submit">Login</button>
+                    <a class="reset_pass hide" href="#">Lost your password?</a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="separator">
+
+                    <div class="clearfix"></div>
+                    <br />
+                    <div>
+                        <p>&copy; @DateTime.Now.Year All Rights Reserved. <a href="#">Privacy and Terms</a></p>
+                    </div>
+                </div>
+            </form>
+            <div class="form-sending"><strong>Verifying Login</strong><span></span></div>
+            <div class="user-message"></div>
+        </section>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        sessionStorage.clear();
+    }
+</script>
+}

@@ -1,0 +1,44 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.NextDayRoute.ViewModels.NextDayRouteViewModel
+@using mxtrAutomation.Websites.Platform.Queries
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+    <h1>Next Day Route</h1>
+    <div id="mainDiv">
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="container-fluid">
+                        @if (Model.EZShredAccountDataModel != null)
+                        {
+                            <div class="col-md-3">
+                                <select class="form-control" id="Datasource" name="Datasource" data-placeholder="Database Location" display:selected style="width: auto">
+                                    <option value="0">Select Location</option>
+                                    @foreach (var item in Model.EZShredAccountDataModel)
+                                    {
+                                        if (@item.EZShredPort != "0")
+                                        {
+                                            <option value="@item.AccountName" id="@item.EZShredId" IP="@item.EZShredIP" Port="@item.EZShredPort" ObjectID="@item.AccountObjectId">@item.AccountName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="button" id="btnTicket" onclick="GetNextDayRouteTicket()" class="btn btn-success" value="Generate Ticket" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section ScriptContent {
+    <script src="~/Scripts/ProShred/ManangeNextDayRoute.js"></script>
+    <script type="text/javascript">
+        var _nextdayrouteticketURL = '@(new GetNextDayRouteTicketWebQuery())';
+        var _checknextdayrouteticketURL = '@(new CheckNextDayRouteTicketWebQuery())';
+    </script>
+
+}

@@ -1,0 +1,182 @@
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Helpers
+@using mxtrAutomation.Web.Common.UI
+@using mxtrAutomation.Websites.Platform.Models.Account.ViewData
+@using mxtrAutomation.Corporate.Data.Enums
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Enums
+
+@model mxtrAutomation.Websites.Platform.Models.Account.ViewModels.AccountUsersViewModel
+
+@{
+    HtmlString users = new HtmlString(JsonConvert.SerializeObject(Model.Users));
+    HtmlString marketPlaces = new HtmlString(JsonConvert.SerializeObject(Model.MarketPlaces));
+}
+<div class="col-xs-12">
+    <h3>User Information</h3>
+    <h6>Enter the following required information to create users for the account.</h6>
+</div>
+<div id="userDiv" data-ng-app="AccountUsers" data-ng-controller="MainCtrl">
+
+    <form autocomplete="off" name="usersForm" class="form-horizontal form-label-left form account-users-form cf" @*action="@(Model.UserSubmitUrl)"*@ method="post" ng-submit="createUser(itemToAdd)" data-submiturl="@(Model.UserSubmitUrl)">
+        <input type="hidden" id="MxtrAccountID" name="MxtrAccountID" value="@Model.MxtrAccountID" />
+        <div class="row col-sm-7 col-xs-12">
+            <div class="col-xs-12 form-group fld-wrap">
+                <label for="FullName">Full Name*</label>
+                <input type="text" class="form-control required" id="FullName" name="FullName" placeholder="" value="" ng-model="itemToAdd.FullName" />
+            </div>
+            <div class="col-sm-12 col-xs-12 form-group fld-wrap">
+                <label for="UserName">Username*</label> (email address)
+                <input ng-readonly="IsUserUpdate" type="text" autocomplete="off" class="form-control required" id="UserName" name="UserName" placeholder="" value="" ng-model="itemToAdd.UserName" />
+            </div>
+            <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+                <label for="Password">Password*</label>
+                @*<input type="password" autocomplete="off" class="form-control required" id="Password" name="Password" placeholder="" value="" ng-model="itemToAdd.password" readonly onfocus="this.removeAttribute('readonly');" style="background-color:white" />*@
+                <input ng-readonly="IsUserUpdate" type="password" autocomplete="off" class="form-control required" id="Password" name="Password" placeholder="" value="" ng-model="itemToAdd.Password" />
+            </div>
+            <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+                <label for="ConfirmPassword">Confirm Password*</label>
+                <input ng-readonly="IsUserUpdate" type="password" autocomplete="off" class="form-control required" id="ConfirmPassword" name="ConfirmPassword" placeholder="" ng-model="itemToAdd.ConfirmPassword"  />
+            </div>
+            <div class="col-sm-6 col-xs-12 form-group">
+                <label for="Phone">Phone</label>
+                <input type="text" class="form-control" id="Phone" name="Phone" placeholder="" value="" ng-model="itemToAdd.Phone" />
+            </div>
+
+            <div class="col-sm-6 col-xs-12 form-group">
+                <label for="CellPhone">Cell Phone</label>
+                <input type="text" class="form-control" id="CellPhone" name="CellPhone" placeholder="" value="" ng-model="itemToAdd.CellPhone" />
+            </div>
+
+            <div class="col-sm-6 col-xs-12 form-group">
+                <label for="SharpspringUserName">Sharpspring User Name</label>
+                <input type="text" class="form-control" id="SharpspringUserName" name="SharpspringUserName" placeholder="" value="" ng-model="itemToAdd.SharpspringUserName" />
+            </div>
+
+            <div class="col-sm-6 col-xs-12 form-group">
+                <label for="SharpspringPassword">Sharpspring Password</label>
+                <input type="text" class="form-control" id="SharpspringPassword" name="SharpspringPassword" placeholder="" value="" ng-model="itemToAdd.SharpspringPassword" />
+            </div>
+        </div>
+        <div class="row col-sm-5 col-xs-12">
+            <div class="col-xs-4">
+                <div class="col-xs-12">
+                    <label for="roleAdmin">Role*</label>
+                </div>
+                <div class="col-xs-12 form-group fld-wrap">
+                    <input type="radio" class="flat rb-role" name="rbRole" id="rbRoleAdmin" value="Admin" ng-model="itemToAdd.Role" i-check /><span style="padding-left:5px;">Admin</span>
+                </div>
+                <div class="col-xs-12 form-group fld-wrap">
+                    <input type="radio" class="flat rb-role" name="rbRole" id="rbRoleUser" value="User" ng-model="itemToAdd.Role" checked="checked" i-check /><span style="padding-left:5px;">User</span>
+                </div>
+                <div class="col-xs-12 fld-wrap">
+                    <input type="hidden" class="required" id="Role" name="Role" value="User" />
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="col-xs-12 form-group fld-wrap">
+                    <label>Permissions</label>
+                </div>
+                @foreach (AccountUserPermissionsViewData p in Model.PermissionKinds)
+                {
+                    <div class="col-xs-12 form-group fld-wrap">
+                        <input type="checkbox" class="js-switch js-check-change" data-friendlyname="@p.PermissionName" value="@p.PermissionKind.ToString()" @(p.Checked ? "checked" : string.Empty) /> @(p.PermissionName)
+                    </div>
+                }
+                <input type="hidden" id="Permissions" name="Permissions" value="" ng-model="itemToAdd.Permissions" permissions-switchery />
+            </div>
+        </div>
+        @*@if (!String.IsNullOrEmpty(Model.EZShredIP) && !String.IsNullOrEmpty(Model.EZShredPort))
+            {*@
+        <div id="dvEZShred_IP_Port" style="display:none;">
+            <div ng-if="itemToAdd.EZShredAccountMappings.length">
+                <div class="col-sm-12 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4 style="color: #73879C;">EZShred Market Places Information</h4></div>
+                        <div class="panel-body">
+                            <div class="col-sm-12 col-xs-12 form-group fld-wrap">
+                                <div style="overflow:auto; height: auto; max-height: 300px;">
+                                    <div class="col-sm-4 col-xs-12 form-group" ng-repeat="marketItem in itemToAdd.EZShredAccountMappings">
+                                        <div class="form-group">
+                                            <label>{{marketItem.AccountName}} EZShred User Id : </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="" value="" ng-model="marketItem.EZShredId" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*}*@
+
+
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <button type="submit" id="CreateAccountUserSubmit" name="CreateAccountUserSubmit" class="btn btn-primary">Create User</button>
+                <span class="loader loader-40 loader-white is-hidden"></span>
+                <div id="dvdata_processing" style="display:none; "></div>
+                <div class="form-sending"><strong>Updating Information</strong><span></span></div>
+                <a ng-show="!IsUserUpdate" href="@(Model.UserFinishedUrl)" id="FinishCreateAccountUsers" name="FinishCreateAccountUsers" class="btn btn-info" @(Model.AccountActionKind == AccountActionKind.Create ? "disabled" : string.Empty)>Done</a>
+                <button ng-show="IsUserUpdate" type="button" class="btn btn-info" ng-click="closeUserUpdation()">Cancel</button>
+            </div>
+        </div>
+    </form>
+    <div class="ln_solid"></div>
+    <div id="user-account-notification" class="notification-bar is-hidden" style="margin-bottom:10px;"></div>
+    <div ng-repeat="item in items">
+        <div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDown">
+            <div class="well profile_view">
+                <div class="col-sm-12">
+                    <div class="left col-xs-7">
+                        <h2>{{item.FullName}}</h2>
+                        <p>{{item.UserName}} </p>
+                        <ul class="list-unstyled">
+                            <li><i class="fa fa-phone" style="padding-right:5px;"></i>{{item.Phone}} </li>
+                            <li><i class="fa fa-mobile" style="padding-right:5px;"></i>{{item.CellPhone}} </li>
+
+                        </ul>
+                    </div>
+                    <div class="right col-xs-5 text-center">
+                        <img src="/images/user.png" alt="" class="img-circle img-responsive">
+                    </div>
+                </div>
+                <div class="col-xs-12 bottom text-center">
+                    <div class="col-xs-12 col-sm-4 emphasis">
+                        <strong>Role:</strong> {{item.Role}}
+                    </div>
+                    <div class="col-xs-12 col-sm-8 emphasis">
+                        <a class="btn btn-info btn-xs pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top"
+                           tooltip title="{{item.permissionsToDisplay}}">View Permissions</a>
+                        <a class="btn btn-primary btn-xs" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" tooltip title="Edit" ng-click="editUser(item)">
+                            Edit
+                        </a>
+                        <a class="pull-right btn btn-danger btn-xs" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" tooltip title="Delete" ng-click="deleteUser(item)">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var _users = @users;
+    var _marketPlaces=@marketPlaces;
+    var _userDeleteUrl='@(new AdminDeleteAccountUserWebQuery())';
+    var _eZShredIP='@Model.EZShredIP';
+    var _eZShredPort='@Model.EZShredPort';
+</script>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>*@
+<script src="~/Scripts/popupMessages/sweetalert2.min.js"></script>
+<link href="~/Scripts/popupMessages/sweetalert2.min.css" rel="stylesheet" />
+<script src="~/Scripts/popupMessages/core.js"></script>
+<script src="~/Scripts/popupHandler.js"></script>

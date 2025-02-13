@@ -1,0 +1,53 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.ProshredHome.ViewModels.ProshredHomeViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+    <style>
+        .right_col {
+            background: white !important;
+        }
+
+        #displayName {
+            color: #5eccd8;
+        }
+
+        #ProshredHomelogoImage {
+            width: 300px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        #Proshredhomebg {
+            width: 65%;
+            float: right;
+            margin-right: 3%;
+            border: 2px solid #ddd;
+            padding: 30px;
+        }
+    </style>
+    <h1 id="displayName">Welcome @(Model.FullName)</h1>
+    <hr />
+
+    <img id="ProshredHomelogoImage" src="~/Images/prologo.jpg"/>
+    <br />
+    <img id="Proshredhomebg" src="~/Images/protruck-home.jpg"/>
+}
+@section ScriptContent
+ {
+    <script>
+        $(document).ready(function () {
+            function warningmessage(message, type) {
+                new PNotify({
+                    text: message,
+                    type: type,
+                    styling: 'bootstrap3'
+                });
+            }
+            var success = localStorage.getItem('success');
+            if (success == "false") {
+                warningmessage("klipfolio Error:- "+localStorage.getItem('message'), "error");
+            }
+        });
+    </script>
+}

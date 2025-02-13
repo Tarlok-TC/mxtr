@@ -1,0 +1,144 @@
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Helpers
+@using mxtrAutomation.Web.Common.UI
+@using Newtonsoft.Json;
+
+@model mxtrAutomation.Websites.Platform.Models.Admin.ViewModels.GoogleAnalyticsViewData
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.Select2);
+    Html.IncludeCss(CssKind.ModuleForms);
+}
+
+@{
+    string accountOptions = "<option value = '0' accountid= '0' > Default </option >";
+    string profileoptions = "";
+    string viewoptions = "";
+    foreach (var item in Model.lstGAAccount)
+    {
+        accountOptions += "<option value = '" + item.Id + "' accountid= '" + item.Id + "' > " + item.Name + " </option >";
+
+        var lstGAProfile = item.lstGAProfile.GroupBy(g => g.PropertyId).Select(a => a.First()).ToList();
+        foreach (var itemProfile in lstGAProfile)
+        {
+            profileoptions += "<option value = '" + itemProfile.ViewId + "' accountid= '" + item.Id + "' username=" + itemProfile.UserName + " timezone=" + itemProfile.Timezone + " propertyid="+itemProfile.PropertyId + "> " + itemProfile.WebsiteUrl + " </option >";
+        }
+        foreach (var itemView in item.lstGAProfile)
+        {
+            viewoptions += "<option value = '" + itemView.ViewId + "' accountid= '" + item.Id + "' username=" + itemView.UserName + " timezone=" + itemView.Timezone + " propertyid=" + itemView.PropertyId + " WebsiteUrl=" + itemView.WebsiteUrl + "> " + itemView.ViewName + " </option >";
+        }
+    }
+}
+<script src="~/Scripts/jquery-1.11.3.js"></script>
+@section MainContent {
+    <form id="frmProfile" class="form-horizontal form-label-left form account-attributes-form cf" method="post">
+        <div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-hidden="true" style="display: block;">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel2">Google analytics profile</h4>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="hdnAccountobjectId" name="AccountobjectId" value="@Model.AccountObjectId" />
+                        <input type="hidden" id="hdnCredentialFile" name="CredentialFile" value="@Model.CredentialFile" />
+                        <p>Select Profile</p>
+                        <p><select id="ddlAccount" onchange="SelectProfile()"></select></p>
+                        <p>Select Website</p>
+                        <p><select id="ddlProfile" onchange="SelectView()"></select></p>
+                        <p>Select View</p>
+                        <p><select id="ddlView"></select></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSaveGAData" name="btnSaveGAData" class="btn btn-primary" onclick="SaveGAData()">Proceed</button>
+                        <button type="submit" id="btnCancel" name="btnCancel" class="btn btn-default" onclick="$('#frmProfile').submit()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-backdrop fade in"></div>
+    </form>
+}
+@section ScriptContent {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Init();
+        });
+        function Init() {
+            $("#ddlAccount").append($("<div />").html("@accountOptions").text());
+            $("#ddlProfile").append($("<div />").html("@profileoptions").text());
+            $("#ddlView").append($("<div />").html("@viewoptions").text());
+
+            //Strictly close option tag to select control
+            $('select').append('</option>');
+            $('option').each(function (i) {
+                if (i != 0) $(this).before('</option>');
+            });
+
+            SelectView();//Default Selection
+        }
+
+        function SelectProfile() {
+            var id = $("#ddlAccount option:selected").attr("value");
+
+            if (id == "0")
+                id = $("#ddlAccount option:eq(1)").attr("value");
+
+            $('#ddlProfile option').hide();
+            $('#ddlProfile option[accountid=' + id + ']').show();
+            $('#ddlProfile option:visible').first().prop('selected', true);
+
+            // Hack for chrome
+            $('#ddlProfile option').each(function (i) {
+                var style = $(this).attr("style");
+                if (style == "display: block;" || typeof style === "undefined") {
+                    $('#ddlProfile option')[i].selected = true;
+                    return false;
+                }
+            });
+            SelectView();
+        }
+        function SelectView() {
+            var propertyid = $("#ddlProfile option:selected").attr("propertyid");
+            $('#ddlView option').hide();
+            $('#ddlView option[propertyid=' + propertyid + ']').show();
+            $('#ddlView option:visible').first().prop('selected', true);
+            $('#ddlView option').each(function (i) {
+                var style = $(this).attr("style");
+                if (style == "display: block;" || typeof style === "undefined") {
+                    $('#ddlView option')[i].selected = true;
+                    return false;
+                }
+            });
+        }
+
+        function SaveGAData() {
+            var data =
+           {
+               'id': $('#hdnAccountobjectId').val(),
+               'viewid': $("#ddlView option:selected").attr("value"),
+               'timezone': $("#ddlView option:selected").attr("timezone"),
+               'username': $("#ddlView option:selected").attr("username"),
+               'credentialFile': $('#hdnCredentialFile').val(),
+               'gaProfileName': $('#ddlAccount option:selected').text(),
+               'gaWebsiteUrl': $('#ddlView option:selected').attr("WebsiteUrl"),
+           };
+
+            $.ajax({
+                url: "/SaveGAData",
+                dataType: 'json',
+                type: 'GET',
+                data: data,
+                success: function (result) {
+                    $('#frmProfile').submit();
+                },
+                error: function (err) {
+                    console.log(err);
+                },
+            });
+        }
+    </script>
+}

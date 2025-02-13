@@ -1,0 +1,155 @@
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Helpers
+@using mxtrAutomation.Web.Common.UI
+
+@model mxtrAutomation.Websites.Platform.Models.Account.ViewModels.AccountAttributesViewModel
+
+@{
+    string styleForGAData = !Model.IsConnectedToGoogleAnalytics() ? "display:none" : "";
+}
+
+<h3>Account Attributes</h3>
+<h6>Enter in optional account information such as api keys to collect data.</h6>
+<form class="form-horizontal form-label-left form account-attributes-form cf" action="@(Model.AccountAttributesSubmitUrl)" method="post">
+    <div id="account-information-notification" class="notification-bar is-hidden"></div>
+
+    <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+        <label for="SharpspringSecretKey">Sharpspring Secret Key</label>
+        <input type="text" class="form-control" id="SharpspringSecretKey" name="SharpspringSecretKey" placeholder="" value="@Model.SharpspringSecretKey" />
+    </div>
+    <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+        <label for="SharpspringAccountID">Sharpspring Account ID</label>
+        <input type="text" class="form-control" id="SharpspringAccountID" name="SharpspringAccountID" placeholder="" value="@Model.SharpspringAccountID" />
+    </div>
+
+    <div class="col-xs-12"><hr /></div>
+
+    <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+        <label for="BullseyeLocationId">Bullseye Location ID</label>
+        <input type="text" class="form-control" id="BullseyeLocationId" name="BullseyeLocationId" placeholder="" value="@Model.BullseyeLocationId" />
+    </div>
+    <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+        <label for="BullseyeThirdPartyId">Bullseye Third Party ID</label>
+        <input type="text" class="form-control" id="BullseyeThirdPartyId" name="BullseyeThirdPartyId" placeholder="" value="@Model.BullseyeThirdPartyId" />
+    </div>
+    <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+        <label for="BullseyeClientId">Bullseye Client ID</label>
+        <input type="text" class="form-control" id="BullseyeClientId" name="BullseyeClientId" placeholder="" value="@Model.BullseyeClientId" />
+    </div>
+    <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+        <label for="BullseyeAdminApiKey">Bullseye Admin Api Key</label>
+        <input type="text" class="form-control" id="BullseyeAdminApiKey" name="BullseyeAdminApiKey" placeholder="" value="@Model.BullseyeAdminApiKey" />
+    </div>
+    <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+        <label for="BullseyeSearchApiKey">Bullseye Search Api Key</label>
+        <input type="text" class="form-control" id="BullseyeSearchApiKey" name="BullseyeSearchApiKey" placeholder="" value="@Model.BullseyeSearchApiKey" />
+    </div>
+
+    <div class="col-xs-12"><hr /></div>
+    <div class="row col-xs-12">
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="EZShredIP">EZShred IP Address</label>
+            <input type="text" class="form-control" id="EZShredIP" name="EZShredIP" placeholder="" value="@Model.EZShredIP" />
+        </div>
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="EZShredPort">EZShred Port</label>
+            <input type="text" class="form-control" id="EZShredPort" name="EZShredPort" placeholder="" value="@Model.EZShredPort" />
+        </div>
+    </div>
+    <div class="col-xs-12"><hr /></div>
+    <div class="row col-xs-12">
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="DealerId">Dealer Id</label>
+            <input type="text" class="form-control" id="DealerId" name="DealerId" placeholder="" value="@Model.DealerId" />
+        </div>
+    </div>
+    <div class="col-xs-12"><hr /></div>
+    <div class="col-sm-12 col-xs-12 form-group fld-wrap">
+        <label for="WebsiteUrl">Connect To Google Analytics</label>
+    </div>
+    <div class="form-group col-xs-12">
+        <input type="hidden" class="form-control" id="GoogleAnalyticsReportingViewId" name="GoogleAnalyticsReportingViewId" placeholder="" value="@Model.GoogleAnalyticsReportingViewId" />
+        <input type="hidden" class="form-control" id="GoogleAnalyticsTimeZoneName" name="GoogleAnalyticsTimeZoneName" placeholder="" value="@Model.GoogleAnalyticsTimeZoneName" />
+        <input type="hidden" class="form-control" id="GoogleServiceAccountCredentialFile" name="GoogleServiceAccountCredentialFile" placeholder="" value="@Model.GoogleServiceAccountCredentialFile" />
+        <input type="hidden" class="form-control" id="GoogleServiceAccountEmail" name="GoogleServiceAccountEmail" placeholder="" value="@Model.GoogleServiceAccountEmail" />
+        <div id="dvGAData" style="@styleForGAData">
+            <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+                <label for="GAProfileName">GA Profile</label>
+                <input readonly="readonly" type="text" class="form-control" id="GAProfileName" name="GAProfileName" placeholder="" value="@Model.GAProfileName" />
+            </div>
+            <div class="col-sm-4 col-xs-12 form-group fld-wrap">
+                <label for="GAWebsite">GA Website</label>
+                <input readonly="readonly" type="text" class="form-control" id="GAWebsiteUrl" name="GAWebsiteUrl" placeholder="" value="@Model.GAWebsiteUrl" />
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            @if (Model.IsConnectedToGoogleAnalytics())
+            {
+                @Html.ActionLink("Disconnect", "DisconnectGAData", "AdminEditAccount", new { id = Model.ObjectID }, new { @class = "btn btn-primary", @id = "DisConnectToGA" })
+                @Html.ActionLink("Connect", "GoogleAnalytics", "AdminEditAccount", new { id = Model.ObjectID }, new { @class = "btn btn-primary", @id = "ConnectToGA", @style = "display:none" })
+            }
+            else
+            {
+                @Html.ActionLink("Connect", "GoogleAnalytics", "AdminEditAccount", new { id = Model.ObjectID }, new { @class = "btn btn-primary", id = "ConnectToGA" })
+                @Html.ActionLink("Disconnect", "DisconnectGAData", "AdminEditAccount", new { id = Model.ObjectID }, new { @class = "btn btn-primary", id = "DisConnectToGA", @style = "display:none" })
+            }
+        </div>
+    </div>
+
+    <div class="col-xs-12"><hr /></div>
+
+    <div class="col-sm-12 col-xs-12 form-group fld-wrap">
+        <label for="WebsiteUrl">Website Url</label>
+        <input type="text" class="form-control" id="WebsiteUrl" name="WebsiteUrl" placeholder="" value="@Model.WebsiteUrl" />
+    </div>
+
+    <div class="col-xs-12"><hr /></div>
+
+    <div class="row col-xs-12">
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="Phone">KlipFolio SSO Secret Key</label>
+            <input type="text" class="form-control" id="KlipfolioSSOSecretKey" name="KlipfolioSSOSecretKey" placeholder="" value="@Model.KlipfolioSSOSecretKey" />
+        </div>
+        <div class="col-sm-5 col-xs-12 form-group fld-wrap">
+            <label for="AccountType">KlipFolio Company ID</label><br />
+            <input type="text" class="form-control" id="KlipfolioCompanyID" name="KlipfolioCompanyID" placeholder="" value="@Model.KlipfolioCompanyID" />
+        </div>
+    </div>
+    <div class="col-xs-12"><hr /></div>
+    <div class="col-xs-12"><h2>SharpSpring Opportunity Stages Mapping (for Proshred only)</h2><br /></div>
+    <div class="row col-xs-12">
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="Lead">Lead</label>
+            <input type="text" class="form-control" id="SSLead" name="SSLead" placeholder="" value="@Model.SSLead" />
+        </div>
+        <div class="col-sm-5 col-xs-12 form-group fld-wrap">
+            <label for="Contact">Contact</label><br />
+            <input type="text" class="form-control" id="SSContact" name="SSContact" placeholder="" value="@Model.SSContact" />
+        </div>
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="QuoteSent">Quote Sent</label>
+            <input type="text" class="form-control" id="SSQuoteSent" name="SSQuoteSent" placeholder="" value="@Model.SSQuoteSent" />
+        </div>
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="Scheduled">Win/Not Scheduled</label>
+            <input type="text" class="form-control" id="SSWonNotScheduled" name="SSWonNotScheduled" placeholder="" value="@Model.SSWonNotScheduled" />
+        </div>
+        <div class="col-sm-6 col-xs-12 form-group fld-wrap">
+            <label for="Closed">Lost</label>
+            <input type="text" class="form-control" id="SSClosed" name="SSClosed" placeholder="" value="@Model.SSClosed" />
+        </div>
+    </div>
+    <div class="form-group col-xs-12">
+        <button type="submit" id="SaveAttributesSubmit" name="SaveAttributesSubmit" class="btn btn-primary">@Model.AccountAttributesSubmitText</button>
+        <span class="loader loader-40 loader-white is-hidden"></span>
+        <div class="form-sending"><strong>Updating Information</strong><span></span></div>
+        <button type="button" id="SkipAccountAttributes" name="SkipAccountAttributes" class="btn btn-info">Skip</button>
+    </div>
+    <script type="text/javascript">
+        var errorMsg = '@ViewBag.GAErrorMessage';
+        if (errorMsg != "")
+            alert(errorMsg);
+    </script>
+</form>

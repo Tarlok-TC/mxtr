@@ -1,0 +1,200 @@
+﻿/* =======================
+    © Adtrak360 LLC. ALL Rights Reserved 
+    states.css
+    Author: Chris Dapkiewicz
+    Set states for various modules / messages etc.
+    Hidden/Visible, is-failure, is-success etc
+    ======================= */
+    .is-hidden, [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak  {display:none;}
+    .is-visible {display:block;}
+
+    /* ==================
+     * MESSAGES TO USERS - WARNINGS, SUCCESS, FAILURE 
+        These get appened to .message div's via JS    
+        ==================*/
+     
+     .is-failure {background:#ffe9e5;color:#c12100 !important;font-weight:700;}
+     .is-success {background:#e5faed;font-weight:600;}
+     .is-warning {font-weight:700;color:#282828 !important;}
+
+/* ==================
+ * MESSAGES TO USERS - WARNINGS, SUCCESS, FAILURE  -
+    ================== */
+    
+    /* notification bar */
+    .notification-bar.is-failure {border-color:#c12100;}
+    .notification-bar.is-failure > strong {color:#c12100;}
+    .notification-bar.is-failure:before {background-position:left top;}
+    
+    .notification-bar.is-warning {border-color:#ddd200;}
+    .notification-bar.is-warning:before {background-position:left -40px;}
+    
+    .notification-bar.is-success {border-color:#1abe57;}
+    .notification-bar.is-success:before {background-position:left -80px;}
+    
+    
+    /* inline msg / checkbox */
+    .notification-inline.is-success {background:url('/images/base-sprite.png') no-repeat -200px -17px !important;}
+    .notification-inline.is-failure {color:#c12100;background:url('/images/base-sprite.png') no-repeat -200px 3px !important;font-weight:bold;padding-left:16px;font-size:12px;}
+    
+    /* -- UPDATED NOTIFICATION BAR -- */
+    .system-msg 
+    {
+        position:relative;
+        display:block;
+        margin:20px;
+        padding:5px 10px;
+        font-size:.875em;
+        line-height:30px;
+        color:#fff !important;
+    }
+    
+    .system-msg > .sprite 
+    {
+        display:inline-block;
+        margin-right:10px;
+        width:30px;
+        height:30px;
+        vertical-align:middle;
+    }
+    
+    .system-msg.is-warning 
+    {
+        background:#ddd200;
+    }
+    
+    .system-msg.is-failure 
+    {
+        background:#c12100;
+    }
+    
+    .system-msg.is-success 
+    {
+        background:#00cc4c;
+    }
+    
+    .system-msg.is-warning > .sprite,
+    .system-msg.is-failure > .sprite.is-warning
+    {
+        background-position:-80px -120px;
+    }
+    
+    .system-msg.is-failure > .sprite 
+    {
+        background-position:-120px -120px;
+    }
+    
+    .system-msg.is-success > .sprite 
+    {
+        background-position:-40px -120px;   
+    }
+    
+/* ==================
+ * TEXT STATES - HIGHLIGHT SEARCH TERMS ETC
+    ================== */
+.is-highlight {
+    display:inline-block;
+    padding:0px 1px;
+    color:#282828;
+    border-radius:3px;
+    background: #fff200;
+}
+
+a.is-disabled 
+{
+    opacity:.3 !important;   
+    cursor:text !important;
+    text-decoration:none;
+}
+
+.is-new-label 
+{
+    position:relative;
+    display:inline-block;
+    padding:0px 8px 0 22px;
+    color:#fff;
+    font-size:11px;
+    line-height:20px;
+    font-weight:bold;
+    text-transform:uppercase;
+    background-color:#1abe57;
+    border-radius:20px;
+    text-shadow:0px 1px 2px rgba(0,0,0,.35);
+    box-shadow:inset 0px 1px 3px rgba(0,0,0,.35), 0px 1px 1px #fff;
+}
+
+.is-new-label:before 
+{
+    content:"";
+    position:absolute;
+    left:2px;
+    top:1.5px;
+    display:inline-block;
+    width:18px;
+    height:17px;
+    background:url('/images/sprite.png') no-repeat -80px -60px;
+}
+
+.is-new-label:first-child 
+{
+    margin-right:5px;   
+}
+
+.is-new-label:last-child 
+{
+    margin-left:5px;
+}
+/* ==================
+ * BUTTON STATES
+    actual <button>'s - for disabled
+    ================== */
+button[disabled] {opacity:.5;cursor:wait !important;}
+
+.hero-btn.is-disabled 
+{
+    opacity:.5;
+    cursor:default !important;
+    border-bottom-width:1px;
+    box-shadow:none;
+}
+
+.hero-btn.is-disabled:before,
+.hero-btn.is-disabled:after
+{
+    display:none;   
+}
+
+.hero-btn.is-disabled:active 
+{
+    bottom:0;
+    margin-bottom:0;
+}
+
+input.is-disabled 
+{
+    background:transparent;
+    border-color:#aaa;
+    box-shadow:none;
+    opacity: .5;
+}
+
+/* ==================
+ * ANIMATION STATES
+    Used for fading in/out via CSS3 (angular.js) instead of relying on javascript
+    ================== */
+.animate-enter {
+    transition: 0.2s ease-in all;
+    opacity: 0;
+}
+.animate-enter.animate-enter-active {
+    transition-delay: 0.2s;
+    opacity: 1;
+}
+.animate-leave {
+    transition: 0.2s ease-out all;
+    opacity: 1;
+}
+.animate-leave.animate-leave-active {
+    opacity: 0;
+}
+    

@@ -1,0 +1,16 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Klipfolio.ViewModels.KlipfolioViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+
+    <iframe id="frameKlipfolio" src="https://app.klipfolio.com/dashboard" width="100%" frameborder="0"></iframe>
+    <script>
+        $('body').css("overflow", "hidden");
+        $('#frameKlipfolio').css("padding-bottom", "50px");
+        $(window).resize(function () {
+            var height = $(window).height();
+            $("#frameKlipfolio").css("height", height);
+        }).resize();
+    </script>
+}

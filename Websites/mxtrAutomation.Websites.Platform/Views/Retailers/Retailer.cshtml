@@ -1,0 +1,319 @@
+﻿@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.Retailers.ViewModels.RetailerViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeJS(JSKind.Angular);
+    Html.IncludeJS(JSKind.Retailer);
+}
+@{
+    HtmlString data = new HtmlString(JsonConvert.SerializeObject(Model.RetailerLeads));
+    HtmlString leadsData = new HtmlString(JsonConvert.SerializeObject(Model.LeadsData));
+    HtmlString searchData = new HtmlString(JsonConvert.SerializeObject(Model.SearchData));
+    HtmlString emailData = new HtmlString(JsonConvert.SerializeObject(Model.EmailData));
+}
+
+@section MainContent {
+
+    <div class="row top_tiles gent-bar">
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="campaigns">
+                <span>
+                    Total Locator Pageviews
+                </span>
+                <div id="dvLocatorPageviews" class="count">@Model.RetailerActivityReportViewData.LocatorPageviews</div>
+            </div>
+        </div>
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="leads">
+                <span>Total Contacts</span>
+                <div id="dvContacts" class="count">@Model.RetailerActivityReportViewData.Contacts</div>
+            </div>
+        </div>
+        <div class="pointer animated flipInY col-lg-4 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="opportunities">
+                <span>Total Landing Pageviews</span>
+                <div id="dvLPPageviews" class="count">@Model.RetailerActivityReportViewData.LPPageviews</div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@(new IndexWebQuery())">Home</a></li>
+                    <li><a href="@(new RetailersWebQuery())">Retailer Performance</a></li>
+                    <li class="breadcrumb-item">Retailer Detail</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Network Activities</h3>
+            </div>
+        </div>
+        <div class="row scorebox-chart-container page-section">
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Locator Pageviews</h4>
+                <div id="LocatorSearches_Chart" style="height:350px;"></div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Contacts</h4>
+                <div id="Leads_Chart" style="height:350px;"></div>
+            </div>
+            <div class="col-sm-4 col-xs-12">
+                <h4 class="graph_title">Emails Sent</h4>
+                <div id="Email_Chart" style="height:350px;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 margin-btm20">
+                <div id="ddlShowHideColumn" class="dropdown pull-left filter-btn">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dvOption" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-th" aria-hidden="true"></i>
+                        Show/Hide Columns
+                        <span class="caret"></span>
+                    </button>
+                    <ul id="filterMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <a id="aSelectAll" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Select All
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aPageviewsLocator" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Pageviews Locator
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aPageviewsLP" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Pageviews LP
+                            </a>
+                        </li>
+                        @*<li>
+                                <a id="aFormSubmissions" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                    <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Form Submissions
+                                </a>
+                            </li>*@
+                        <li>
+                            <a id="aContacts" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Contacts
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aEmailsSent" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Emails Sent
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aTotalClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Total Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aDirectionClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Directions Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aHoursClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Hours Clicks
+                            </a>
+                        </li>
+                        @*<li>
+                                <a id="aMoreInfoClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                    <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> More Info Clicks
+                                </a>
+                            </li>*@
+                        <li>
+                            <a id="aLogoClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Logo Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aWebsiteClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Website Clicks
+                            </a>
+                        </li>
+                        <li>
+                            <a id="aPhoneClicks" onclick="showHideColumn(this)" class="toggle-link toggle-typeFilter link-active toggle-all-events toggle-vis" data-timeline-event="">
+                                <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> Phone Clicks
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table id="tbl_RetailerDetail" class="table table-striped jambo_table retailers-table bulk_action margin-btm0" width="100%">
+                        <thead>
+                            <tr class="headings">
+                                <th class="text-center">RETAILER</th>
+                                <th id="thPageviewsLocator" class="text-center">Pageviews Locator</th>
+                                <th id="thPageviewsLP" class="text-center">Pageviews LP</th>
+                                @*<th id="thFormSubmissions" class="text-center">Form Submissions</th>*@
+                                <th id="thContacts" class="text-center">Contacts</th>
+                                <th id="thEmailsSent" class="text-center">Emails Sent</th>
+                                <th id="thTotalClicks" class="text-center">Total Clicks</th>
+                                <th id="thClickDirection" class="text-center">Clicks-Directions</th>
+                                <th id="thClickHour" class="text-center">Clicks-Hours</th>
+                                @*<th id="thClickMoreInfo" class="text-center">Clicks- More Info</th>*@
+                                <th id="thLogo" class="column-title" style="display: table-cell">Logo Clicks</th>
+                                <th id="thWebsite" class="column-title" style="display: table-cell">Website Clicks</th>
+                                <th id="thPhone" class="column-title" style="display: table-cell">Phone Clicks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Model.RetailerActivityReportViewData.AccountName</td>
+                                <td id="tdPageviewsLocator" class="numericCol"><span id="spLocatorPageviews">@Model.RetailerActivityReportViewData.LocatorPageviews</span></td>
+                                <td id="tdPageviewsLP" class="numericCol"><span id="spLPPageviews">@Model.RetailerActivityReportViewData.LPPageviews</span></td>
+                                @*<td id="tdFormSubmissions" class="numericCol"><span id="spFormSubmissions">@Model.RetailerActivityReportViewData.FormSubmissions</span></td>*@
+                                <td id="tdContacts" class="numericCol"><span id="spContacts">@Model.RetailerActivityReportViewData.Contacts</span></td>
+                                <td id="tdEmailsSent" class="numericCol"><span id="spEmailsSent">@Model.RetailerActivityReportViewData.EmailsSent</span></td>
+                                <td id="tdTotalClicks" class="numericCol"><span id="spTotalClicks">@Model.RetailerActivityReportViewData.TotalClicks</span></td>
+                                <td id="tdClickDirection" class="numericCol"><span id="spDirectionsClicks">@Model.RetailerActivityReportViewData.DirectionsClicks</span></td>
+                                <td id="tdClickHour" class="numericCol"><span id="spHourClicks">@Model.RetailerActivityReportViewData.MapClicks</span></td>
+                                @*<td id="tdClickMoreInfo" class="numericCol"><span id="spMoreInfoClicks">@Model.RetailerActivityReportViewData.MoreInfoClicks</span></td>*@
+                                <td id="tdLogo" class="numericCol"><span id="spLogoClicks">@Model.RetailerActivityReportViewData.LogoClicks</span></td>
+                                <td id="tdWebsite" class="numericCol"><span id="spWebsiteClicks">@Model.RetailerActivityReportViewData.WebsiteClicks</span></td>
+                                <td id="tdPhone" class="numericCol"><span id="spPhoneClicks">@Model.RetailerActivityReportViewData.PhoneClicks</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="dvRetailerLeads" data-ng-app="retailerApp" data-ng-controller="retailerController">
+                    <div class="dashboard_graph">
+                        <div class="col-xs-12">
+                            <h3 class="sub-head-title">@Model.RetailerActivityReportViewData.AccountName</h3>
+                        </div>
+                        <div class="col-xs-12">
+                            <h4>Contact Manager</h4>
+                        </div>
+                        <div class="row  profile">
+                            <div ng-if="!items.length" class="col-xs-12">
+                                <span class="col-xs-12">No Record(s) found</span>
+                            </div>
+                            <div ng-repeat="item in items">
+                                <div class='col-md-4'>
+                                    <div class='inner-box'>
+                                        <h4 class='brief'><i> {{GetCompanyName(item)}}</i></h4>
+                                        <div class='col-md-9'>
+                                            <h2>{{GetName(item)}}</h2>
+                                            <ul class='list-unstyled user_data'>
+                                                <li>
+                                                    <i class='fa fa-map-marker user-profile-icon'></i> {{GetCity(item)}}<span>{{GetSep(item)}}</span> {{GetState(item)}}
+                                                </li>
+                                                <li>
+                                                    <i class='fa fa-envelope user-profile-icon'></i> {{GetEmail(item)}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class='col-md-3 text-center'>
+                                            <img class='img-circle  img-responsive avatar-view' src='/images/user.png' alt='Avatar' title='name'>
+                                        </div>
+                                        <div class='profile-footer'>
+                                            <div class='score-sc col-xs-5'>
+                                                <h4>
+                                                    Lead Score : <span class='score-text gold'>{{item.LeadScore}}</span>
+                                                </h4>
+                                            </div>
+                                            <a href="{{GetUrl(item)}}" class='btn btn-primary'>
+                                                <i class='fa  fa-user'></i> View profile
+                                            </a>
+                                            <a class='btn btn-danger' ng-click="DeleteLead(item.ObjectID)"><i class="fa fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+                                            <h4 class="brief"><i>Arcon Group</i></h4>
+                                            <div class="left col-xs-7">
+                                                <h2>Bud Miller</h2>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-envelope"></i> Email: <a href="#">bmiller@arcongroupinc.com</a> </li>
+                                                    <li><i class="fa fa-building"></i> Address: 195 Airport Road, Selinsgrove, PA, 17870</li>
+                                                    <li><i class="fa fa-phone"></i> Phone #: 570-374-3711</li>
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="images/user.png" alt="" class="img-circle img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <p class="ratings">
+                                                    Lead Score :
+                                                    <a href="#" class="gold">18</a>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+
+                                                <button type="button" class="btn btn-primary btn-xs">
+                                                    <i class="fa fa-user"> </i> View Profile
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+                        </div>
+                    </div>
+                    <div class="row text-right">
+                        <div class="col-xs-12">
+                            <ul ng-if="pager.pages.length" class="pagination">
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(1)">First</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === 1}">
+                                    <a ng-click="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li ng-repeat="page in pager.pages" ng-class="{active:pager.currentPage === page}">
+                                    <a ng-click="setPage(page)">{{page}}</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <li ng-class="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a ng-click="setPage(pager.totalPages)">Last</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section ScriptContent {
+    <script>
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _data = @data;
+        var _leadsData = @leadsData;
+        var _searchData = @searchData;
+        var _emailData = @emailData;
+        var _leadUrl = '@(new LeadWebQuery())';
+        var _leadDeleteUrl='@(new LeadDeleteWebQuery())';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script src="~/Scripts/popupHandler.js"></script>
+}

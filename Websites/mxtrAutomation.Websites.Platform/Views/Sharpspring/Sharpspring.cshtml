@@ -1,0 +1,50 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Sharpspring.ViewModels.SharpspringViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+
+
+    @if (!string.IsNullOrEmpty(Model.SharpspringUserName) && !string.IsNullOrEmpty(Model.SharpspringPassword))
+    {
+        <div id="login-form" style="display:none;">
+            <form id="login" method="post" action="https://proshred.marketingautomation.services/auth/authenticate" target="frameSharpSpring">
+
+                <div id="vertical-login-wrapper">
+                    <input type="text" id="username" name="username" placeholder="Email" value="@Model.SharpspringUserName">
+                    <input type="password" id="password" name="password" placeholder="Password" value="@Model.SharpspringPassword" autocomplete="off">
+                    <div id="login-signin">
+                        <button class="btn btn-success" type="submit">
+                            <span>Sign In</span>
+                        </button>
+                        <a href="https://proshred.marketingautomation.services/auth/forget/MzawMDEzsDQxBgA/0/1" class="forget-link">Forget Password?</a>
+                    </div>
+                </div>
+
+                <input type="hidden" name="r" value="/dashboard/" class="login-agency-redirect">
+                <input type="hidden" name="encodedCompanyID" value="MzawMDEzsDQxBgA">
+                <input type="hidden" name="iframe" value="0">
+                <input type="hidden" name="vertical" value="1">
+                <input type="hidden" name="login" value="1">
+                <input type="hidden" name="companyLoginID" value="308460943">
+            </form>
+        </div>
+        <iframe id="frameSharpSpring" name="frameSharpSpring" src="" width="100%" frameborder="0"></iframe>
+    }
+    else
+    {
+        <iframe id="frameSharpSpring" src="https://app.sharpspring.com/" width="100%" frameborder="0"></iframe>
+    }
+
+    <script>
+        $('body').css("overflow", "hidden");
+        $('#frameSharpSpring').css("padding-bottom", "50px");
+        $(window).resize(function () {
+            var height = $(window).height();
+            $("#frameSharpSpring").css("height", height);
+        }).resize();
+
+        // submit the form into iframe for login into remote site
+        document.getElementById('login').submit();
+    </script>
+}

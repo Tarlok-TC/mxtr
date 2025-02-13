@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="mxtrAutomation.Api" Label="mxtrAutomation.Api" Category="Project" />
+    <Node Id="EasyHttp 1.7.0" Label="EasyHttp 1.7.0" Category="Package" />
+    <Node Id="Google.Apis 1.24.1" Label="Google.Apis 1.24.1" Category="Package" />
+    <Node Id="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Label="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Category="Package" />
+    <Node Id="Google.Apis.Auth 1.24.1" Label="Google.Apis.Auth 1.24.1" Category="Package" />
+    <Node Id="Google.Apis.Core 1.24.1" Label="Google.Apis.Core 1.24.1" Category="Package" />
+    <Node Id="JsonFx 2.0.1209.2802" Label="JsonFx 2.0.1209.2802" Category="Package" />
+    <Node Id="Newtonsoft.Json 7.0.1" Label="Newtonsoft.Json 7.0.1" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="RestSharp 105.2.3" Label="RestSharp 105.2.3" Category="Package" />
+    <Node Id="Zlib.Portable.Signed 1.11.0" Label="Zlib.Portable.Signed 1.11.0" Category="Package" />
+    <Node Id="mxtrAutomation.Corporate.Data" Label="mxtrAutomation.Corporate.Data" Category="Project" />
+    <Node Id="MongoDB.Bson 2.4.3" Label="MongoDB.Bson 2.4.3" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="mxtrAutomation.Web.Common" Label="mxtrAutomation.Web.Common" Category="Project" />
+    <Node Id="Antlr 3.4.1.9004" Label="Antlr 3.4.1.9004" Category="Package" />
+    <Node Id="Microsoft.AspNet.Mvc 4.0.20710.0" Label="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Razor 2.0.20715.0" Label="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.1.3" Label="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages 2.0.20710.0" Label="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages.Data 3.2.3" Label="Microsoft.AspNet.WebPages.Data 3.2.3" Category="Package" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="NUnit 2.6.4" Label="NUnit 2.6.4" Category="Package" />
+    <Node Id="WebGrease 1.6.0" Label="WebGrease 1.6.0" Category="Package" />
+    <Node Id="mxtrAutomation.Data" Label="mxtrAutomation.Data" Category="Project" />
+    <Node Id="Antlr 3.5.0.2" Label="Antlr 3.5.0.2" Category="Package" />
+    <Node Id="mongocsharpdriver 2.1.0" Label="mongocsharpdriver 2.1.0" Category="Package" />
+    <Node Id="MongoDB.Bson 2.1.0" Label="MongoDB.Bson 2.1.0" Category="Package" />
+    <Node Id="MongoDB.Driver 2.1.0" Label="MongoDB.Driver 2.1.0" Category="Package" />
+    <Node Id="MongoDB.Driver.Core 2.1.0" Label="MongoDB.Driver.Core 2.1.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="NUnit 2.6.4" Label="NUnit 2.6.4" Category="Package" />
+    <Node Id="WebGrease 1.6.0" Label="WebGrease 1.6.0" Category="Package" />
+    <Node Id="mxtrAutomation.Common" Label="mxtrAutomation.Common" Category="Project" />
+    <Node Id="Antlr 3.4.1.9004" Label="Antlr 3.4.1.9004" Category="Package" />
+    <Node Id="HtmlAgilityPack 1.4.9" Label="HtmlAgilityPack 1.4.9" Category="Package" />
+    <Node Id="LINQtoCSV 1.5.0.0" Label="LINQtoCSV 1.5.0.0" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="NUnit 2.6.4" Label="NUnit 2.6.4" Category="Package" />
+    <Node Id="WebGrease 1.6.0" Label="WebGrease 1.6.0" Category="Package" />
+    <Node Id="mxtrAutomation.Websites.Platform.Tests" Label="mxtrAutomation.Websites.Platform.Tests" Category="Project" />
+    <Node Id="Microsoft.AspNet.Mvc 4.0.20710.0" Label="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Mvc.FixedDisplayModes 1.0.0" Label="Microsoft.AspNet.Mvc.FixedDisplayModes 1.0.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Razor 2.0.20715.0" Label="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Label="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Label="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages 2.0.20710.0" Label="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.0.20710.0" Label="Microsoft.Net.Http 2.0.20710.0" Category="Package" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 4.5.11" Label="Newtonsoft.Json 4.5.11" Category="Package" />
+    <Node Id="mxtrAutomation.Websites.Platform" Label="mxtrAutomation.Websites.Platform" Category="Project" />
+    <Node Id="AngularJS.Core 1.4.7" Label="AngularJS.Core 1.4.7" Category="Package" />
+    <Node Id="Antlr 3.5.0.2" Label="Antlr 3.5.0.2" Category="Package" />
+    <Node Id="bootstrap 3.3.5" Label="bootstrap 3.3.5" Category="Package" />
+    <Node Id="CodeContracts 1.0.5680.18392" Label="CodeContracts 1.0.5680.18392" Category="Package" />
+    <Node Id="DotNetOpenAuth.AspNet 4.1.4.12333" Label="DotNetOpenAuth.AspNet 4.1.4.12333" Category="Package" />
+    <Node Id="DotNetOpenAuth.Core 4.1.4.12333" Label="DotNetOpenAuth.Core 4.1.4.12333" Category="Package" />
+    <Node Id="DotNetOpenAuth.OAuth.Consumer 4.1.4.12333" Label="DotNetOpenAuth.OAuth.Consumer 4.1.4.12333" Category="Package" />
+    <Node Id="DotNetOpenAuth.OAuth.Core 4.1.4.12333" Label="DotNetOpenAuth.OAuth.Core 4.1.4.12333" Category="Package" />
+    <Node Id="DotNetOpenAuth.OpenId.Core 4.1.4.12333" Label="DotNetOpenAuth.OpenId.Core 4.1.4.12333" Category="Package" />
+    <Node Id="DotNetOpenAuth.OpenId.RelyingParty 4.1.4.12333" Label="DotNetOpenAuth.OpenId.RelyingParty 4.1.4.12333" Category="Package" />
+    <Node Id="jQuery 1.11.3" Label="jQuery 1.11.3" Category="Package" />
+    <Node Id="jQuery.Validation 1.14.0" Label="jQuery.Validation 1.14.0" Category="Package" />
+    <Node Id="Microsoft.AspNet.Mvc 5.2.3" Label="Microsoft.AspNet.Mvc 5.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.Razor 3.2.3" Label="Microsoft.AspNet.Razor 3.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.Web.Optimization 1.1.3" Label="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi 5.2.3" Label="Microsoft.AspNet.WebApi 5.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Client 5.2.3" Label="Microsoft.AspNet.WebApi.Client 5.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.Core 5.2.3" Label="Microsoft.AspNet.WebApi.Core 5.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebApi.WebHost 5.2.3" Label="Microsoft.AspNet.WebApi.WebHost 5.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages 3.2.3" Label="Microsoft.AspNet.WebPages 3.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages.Data 3.2.3" Label="Microsoft.AspNet.WebPages.Data 3.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages.OAuth 3.2.3" Label="Microsoft.AspNet.WebPages.OAuth 3.2.3" Category="Package" />
+    <Node Id="Microsoft.AspNet.WebPages.WebData 3.2.3" Label="Microsoft.AspNet.WebPages.WebData 3.2.3" Category="Package" />
+    <Node Id="Microsoft.Bcl 1.1.10" Label="Microsoft.Bcl 1.1.10" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.29" Label="Microsoft.Net.Http 2.2.29" Category="Package" />
+    <Node Id="Microsoft.Web.Infrastructure 1.0.0.0" Label="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package" />
+    <Node Id="Modernizr 2.8.3" Label="Modernizr 2.8.3" Category="Package" />
+    <Node Id="Moment.js 2.13.0" Label="Moment.js 2.13.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.4" Label="Newtonsoft.Json 6.0.4" Category="Package" />
+    <Node Id="Ninject 3.2.2.0" Label="Ninject 3.2.2.0" Category="Package" />
+    <Node Id="WebGrease 1.6.0" Label="WebGrease 1.6.0" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="EasyHttp 1.7.0" Target="JsonFx 2.0.1209.2802" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.24.1" Target="Zlib.Portable.Signed 1.11.0" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.24.1" Target="Zlib.Portable.Signed 1.11.0" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis.Auth 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis.Auth 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis.Auth 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Target="Google.Apis.Auth 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.24.1" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.24.1" Target="Google.Apis 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.24.1" Target="Google.Apis.Core 1.24.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.24.1" Target="Newtonsoft.Json 7.0.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.24.1" Target="Newtonsoft.Json 7.0.1" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.24.1" Target="Newtonsoft.Json 7.0.1" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Api" Target="EasyHttp 1.7.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Api" Target="Google.Apis.AnalyticsReporting.v4 1.24.1.798" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Api" Target="Ninject 3.2.2.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Api" Target="RestSharp 105.2.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Corporate.Data" Target="MongoDB.Bson 2.4.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Corporate.Data" Target="Ninject 3.2.2.0" Category="Installed Package" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="WebGrease 1.6.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Antlr 3.4.1.9004" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Web.Common" Target="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Web.Common" Target="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Web.Common" Target="Microsoft.AspNet.WebPages.Data 3.2.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Web.Common" Target="Ninject 3.2.2.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Web.Common" Target="NUnit 2.6.4" Category="Installed Package" />
+    <Link Source="mongocsharpdriver 2.1.0" Target="MongoDB.Bson 2.1.0" Category="Package Dependency" />
+    <Link Source="mongocsharpdriver 2.1.0" Target="MongoDB.Driver.Core 2.1.0" Category="Package Dependency" />
+    <Link Source="mongocsharpdriver 2.1.0" Target="MongoDB.Driver 2.1.0" Category="Package Dependency" />
+    <Link Source="MongoDB.Driver 2.1.0" Target="MongoDB.Bson 2.1.0" Category="Package Dependency" />
+    <Link Source="MongoDB.Driver 2.1.0" Target="MongoDB.Driver.Core 2.1.0" Category="Package Dependency" />
+    <Link Source="MongoDB.Driver.Core 2.1.0" Target="MongoDB.Bson 2.1.0" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Antlr 3.5.0.2" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Data" Target="mongocsharpdriver 2.1.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Data" Target="Ninject 3.2.2.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Data" Target="NUnit 2.6.4" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Data" Target="WebGrease 1.6.0" Category="Installed Package" />
+    <Link Source="WebGrease 1.6.0" Target="Antlr 3.4.1.9004" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Common" Target="HtmlAgilityPack 1.4.9" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Common" Target="LINQtoCSV 1.5.0.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Common" Target="log4net 2.0.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Common" Target="Ninject 3.2.2.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Common" Target="NUnit 2.6.4" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Common" Target="WebGrease 1.6.0" Category="Installed Package" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.WebPages 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 4.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc.FixedDisplayModes 1.0.0" Target="Microsoft.AspNet.Mvc 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Microsoft.Net.Http 2.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Target="Newtonsoft.Json 4.5.11" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Client 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Target="Microsoft.AspNet.WebApi.Core 4.0.20710.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 2.0.20710.0" Target="Microsoft.AspNet.Razor 2.0.20715.0" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Websites.Platform.Tests" Target="Microsoft.AspNet.Mvc.FixedDisplayModes 1.0.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform.Tests" Target="Microsoft.AspNet.WebApi.WebHost 4.0.20710.0" Category="Installed Package" />
+    <Link Source="bootstrap 3.3.5" Target="jQuery 1.11.3" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.AspNet 4.1.4.12333" Target="DotNetOpenAuth.OpenId.RelyingParty 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.AspNet 4.1.4.12333" Target="DotNetOpenAuth.OAuth.Consumer 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.Core 4.1.4.12333" Target="Microsoft.Net.Http 2.2.29" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.OAuth.Consumer 4.1.4.12333" Target="DotNetOpenAuth.OAuth.Core 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.OAuth.Core 4.1.4.12333" Target="DotNetOpenAuth.Core 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.OpenId.Core 4.1.4.12333" Target="DotNetOpenAuth.Core 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="DotNetOpenAuth.OpenId.RelyingParty 4.1.4.12333" Target="DotNetOpenAuth.OpenId.Core 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="jQuery.Validation 1.14.0" Target="jQuery 1.11.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 5.2.3" Target="Microsoft.AspNet.WebPages 3.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Mvc 5.2.3" Target="Microsoft.AspNet.Razor 3.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.Web.Optimization 1.1.3" Target="WebGrease 1.6.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi 5.2.3" Target="Microsoft.AspNet.WebApi.WebHost 5.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 5.2.3" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 5.2.3" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Client 5.2.3" Target="Microsoft.Net.Http 2.2.29" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.Core 5.2.3" Target="Microsoft.AspNet.WebApi.Client 5.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebApi.WebHost 5.2.3" Target="Microsoft.AspNet.WebApi.Core 5.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.3" Target="Microsoft.Web.Infrastructure 1.0.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages 3.2.3" Target="Microsoft.AspNet.Razor 3.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages.OAuth 3.2.3" Target="Microsoft.AspNet.WebPages.WebData 3.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages.OAuth 3.2.3" Target="DotNetOpenAuth.AspNet 4.1.4.12333" Category="Package Dependency" />
+    <Link Source="Microsoft.AspNet.WebPages.WebData 3.2.3" Target="Microsoft.AspNet.WebPages.Data 3.2.3" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl 1.1.10" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.29" Target="Microsoft.Bcl 1.1.10" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.29" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Antlr 3.5.0.2" Category="Package Dependency" />
+    <Link Source="WebGrease 1.6.0" Target="Newtonsoft.Json 6.0.4" Category="Package Dependency" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="AngularJS.Core 1.4.7" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="bootstrap 3.3.5" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="CodeContracts 1.0.5680.18392" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="jQuery.Validation 1.14.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Microsoft.AspNet.Mvc 5.2.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Microsoft.AspNet.Web.Optimization 1.1.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Microsoft.AspNet.WebApi 5.2.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Microsoft.AspNet.WebPages.OAuth 3.2.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Modernizr 2.8.3" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Moment.js 2.13.0" Category="Installed Package" />
+    <Link Source="mxtrAutomation.Websites.Platform" Target="Ninject 3.2.2.0" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

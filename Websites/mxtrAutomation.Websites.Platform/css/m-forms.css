@@ -1,0 +1,106 @@
+﻿
+
+input[type=text], input[type=email], input[type=password], input[type=url], input[type=number], input[type=search], textarea, select 
+{
+     /* box sizing adjusted */ -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    /* css */ 
+    height:34px;
+    padding:5px;
+    width:100%;
+    border:1px solid #c3c3c3;
+    outline:none;
+    border-radius:3px;
+    background:#fff;
+    font:normal 1em/1.25em 'Open Sans', Verdana, sans-serif;
+    color:#5c5c5c;
+    /* css3 animation */
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+}
+
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover, input[type=url]:hover, input[type=number]:hover, textarea:hover, select:hover
+{
+    border-color:#b3b3b3;
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(75, 75, 75, .2);
+    box-shadow: inset 0px 1px 1px 0px rgba(75, 75, 75, .2);
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, input[type=url]:focus, input[type=number]:focus, textarea:focus, select:focus
+{
+    color:#282828;
+    border-color:#1eb9f0;
+    -webkit-box-shadow:inset 0px 1px 1px 0px rgba(50, 50, 50, .2), 0 0 3px rgba(0, 135, 186, .35); 
+    box-shadow:inset 0px 1px 1px 0px rgba(50, 50, 50, .2), 0 0 3px rgba(0, 135, 186, .35); 
+}
+
+
+/*textarea {min-height:175px;}*/
+.fld-wrap {margin-bottom:1em;line-height:1.25em;}
+.fld-wrap > .fld-wrap-title {display:block;margin-bottom:5px;font-weight:bold;line-height:1.25em;font-size:1em;}
+.fld-wrap-checkbox > .fld-wrap-title {margin-left:-25px;}
+.fld-wrap > .fld-lbl {display:inline-block;margin-bottom:.25em;font-weight:normal;font-size:1.429em;line-height:1.429em;color:#282828;}
+.fld-wrap > .fld-lbl > .fld-lbl-note {font-weight:normal;color:#969797;font-size:.875em;}
+.fld-wrap > .fld-lbl-note {font-weight:normal;color:#969797;font-size:.75em;}
+
+.fld-help-text {display:block;padding:20px 0 0;font-weight:normal;color:#969797;font-size:.75em;}
+
+.fld-wrap > .tip-trigger {margin-bottom:-4px;} /* In for tooltips line-height adjustment */
+
+/* CHECKBOX or RADIO BUTTON LISTS */
+.fld-wrap-checkbox, .fld-wrap-input-list {
+    -webkit-transition: background linear .2s;
+    -moz-transition: background linear .2s;
+    -o-transition: background linear .2s;
+    transition: background linear .2s;
+    }
+.fld-wrap-input-list {margin-top:1.25em;}
+.fld-wrap-input-list > .input-list-heading {display:block;margin-bottom:.375em;font-size:.875em;line-height:1.429em;font-weight:bold;}
+.fld-wrap-input-list > .fld-lbl {font-weight:normal;}
+
+.fld-wrap-checkbox {padding-left:25px;}
+.fld-wrap-checkbox input[type=checkbox] {float:left;margin-left:-25px;}
+
+/* BUTTON HTML ELEMENT ADJUSTMENTS */
+.fld-wrap button.sm-btn {line-height:20px;}
+
+/* FORM VALIDATION */
+/* is-error - yes this is a state - but it is form specific */
+.fld-wrap > input[type=text].is-error, .fld-wrap > input[type=email].is-error, .fld-wrap > input[type=password].is-error, .fld-wrap > input[type=url].is-error, fld-wrap > input[type=number].is-error, .fld-wrap > textarea.is-error, .fld-wrap > select.is-error {border-color:#c12100;}
+.fld-wrap > input[type=text].is-error:focus, .fld-wrap > input[type=email].is-error:focus, .fld-wrap > input[type=password].is-error:focus, .fld-wrap > input[type=url].is-error:focus, fld-wrap > input[type=number].is-error:focus, .fld-wrap > textarea.is-error:focus, .fld-wrap > select.is-error:focus
+{
+    -webkit-box-shadow: 0 0 3px rgba(193, 33, 0, .35); 
+    box-shadow: 0 0 3px rgba(193, 33, 0, .35); 
+}
+.fld-wrap > span.is-error {display:block;padding-left:0px;background:url('/images/form-is-error-arrow.png') no-repeat left 5px;font-weight:600;font-size:12px;color:#c12100;}
+
+.fld-wrap-checkbox.is-error, .fld-wrap-input-list.is-error {}
+.fld-wrap-checkbox > span.is-error, .fld-wrap-input-list > span.is-error {margin-left:3px;}
+/* hide valid from plugin */
+.fld-wrap > span.is-valid {display:none;}
+.fld-wrap > a {font-size:.875em;}
+
+/* ==================
+ * AJAX LOADERS FOR FORMS
+    ================== */
+/* @form saving grey box */
+.form-sending {display:none;padding:20px;background:#f4f4f4;text-align:center;font-size:.875em;}
+.form-sending > strong {display:block;font-size:1.286em;}
+.form-sending > span {display:block;padding-bottom:50px;background:url('/images/loader-grey-40.gif') no-repeat center bottom;}
+
+/* @loader gif animation sizes */
+.loader.loader-20 {padding:10px;}
+.loader.loader-40 {padding:20px;}
+.loader-40 {display:inline-block;width:40px;height:40px;vertical-align:middle;}
+.loader-20 {display:inline-block;vertical-align:middle;}
+
+.loader-40.loader-grey {background:url('/images/loader-grey-40.gif') no-repeat center center;}
+.loader-20.loader-grey {background:url('/images/loader-grey-20.gif') no-repeat center center;}
+
+.loader-40.loader-white {background:url('/images/loader-white-40.gif') no-repeat center center;}
+.loader-20.loader-white {background:url('/images/loader-white-20.gif') no-repeat center center;}
+
+form hr.form-divider {display: block;margin: 20px 0;width: 100%;height: 1px;border: 0;outline: 0;background: #D2D2D2;}
+
+

@@ -1,0 +1,243 @@
+﻿@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.WhiteLabeling.ViewModels.WhiteLabelingViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+
+@section MainContent {
+    <style>
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+            .upload-btn-wrapper input[type=file] {
+                font-size: 100px;
+                position: absolute;
+                left: 0;
+                top: 0;
+                opacity: 0;
+            }
+    </style>
+
+
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="x_panel">
+                <div class="text-center">
+                    <h2 class="title-top"><strong>White Labeling</strong></h2>
+                </div>
+                <div>
+                    <hr />
+                </div>
+                <div class="col-lg-12">
+                    <h4><strong>Change logos</strong></h4>
+                    <br />
+                </div>
+                <div class="row col-lg-12">
+                    @*<div class="col-sm-12 col-xs-12">
+                            <h4>Rebranding MXTR</h4>
+                            <div>
+                                Upload your logo to rebrand MXTR for your company.
+                                <hr />
+
+
+                            </div>
+                        </div>*@
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="row inner-gray margin-none">
+                            <div class="col-sm-12">
+                                <div class="col-sm-4 col-xs-12">
+                                    <button type="button" onclick="removeApplicationLogo();" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></button>
+                                    <h4>Application Logo</h4>
+                                    <p>Appears in the top left of the application.</p>
+                                    @using (Html.BeginForm("AddApplicationLogo", "WhiteLabeling", FormMethod.Post, new { enctype = "multipart/form-data", id = "ApplicationLogoForm" }))
+                                    {
+                                        <div>
+                                            <div class="col-lg-12 pull-left" id="divApplicationLogo">
+                                                <img src="@(String.Format("{0}?{1}", Model.ApplicationLogoURL,  DateTime.Now.ToString("hhmmssffffff")))" id="imgApplicationLogo" class="img-responsive no-cache" />
+                                            </div>
+                                            <div class="col-lg-12 pull-left upload-btn-wrapper">
+                                                <button id="btnApllicationLogo" name="btnApllicationLogo" class="btn btn-primary pull-left">Change Image</button>
+                                                <input type="file" id="ApplicationLogo" name="ApplicationLogo" />
+                                            </div>
+                                        </div>
+                                        <p>A 210px height by 128px width PNG format with transparent background looks best for application.</p>
+                                    }
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    @using (Html.BeginForm("AddBrandingLogo", "WhiteLabeling", FormMethod.Post, new { enctype = "multipart/form-data", id = "BrandingLogoForm" }))
+                                    {
+                                        <button type="button" onclick="removeBrandingLogo();" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></button>
+
+                                        <h4>Branding Logo</h4>
+                                        <p>Appears in places such as email notifications and login screens.</p>
+
+                                        <div class="upload-btn-wrapper">
+                                            <div id="divBrandingLogo">
+                                                <p><img src="@Model.BrandingLogoURL" id="imgBrandingLogo" class="img-responsive no-cache" /></p>
+                                            </div>
+                                            <button id="btnBrandingLogo" name="btnBrandingLogo" class="btn btn-primary pull-left">Change Image</button>
+                                            <input type="file" id="BrandingLogo" name="BrandingLogo" />
+                                        </div>
+                                        <p> Max-width of 350px in PNG format with transparent background looks best.</p>
+                                    }
+                                </div>
+
+                                <div class="col-sm-4 col-xs-12">
+                                    @using (Html.BeginForm("AddFavIcon", "WhiteLabeling", FormMethod.Post, new { enctype = "multipart/form-data", id = "FavIconForm" }))
+                                    {
+                                        <button type="button" onclick="removeFavIcon();" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Remove</span></button>
+
+                                        <h4>Menu Bar Icon</h4>
+                                        <p>Appears in left side as small icon, when menus are collapse</p>
+
+                                        <div class="upload-btn-wrapper">
+                                            <div id="divFavIcon">
+                                                <p><img src="@Model.FavIconURL" id="imgFavIcon" class="img-responsive no-cache" style="width:50px;" /></p>
+                                            </div>
+                                            <button id="btnFavIcon" name="btnFavIcon" class="btn btn-primary pull-left">Change Image</button>
+                                            <input type="file" id="FavIcon" name="FavIcon" />
+                                        </div>
+                                        <p>A 50px height by 50px width PNG format with transparent background looks best.</p>
+                                    }
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-sm-12">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12">
+                    <hr>
+                </div>
+                <div class="row col-lg-12">
+                    <div class="col-sm-3">
+                        <h4 class="margin-top-0"><strong>Domain</strong></h4>
+                        <p>When your users log in they should see your company <span id="spCompanyName" style="color:black">@Model.DomainName</span> as the application URI</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-9">
+                            <p>Your domain name is currently set to <code id="spDomainName">@Model.DomainName</code></p>
+                        </div>
+                        <button class="btn btn-primary pull-right" onclick="addUpdateDomain()"><i class="fa fa-pencil"></i>  Edit Domain</button>
+                    </div>
+                </div>
+                <div class="row col-lg-12">
+                    <hr>
+                </div>
+                <div class="row col-lg-12">
+                    <div class="col-sm-3">
+                        <h4 class="margin-top-0"><strong>Home Page</strong></h4>
+                        <p> Set your home page url</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="col-sm-9">
+                            <p>
+                                Home Page Url <code id="spHomePageUrl">@(String.IsNullOrEmpty(Model.HomePageUrl) ? "Default" : Model.HomePageUrl) </code>
+                            </p>
+                        </div>
+                        <button class="btn btn-primary pull-right" onclick="addUpdateHomePage()"><i class="fa fa-pencil"></i>  Home Page</button>
+                    </div>
+                </div>
+                <div class="row col-lg-12">
+                    <hr>
+                </div>
+                <div class="row col-lg-12">
+                    <div class="col-sm-3">
+                        <h4><strong>Edit Menu</strong></h4>
+                        <p>Create a custom look to your MXTR account by customized Menu</p>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <img src="~/Images/menuSample.png" />
+                    </div>
+                    <div class="col-sm-3 col-xs-12">
+                        <button class="btn btn-primary pull-right" onclick="gotoCustomiseMenu()"><i class="fa fa-pencil"></i>  Customise Menu</button>
+                    </div>
+                </div>
+                <div class="row col-lg-12">
+                    <hr>
+                </div>
+                <div class="row col-lg-12" style="display:none">
+
+                    <div class="col-sm-3">
+                        <h4><strong> Login Widget</strong></h4>
+                        <div>
+                            Sign in to your MXTR account via a
+                            widget embedded on your own site.
+                            <br /><br /><br />
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-9 col-xs-12">
+                                <h4> Vertical</h4>
+                                <code class="iframecode">&lt;iframe src="https://@(Request.Url.Host)/auth/login/MzawMDEzsDCyAAA/1" width="100%" height="420"&gt;&lt;/iframe&gt;</code>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <button class="btn btn-primary pull-right margin-top-10"><i class="fa fa-window-restore"></i>  Preview Vertical</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row col-lg-12" style="display:none">
+                    <div class="col-sm-3">
+
+                        <div>
+                            To embed a MXTR login widget directly on your site (with an iframe), simply copy and paste the code into the page where you want the login to appear.
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+
+                        <div class="row">
+                            <div class="col-sm-9 col-xs-12">
+                                <h4> Horizontal</h4>
+                                <code class="iframecode">&lt;iframe src="https://@(Request.Url.Host)/auth/login/MzawMDEzsDCyAAA/1/0" width="100%" height="80"&gt;&lt;/iframe&gt;</code>
+                                <div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-xs-12">
+                                <button class="btn btn-primary pull-right margin-top-10"><i class="fa fa-window-restore"></i>  Preview Horizontal</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-lg-12" style="display:none">
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section ScriptContent {
+    <script type="text/javascript">
+        var _customiseMenuUrl = '@(new CustomizeMenuWebQuery())';
+        var _addUpdateDomainUrl = '@(new WhiteLabelingManageDomainWebQuery())';
+        var _WhiteLabelingURL = '@(new WhiteLabelingWebQuery())';
+        var _addUpdateHomePageUrl = '@(new WhiteLabelingManageHomePageWebQuery())';
+        var _domainName = '@Model.DomainName';
+        var _applicationLogoURL = '@Model.ApplicationLogoURL';
+        var _homePageUrl = '@Model.HomePageUrl';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script src="~/Scripts/popupHandler.js"></script>
+
+    <script src="~/Scripts/white-labeling.js"></script>
+
+}

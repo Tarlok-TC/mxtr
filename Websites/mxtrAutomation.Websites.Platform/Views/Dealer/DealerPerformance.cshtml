@@ -1,0 +1,105 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Dealer.ViewModels.DealerPerformanceViewModel
+@using System.Web.Optimization
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.UI
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);    
+}
+@{
+    @Scripts.Render("~/bundles/vmap")
+}
+@section MainContent {
+    <link href="~/css/shaw.css" rel="stylesheet" />
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@(new ShawHomeWebQuery())">Home</a></li>
+                    <li class="breadcrumb-item">Dealer Performance</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Dealer Performance: Summary</h3>
+            </div>
+        </div>
+        <div class="row enterprise">
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="white-box">
+                    <h5 class="count_top">Total Leads in Dealer Funnel</h5>
+                    <h3 class="count" id="leadsCountInDealerFunnel">@Model.LeadsCountInDealerFunnel</h3>
+                    <p class="count_bottom">&nbsp;</p>
+                    <span class="icons-new"><img src="~/Images/Shaw/funnel.png" alt="" /></span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="white-box">
+                    <h5 class="count_top">Average Lead Time- Dealers </h5>
+                    <h3 class="count"><span id="spAverageLeadTimeDealer">@Model.AverageLeadTimeDealer</span> days</h3>
+                    <p class="count_bottom">&nbsp;</p>
+                    <span class="icons-new">
+                        <img src="~/Images/Shaw/sample-graph.png" alt="" />
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                <div class="white-box">
+                    <h5 class="count_top">Conversion Rate Dealer</h5>
+                    <h3 class="count" id="conversionRateDealer">@Model.ConversionRateDealer%</h3>                   
+                    <p class="count_bottom">&nbsp;</p>
+                    <span class="icons-new">
+                        <span id="spConversionRateDealerDataPercentage" class="chart" data-percent="@Model.ConversionRateDealer">
+                            <span id="spConversionRateDealerPercentage" class="percent">@Model.ConversionRateDealer</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-responsive col-md-12">
+                <div id="DealerPerformanceReportHolder" class="table-responsive">
+                    <table id="DealerPerformanceReport" class="table table-striped jambo_table retailers-table bulk_action" width="100%">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title text-center" style="display: table-cell; width:20%;">RETAILERS</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Cold Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Warm Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Hot Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Handed Off Leads</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Pass Off %</th>
+                                <th class="column-title" style="display: table-cell;padding-right: 20px;">Average Time in Funnel (Days)</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr class="differ-footer-row">
+                                <td id="tdDealerPerformance"></td>
+                                <td id="ftTotalLeads">@Model.FooterData.TotalLeads</td>
+                                <td id="ftTotalColdLead">@Model.FooterData.TotalColdLead</td>
+                                <td id="ftTotalWarmLead">@Model.FooterData.TotalWarmLead</td>
+                                <td id="ftTotalHotLead">@Model.FooterData.TotalHotLead</td>
+                                <td id="ftHandedOffLeads">@Model.FooterData.TotalHandedOffLeads</td>
+                                <td id="ftTotalPassOf">@Model.FooterData.TotalPassOf</td>
+                                <td id="ftTotalAvgTimeFunnel">@Model.FooterData.TotalAvgTimeFunnel</td>    
+                                @*<th>Status</th>*@                            
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section ScriptContent{
+    <script type="text/javascript">
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _dealerPerformanceDetailUrl = '@(new DealerPerformanceDetailWebQuery())'
+        var _dealerPerformanceIdentifer = '@ViewBag.DataTableIdentifier';
+    </script>
+    <script src="~/Scripts/Shaw/dealer-performance.js"></script>
+    <script src="~/Scripts/jquery.easypiechart.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/workspace.filter.actions.js"></script>
+}

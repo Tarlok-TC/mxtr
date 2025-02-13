@@ -1,0 +1,77 @@
+﻿body {position:relative;font:normal 100%/1.25em 'Open Sans', Arial, Helvetica, sans-serif;background:#d9d9d9;}
+.page-container {background:#d9d9d9;color:#282828;}
+nav > ul, nav ul ul {list-style:none;margin:0;padding:0;}
+.nav-tabs > li {text-align:center;}
+.nav-pills > li {text-align:center;}
+.sub-nav-reports {
+    float: right;
+    padding-right: 100px;
+}
+.panel {
+    margin-left:-15px;
+    margin-right:-15px;
+}
+
+
+/* Center bootstrap's container class */
+.container {width:940px;margin:1.25em auto;}
+
+header {margin-top:60px !important;}
+h1, h2, h3 {margin-bottom:20px;}
+
+.content-box 
+{
+    -moz-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    padding:20px;
+    background:#f2f2f2;
+}
+
+/* ==================
+ * LOGO SETUP 
+    ==================*/
+.logo-wrap {text-align:center;}
+.logo-container {width:190px;margin:0 auto;text-align:center;}
+.logo-container > img {max-width:190px;height:auto;}
+
+
+/* LOGIN BOX */
+.login-box {width:500px;margin:0 auto;}
+
+.activate-box {width:620px;margin:0 auto;}
+
+/* ===============================
+	Main Content Container
+   =============================== */
+
+.content-container {-moz-box-sizing:border-box;-o-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;background:#f2f2f2;
+}
+
+
+/* ==================
+* PLATFORM SECTIONS (HEADER / CONTENT)
+    ==================*/
+
+.page-header {padding:10px;border-bottom:1px solid #d9d9d9}
+.page-header h1 {font-size:1.25em;line-height:1em;font-weight:normal;letter-spacing:-1px;}
+.page-header .sub-head {font-size:.75em;color:#737373;}
+
+.page-section {padding:10px;border-bottom:1px solid #d9d9d9;}
+.page-section:last-child {border-bottom:none;}
+
+.content-section {margin-bottom:30px;padding-bottom:40px;border-bottom:1px solid #d9d9d9;}
+.content-section-title {margin-bottom:20px;}
+.content-section-title h2 {font-size:1.5em;line-height:1.25em;letter-spacing:-1px;}
+.content-section-title .sub-title {font-size:.875em;color:#737373;line-height:1.429em;}
+
+
+/* hide bevel on last item on page */
+.page-section .content-section:last-child {margin-bottom:0;padding-bottom:0;border-bottom:none;box-shadow:none;}
+
+/*.section-header, .page-header {position:relative;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #adadad;box-shadow:0px 1px 2px 0px #fff;}
+.page-header-text > h1 {font-size:1.5em;line-height:1em;}
+.section-header-text >  h1 {font-size:1.5em;line-height:1em;font-weight:bold;}
+.section-header-text > .sub-head, .page-header-text > .sub-head {font-size:.875em;color:#737373;}
+.section-content h2 {margin-bottom:1em;font-size:1.125em;letter-spacing:0;}*/

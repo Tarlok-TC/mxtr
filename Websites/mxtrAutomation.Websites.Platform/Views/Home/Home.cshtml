@@ -1,0 +1,460 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Home.ViewModels.HomeViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@section MainContent {
+
+<div class="row top_tiles gent-bar">
+    @*  <div class="animated flipInY col-lg-3 col-md-6 col-sm-6 col-xs-12">
+            <div class="tile-stats">
+                <div class="icon">
+                    <i class="fa fa-building-o"></i>
+                </div>
+                <h3>Total Clients</h3>
+                <div class="count">2500</div>
+                <p><span><i class="fa fa-arrow-up"></i></span> 4% from last week</p>
+            </div>
+        </div>*@
+    <div id="campaigns" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box" data-report="campaigns">
+            <span>
+                Emails Sent
+            </span>
+            @*<div id="CampaignsCount" class="count">@Model.TotalCampaigns</div>*@
+            <div class="count">2,450</div>
+            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+            @*<p>
+                    <span>
+                        <i id="CampaignsDeltaCSS" class="@Model.TotalCampaignsDeltaArrowCss"></i>
+                    </span>
+                    <span id="CampaignsDelta">@Math.Abs(Model.TotalCampaignsDelta).ToString("P0")</span>
+                    during date range
+                </p>*@
+        </div>
+    </div>
+    <div id="leads" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box" data-report="leads">
+            <span>Open Rate</span>
+            <div class="count">22.5%</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+            @*<div id="LeadsCount" class="count">@Model.TotalLeads</div>*@
+            @*<p>
+                    <span>
+                        <i id="LeadsDeltaCSS" class="@Model.TotalLeadsDeltaArrowCss"></i>
+                    </span>
+                    <span id="LeadsDelta">@Math.Abs(Model.TotalLeadsDelta).ToString("P0")</span>
+                    during date range
+                </p>*@
+        </div>
+    </div>
+    <div id="opportunity-value" class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box" data-report="opportunities">
+            <span>Click Rate</span>
+            <div class="count">12.5%</div>
+            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+            @*<div id="OpenOpportunityValue" class="count">@Model.OpenOpportunityValue.ToString("C0")</div>*@
+            @*<p>
+                    <span>
+                        <i id="OpenOpportunityValueDeltaCSS" class="@Model.OpenOpportunityValueDeltaArrowCss"></i>
+                    </span>
+                    <span id="OpenOpportunityValueDelta">@Math.Abs(Model.OpenOpportunityValueDelta).ToString("P0")</span>
+                    during date range
+                </p>*@
+        </div>
+    </div>
+    <div class="animated flipInY col-lg-2 col-md-6 col-sm-6 col-xs-12">
+        <div class="tile-stats link-score-box" data-report="opportunities">
+            <span>Events Scheduled</span>
+            <div class="count">7,653</div>
+            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+        </div>
+    </div>
+</div>
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-xs-6">
+                <h3 class="main-title">Welcome Nick</h3>
+            </div>
+            <div class="col-xs-6">
+                <div class="date-filter pull-right">
+                    <div class="m-report-filters-daterange"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="well">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default btn-search" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control" name="x" placeholder="Search term...">
+                        <div class="input-group-btn search-panel">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                <span id="search_concept">Sort by</span> <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#contains">Contains</a></li>
+                                <li><a href="#its_equal">It's equal</a></li>
+                                <li><a href="#greather_than">Greather than ></a></li>
+                                <li><a href="#less_than">Less than < </a></li>
+                                <li class="divider"></li>
+                                <li><a href="#all">Anything</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-8">
+                    <div class="btn-group switch-button pull-right">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <i class="fa fa-filter" aria-hidden="true"></i>
+                                Filters: Off
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-8" style="padding: 30px">
+                    <h3 class="main-title text-right">Participating Retailers</h3>
+                    <p>USA Vector Map</p>
+                    <div id="usa_map" style="height:400px !important;"></div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="x_panel home-signs">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span>176</span>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <i class="fa fa-play-circle" aria-hidden="true"></i>
+                            </div>
+                            <h1>New Sign ups</h1>
+                            <h2>Lorem Ipsum psdea itgum rixt</h2>
+                        </div>
+                    </div>
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Customer Journey</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                       aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Settings 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+
+                            <div id="echart_pyramid" style="height:370px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var theme = {
+                    color: [
+                        '#26B99A', '#34495E', '#66FF00', '#3498DB',
+                        '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+                    ],
+
+                    title: {
+                        itemGap: 8,
+                        textStyle: {
+                            fontWeight: 'normal',
+                            color: '#408829'
+                        }
+                    },
+
+                    dataRange: {
+                        color: ['#1f610a', '#97b58d']
+                    },
+
+                    toolbox: {
+                        color: ['#408829', '#408829', '#408829', '#408829']
+                    },
+
+                    tooltip: {
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        axisPointer: {
+                            type: 'line',
+                            lineStyle: {
+                                color: '#408829',
+                                type: 'dashed'
+                            },
+                            crossStyle: {
+                                color: '#408829'
+                            },
+                            shadowStyle: {
+                                color: 'rgba(200,200,200,0.3)'
+                            }
+                        }
+                    },
+
+                    dataZoom: {
+                        dataBackgroundColor: '#eee',
+                        fillerColor: 'rgba(64,136,41,0.2)',
+                        handleColor: '#408829'
+                    },
+                    grid: {
+                        borderWidth: 0
+                    },
+
+                    categoryAxis: {
+                        axisLine: {
+                            lineStyle: {
+                                color: '#408829'
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: ['#eee']
+                            }
+                        }
+                    },
+
+                    valueAxis: {
+                        axisLine: {
+                            lineStyle: {
+                                color: '#408829'
+                            }
+                        },
+                        splitArea: {
+                            show: true,
+                            areaStyle: {
+                                color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                            }
+                        },
+                        splitLine: {
+                            lineStyle: {
+                                color: ['#eee']
+                            }
+                        }
+                    },
+                    timeline: {
+                        lineStyle: {
+                            color: '#408829'
+                        },
+                        controlStyle: {
+                            normal: { color: '#408829' },
+                            emphasis: { color: '#408829' }
+                        }
+                    },
+
+                    k: {
+                        itemStyle: {
+                            normal: {
+                                color: '#68a54a',
+                                color0: '#a9cba2',
+                                lineStyle: {
+                                    width: 1,
+                                    color: '#408829',
+                                    color0: '#86b379'
+                                }
+                            }
+                        }
+                    },
+                    map: {
+                        itemStyle: {
+                            normal: {
+                                areaStyle: {
+                                    color: '#ddd'
+                                },
+                                label: {
+                                    textStyle: {
+                                        color: '#c12e34'
+                                    }
+                                }
+                            },
+                            emphasis: {
+                                areaStyle: {
+                                    color: '#99d2dd'
+                                },
+                                label: {
+                                    textStyle: {
+                                        color: '#c12e34'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    force: {
+                        itemStyle: {
+                            normal: {
+                                linkStyle: {
+                                    strokeColor: '#408829'
+                                }
+                            }
+                        }
+                    },
+                    chord: {
+                        padding: 4,
+                        itemStyle: {
+                            normal: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                },
+                                chordStyle: {
+                                    lineStyle: {
+                                        width: 1,
+                                        color: 'rgba(128, 128, 128, 0.5)'
+                                    }
+                                }
+                            },
+                            emphasis: {
+                                lineStyle: {
+                                    width: 1,
+                                    color: 'rgba(128, 128, 128, 0.5)'
+                                },
+                                chordStyle: {
+                                    lineStyle: {
+                                        width: 1,
+                                        color: 'rgba(128, 128, 128, 0.5)'
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    gauge: {
+                        startAngle: 225,
+                        endAngle: -45,
+                        axisLine: {
+                            show: true,
+                            lineStyle: {
+                                color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+                                width: 8
+                            }
+                        },
+                        axisTick: {
+                            splitNumber: 10,
+                            length: 12,
+                            lineStyle: {
+                                color: 'auto'
+                            }
+                        },
+                        axisLabel: {
+                            textStyle: {
+                                color: 'auto'
+                            }
+                        },
+                        splitLine: {
+                            length: 18,
+                            lineStyle: {
+                                color: 'auto'
+                            }
+                        },
+                        pointer: {
+                            length: '90%',
+                            color: 'auto'
+                        },
+                        title: {
+                            textStyle: {
+                                color: '#333'
+                            }
+                        },
+                        detail: {
+                            textStyle: {
+                                color: 'auto'
+                            }
+                        }
+                    },
+                    textStyle: {
+                        fontFamily: 'Arial, Verdana, sans-serif'
+                    }
+                };
+                var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
+
+                echartFunnel.setOption({
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c}%"
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            restore: {
+                                show: true,
+                                title: "Restore"
+                            },
+                            saveAsImage: {
+                                show: true,
+                                title: "Save Image"
+                            }
+                        }
+                    },
+                    calculable: true,
+                    series: [{
+                        name: '漏斗图',
+                        type: 'funnel',
+                        width: '40%',
+                        data: [{
+                            value: 60,
+                            name: 'Digital Hugs - Nurturing'
+                        }, {
+                            value: 40,
+                            name: 'Behavior Driven Info'
+                        }, {
+                            value: 20,
+                            name: 'Interaction'
+                        }, {
+                            value: 80,
+                            name: 'Contact Made'
+                        }, {
+                            value: 100,
+                            name: 'Web Visits'
+                        }]
+                    }]
+                });
+
+            var sample_data = { "af": "16.63", "al": "11.58", "dz": "158.97", "ao": "85.81", "ag": "1.1", "ar": "351.02", "am": "8.83", "au": "1219.72", "at": "366.26", "az": "52.17", "bs": "7.54", "bh": "21.73", "bd": "105.4", "bb": "3.96", "by": "52.89", "be": "461.33", "bz": "1.43", "bj": "6.49", "bt": "1.4", "bo": "19.18", "ba": "16.2", "bw": "12.5", "br": "2023.53", "bn": "11.96", "bg": "44.84", "bf": "8.67", "bi": "1.47", "kh": "11.36", "cm": "21.88", "ca": "1563.66", "cv": "1.57", "cf": "2.11", "td": "7.59", "cl": "199.18", "cn": "5745.13", "co": "283.11", "km": "0.56", "cd": "12.6", "cg": "11.88", "cr": "35.02", "ci": "22.38", "hr": "59.92", "cy": "22.75", "cz": "195.23", "dk": "304.56", "dj": "1.14", "dm": "0.38", "do": "50.87", "ec": "61.49", "eg": "216.83", "sv": "21.8", "gq": "14.55", "er": "2.25", "ee": "19.22", "et": "30.94", "fj": "3.15", "fi": "231.98", "fr": "2555.44", "ga": "12.56", "gm": "1.04", "ge": "11.23", "de": "3305.9", "gh": "18.06", "gr": "305.01", "gd": "0.65", "gt": "40.77", "gn": "4.34", "gw": "0.83", "gy": "2.2", "ht": "6.5", "hn": "15.34", "hk": "226.49", "hu": "132.28", "is": "12.77", "in": "1430.02", "id": "695.06", "ir": "337.9", "iq": "84.14", "ie": "204.14", "il": "201.25", "it": "2036.69", "jm": "13.74", "jp": "5390.9", "jo": "27.13", "kz": "129.76", "ke": "32.42", "ki": "0.15", "kr": "986.26", "undefined": "5.73", "kw": "117.32", "kg": "4.44", "la": "6.34", "lv": "23.39", "lb": "39.15", "ls": "1.8", "lr": "0.98", "ly": "77.91", "lt": "35.73", "lu": "52.43", "mk": "9.58", "mg": "8.33", "mw": "5.04", "my": "218.95", "mv": "1.43", "ml": "9.08", "mt": "7.8", "mr": "3.49", "mu": "9.43", "mx": "1004.04", "md": "5.36", "mn": "5.81", "me": "3.88", "ma": "91.7", "mz": "10.21", "mm": "35.65", "na": "11.45", "np": "15.11", "nl": "770.31", "nz": "138", "ni": "6.38", "ne": "5.6", "ng": "206.66", "no": "413.51", "om": "53.78", "pk": "174.79", "pa": "27.2", "pg": "8.81", "py": "17.17", "pe": "153.55", "ph": "189.06", "pl": "438.88", "pt": "223.7", "qa": "126.52", "ro": "158.39", "ru": "1476.91", "rw": "5.69", "ws": "0.55", "st": "0.19", "sa": "434.44", "sn": "12.66", "rs": "38.92", "sc": "0.92", "sl": "1.9", "sg": "217.38", "sk": "86.26", "si": "46.44", "sb": "0.67", "za": "354.41", "es": "1374.78", "lk": "48.24", "kn": "0.56", "lc": "1", "vc": "0.58", "sd": "65.93", "sr": "3.3", "sz": "3.17", "se": "444.59", "ch": "522.44", "sy": "59.63", "tw": "426.98", "tj": "5.58", "tz": "22.43", "th": "312.61", "tl": "0.62", "tg": "3.07", "to": "0.3", "tt": "21.2", "tn": "43.86", "tr": "729.05", "tm": 0, "ug": "17.12", "ua": "136.56", "ae": "239.65", "gb": "2258.57", "us": "14624.18", "uy": "40.71", "uz": "37.72", "vu": "0.72", "ve": "285.21", "vn": "101.99", "ye": "30.02", "zm": "15.69", "zw": "5.57" };
+            $('#usa_map').vectorMap({
+                map: 'usa_en',
+                backgroundColor: null,
+                color: '#ffffff',
+                hoverOpacity: 0.7,
+                selectedColor: '#666666',
+                enableZoom: true,
+                showTooltip: true,
+                values: sample_data,
+                scaleColors: ['#E6F2F0', '#149B7E'],
+                normalizeFunction: 'polynomial'
+            });
+            </script>
+        </div>
+    </div>
+<script src="~/Scripts/controllers/home.js"></script>
+}

@@ -1,0 +1,73 @@
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Models.Leads.ViewModels.ShawLeadsViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+}
+
+@{
+    HtmlString leadsChartData = new HtmlString(JsonConvert.SerializeObject(Model.LeadsChartViewData));
+    HtmlString accountObjectIDs = new HtmlString(JsonConvert.SerializeObject(Model.AccountObjectIDs));
+}
+
+@section MainContent {
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><a href="@(new ShawHomeWebQuery())">Home</a></li>
+                    <li class="breadcrumb-item">Contacts</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Shaw Corporate Leads</h3>
+            </div>
+        </div>
+
+        <div class="row scorebox-chart-container page-section">
+            <div class="col-xs-12">
+                <h4 class="graph_title">Lead added between <span id="spnStartDate">@Convert.ToDateTime(Model.StartDate).ToString("yyyy-MM-dd")</span> and <span id="spnEndDate">@Convert.ToDateTime(Model.EndDate).ToString("yyyy-MM-dd")</span></h4>
+                <div id="Shawleads_Chart" class="demo-placeholder" style="width: 100%; height: 370px;"></div>
+            </div>
+        </div>
+
+        <div class="table-responsive reset-inputs">
+            <table id="shawLeads" class="table table-striped jambo_table bulk_action " width="100%">
+                <thead>
+                    <tr>
+                        <th class="column-title" style="display: table-cell">First Name</th>
+                        <th class="column-title" style="display: table-cell">Last Name</th>
+                        <th class="column-title" style="display: table-cell">Email Address</th>
+                        <th class="column-title" style="display: table-cell">Dealer Name</th>
+                        <th class="column-title" style="display: table-cell">Campaign Name</th>
+                        <th class="column-title" style="display: table-cell">Lead Score</th>
+                        <th class="column-title" style="display: table-cell">First Touch</th>
+                        <th class="column-title" style="display: table-cell">Last Touch</th>
+                        <th class="column-title" style="display: table-cell">Handed off Dealer</th>
+                        <th class="column-title" style="display: table-cell">Action</th>
+                    </tr>
+                </thead>
+            </table>
+            <input id="hdnLeadFilter" type="hidden" value="0" />
+        </div>
+    </div>
+}
+
+@section ScriptContent {
+    <script src="~/Scripts/Shaw/shawcorporateleads.js"></script>
+    <script type="text/javascript">
+        var _accountObjectIDs = @accountObjectIDs;
+        var _leadsChartData=@leadsChartData;
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _leadUrl = '@(new LeadWebQuery())';
+        //var _shawleadsIdentifer='@ViewBag.DataTableIdentifier';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    @*<script src="~/Scripts/workspace.filter.actions.js"></script>*@
+}

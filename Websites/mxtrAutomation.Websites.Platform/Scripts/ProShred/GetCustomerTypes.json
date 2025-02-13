@@ -1,0 +1,51 @@
+{
+    "Request": "GetCustomerTypes",
+    "status": "OK",
+    "tblCustomerType": [
+        {
+            "CustomerTypeID": "1",CustomerType: "Default"
+        },
+        {
+            "CustomerTypeID": "2",CustomerType: "Financial"
+        },
+        {
+            "CustomerTypeID": "3",CustomerType: "Insurance"
+        },
+        {
+            "CustomerTypeID": "4",CustomerType: "Retail"
+        },
+        {
+            "CustomerTypeID": "5",CustomerType: "Manufacturing & Distribution"
+        },
+        {
+            "CustomerTypeID": "6",CustomerType: "Government"
+        },
+        {
+            "CustomerTypeID": "7",CustomerType: "Education"
+        },
+        {
+            "CustomerTypeID": "8",CustomerType: "Legal"
+        },
+        {
+            "CustomerTypeID": "9",CustomerType: "Residential / Personal"
+        },
+        {
+            "CustomerTypeID": "10",CustomerType: "Services"
+        },
+        {
+            "CustomerTypeID": "11",CustomerType: "Other"
+        },
+        {
+            "CustomerTypeID": "12",CustomerType: "Healthcare"
+        },
+        {
+            "CustomerTypeID": "13",CustomerType: "Housing"
+        },
+        {
+            "CustomerTypeID": "14",CustomerType: "Construction"
+        },
+        {
+            "CustomerTypeID": "15",CustomerType: "Non-Profit Organizations"
+        }
+    ]
+}

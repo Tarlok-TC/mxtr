@@ -1,0 +1,35 @@
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Models.Dashboard.ViewData
+
+@model mxtrAutomation.Websites.Platform.Models.Dashboard.ViewModels.DashboardViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleScoreBoxes);
+
+    //Html.IncludeJS(JSKind.Dashboard);
+}
+
+@{
+    //HtmlString leadsChartData = new HtmlString(JsonConvert.SerializeObject(Model.LeadsChartData));
+    //HtmlString campaignsChartData = new HtmlString(JsonConvert.SerializeObject(Model.CampaignsChartData));
+    //HtmlString openOpportunityValueChartData = new HtmlString(JsonConvert.SerializeObject(Model.OpenOpportunityValueChartData));
+}
+
+@section MainContent {
+
+}
+
+
+@section ScriptContent {
+    <script type="text/javascript">
+        var _refreshUrl = '@Model.RefreshUrl';
+@*        var _leadsChartData = @leadsChartData;
+        var _campaignsChartData = @campaignsChartData;
+        var _openOpportunityValueChartData = @openOpportunityValueChartData;*@
+        var _activeChart = 'campaigns';
+    </script>
+}

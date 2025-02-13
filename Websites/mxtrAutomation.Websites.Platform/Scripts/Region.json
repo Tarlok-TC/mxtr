@@ -1,0 +1,363 @@
+﻿{
+  "Region": {
+    "North": [
+      "US-CT",
+      "US-ME",
+      "US-MA",
+      "US-NH",
+      "US-NJ",
+      "US-NY",
+      "US-PA",
+      "US-RI",
+      "US-VT"
+    ],
+    "East": [
+      "US-IN",
+      "US-IA",
+      "US-IL",
+      "US-KS",
+      "US-MI",
+      "US-MN",
+      "US-OH",
+      "US-MO",
+      "US-NE",
+      "US-ND",
+      "US-SD",
+      "US-WI"
+    ],
+    "South": [
+      "US-DE",
+      "US-AL",
+      "US-AR",
+      "US-DC",
+      "US-KY",
+      "US-LA",
+      "US-FL",
+      "US-MS",
+      "US-OK",
+      "US-GA",
+      "US-MD",
+      "US-TN",
+      "US-TX",
+      "US-NC",
+      "US-SC",
+      "US-VA",
+      "US-WV"
+    ],
+    "West": [
+      "US-AZ",
+      "US-MT",
+      "US-AK",
+      "US-CO",
+      "US-UT",
+      "US-CA",
+      "US-ID",
+      "US-NV",
+      "US-HI",
+      "US-NM",
+      "US-WY",
+      "US-OR",
+      "US-WA"
+    ]
+  },
+  "States": [
+    {
+      "Name": "Alabama",
+      "Abbreviation": "US-AL"
+    },
+    {
+      "Name": "Alaska",
+      "Abbreviation": "US-AK"
+    },
+    {
+      "Name": "American Samoa",
+      "Abbreviation": "US-AS"
+    },
+    {
+      "Name": "Arizona",
+      "Abbreviation": "US-AZ"
+    },
+    {
+      "Name": "Arkansas",
+      "Abbreviation": "US-AR"
+    },
+    {
+      "Name": "California",
+      "Abbreviation": "US-CA"
+    },
+    {
+      "Name": "Colorado",
+      "Abbreviation": "US-CO"
+    },
+    {
+      "Name": "Connecticut",
+      "Abbreviation": "US-CT"
+    },
+    {
+      "Name": "Delaware",
+      "Abbreviation": "US-DE"
+    },
+    {
+      "Name": "District Of Columbia",
+      "Abbreviation": "US-DC"
+    },
+    {
+      "Name": "Federated States Of Micronesia",
+      "Abbreviation": "US-FM"
+    },
+    {
+      "Name": "Florida",
+      "Abbreviation": "US-FL"
+    },
+    {
+      "Name": "Georgia",
+      "Abbreviation": "US-GA"
+    },
+    {
+      "Name": "Guam",
+      "Abbreviation": "US-GU"
+    },
+    {
+      "Name": "Hawaii",
+      "Abbreviation": "US-HI"
+    },
+    {
+      "Name": "Idaho",
+      "Abbreviation": "US-ID"
+    },
+    {
+      "Name": "Illinois",
+      "Abbreviation": "US-IL"
+    },
+    {
+      "Name": "Indiana",
+      "Abbreviation": "US-IN"
+    },
+    {
+      "Name": "Iowa",
+      "Abbreviation": "US-IA"
+    },
+    {
+      "Name": "Kansas",
+      "Abbreviation": "US-KS"
+    },
+    {
+      "Name": "Kentucky",
+      "Abbreviation": "US-KY"
+    },
+    {
+      "Name": "Louisiana",
+      "Abbreviation": "US-LA"
+    },
+    {
+      "Name": "Maine",
+      "Abbreviation": "US-ME"
+    },
+    {
+      "Name": "Marshall Islands",
+      "Abbreviation": "US-MH"
+    },
+    {
+      "Name": "Maryland",
+      "Abbreviation": "US-MD"
+    },
+    {
+      "Name": "Massachusetts",
+      "Abbreviation": "US-MA"
+    },
+    {
+      "Name": "Michigan",
+      "Abbreviation": "US-MI"
+    },
+    {
+      "Name": "Minnesota",
+      "Abbreviation": "US-MN"
+    },
+    {
+      "Name": "Mississippi",
+      "Abbreviation": "US-MS"
+    },
+    {
+      "Name": "Missouri",
+      "Abbreviation": "US-MO"
+    },
+    {
+      "Name": "Montana",
+      "Abbreviation": "US-MT"
+    },
+    {
+      "Name": "Nebraska",
+      "Abbreviation": "US-NE"
+    },
+    {
+      "Name": "Nevada",
+      "Abbreviation": "US-NV"
+    },
+    {
+      "Name": "New Hampshire",
+      "Abbreviation": "US-NH"
+    },
+    {
+      "Name": "New Jersey",
+      "Abbreviation": "US-NJ"
+    },
+    {
+      "Name": "New Mexico",
+      "Abbreviation": "US-NM"
+    },
+    {
+      "Name": "New York",
+      "Abbreviation": "US-NY"
+    },
+    {
+      "Name": "North Carolina",
+      "Abbreviation": "US-NC"
+    },
+    {
+      "Name": "North Dakota",
+      "Abbreviation": "US-ND"
+    },
+    {
+      "Name": "Northern Mariana Islands",
+      "Abbreviation": "US-MP"
+    },
+    {
+      "Name": "Ohio",
+      "Abbreviation": "US-OH"
+    },
+    {
+      "Name": "Oklahoma",
+      "Abbreviation": "US-OK"
+    },
+    {
+      "Name": "Oregon",
+      "Abbreviation": "US-OR"
+    },
+    {
+      "Name": "Palau",
+      "Abbreviation": "US-PW"
+    },
+    {
+      "Name": "Pennsylvania",
+      "Abbreviation": "US-PA"
+    },
+    {
+      "Name": "Puerto Rico",
+      "Abbreviation": "US-PR"
+    },
+    {
+      "Name": "Rhode Island",
+      "Abbreviation": "US-RI"
+    },
+    {
+      "Name": "South Carolina",
+      "Abbreviation": "US-SC"
+    },
+    {
+      "Name": "South Dakota",
+      "Abbreviation": "US-SD"
+    },
+    {
+      "Name": "Tennessee",
+      "Abbreviation": "US-TN"
+    },
+    {
+      "Name": "Texas",
+      "Abbreviation": "US-TX"
+    },
+    {
+      "Name": "Utah",
+      "Abbreviation": "US-UT"
+    },
+    {
+      "Name": "Vermont",
+      "Abbreviation": "US-VT"
+    },
+    {
+      "Name": "Virgin Islands",
+      "Abbreviation": "US-VI"
+    },
+    {
+      "Name": "Virginia",
+      "Abbreviation": "US-VA"
+    },
+    {
+      "Name": "Washington",
+      "Abbreviation": "US-WA"
+    },
+    {
+      "Name": "West Virginia",
+      "Abbreviation": "US-WV"
+    },
+    {
+      "Name": "Wisconsin",
+      "Abbreviation": "US-WI"
+    },
+    {
+      "Name": "Wyoming",
+      "Abbreviation": "US-WY"
+    }
+  ]
+}
+
+//{
+//  "North": {
+//    "US-CT": "Connecticut",
+//    "US-ME": "Maine",
+//    "US-MA": "Massachusetts",
+//    "US-NH": "New Hampshire",
+//    "US-NJ": "New Jersey",
+//    "US-NY": "New York",
+//    "US-PA": "Pennsylvania",
+//    "US-RI": "Rhode Island",
+//    "US-VT": "Vermont"
+//  },
+//  "East": {
+//    "US-IN": "Indiana",
+//    "US-IA": "Iowa",
+//    "US-IL": "Illinois",
+//    "US-KS": "Kansas",
+//    "US-MI": "Michigan",
+//    "US-MN": "Minnesota",
+//    "US-OH": "Ohio",
+//    "US-MO": "Missouri",
+//    "US-NE": "Nebraska",
+//    "US-ND": "North Dakota",
+//    "US-SD": "South Dakota",
+//    "US-WI": "Wisconsin"
+//  },
+//  "South": {
+//    "US-DE": "Delaware",
+//    "US-AL": "Alabama",
+//    "US-AR": "Arkansas",
+//    "US-DC": "District Of Columbia",
+//    "US-KY": "Kentucky",
+//    "US-LA": "Louisiana",
+//    "US-FL": "Florida",
+//    "US-MS": "Mississippi",
+//    "US-OK": "Oklahoma",
+//    "US-GA": "Georgia",
+//    "US-MD": "Maryland",
+//    "US-TN": "Tennessee",
+//    "US-TX": "Texas",
+//    "US-NC": "North Carolina",
+//    "US-SC": "South Carolina",
+//    "US-VA": "Virginia",
+//    "US-WV": "West Virginia"
+//  },
+//  "West": {
+//    "US-AZ": "Arizona",
+//    "US-MT": "Montana",
+//    "US-AK": "Alaska",
+//    "US-CO": "Colorado",
+//    "US-UT": "Utah",
+//    "US-CA": "California",
+//    "US-ID": "Idaho",
+//    "US-NV": "Nevada",
+//    "US-HI": "Hawaii",
+//    "US-NM": "New Mexico",
+//    "US-WY": "Wyoming",
+//    "US-OR": "Oregon",
+//    "US-WA": "Washington"
+//  }
+//}

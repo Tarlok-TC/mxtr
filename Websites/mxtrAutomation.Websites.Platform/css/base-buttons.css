@@ -1,0 +1,368 @@
+﻿  
+
+button {border:none;outline:none;} /* get rid of button defaults */
+button:hover {cursor:pointer;}
+
+
+/* =======================================
+	HERO & SECONDARY BTN - NEW FLATNESS
+	requires a second class to define colors
+   ======================================= */
+
+.hero-btn {
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    display:inline-block;
+    min-width: 100px;
+    height:40px;
+    padding:0 35px;
+    font-size:1em;
+    font-weight:600;
+    letter-spacing: -.5px;
+    text-align: center;
+    line-height:40px;
+    border-radius:25px;
+    text-transform:capitalize;
+    transition:background .2s, box-shadow .2s;
+}
+   
+.secondary-btn {
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    display:inline-block;
+    min-width: 100px;
+    height:30px;
+    padding:0 20px;
+    font-size:.875em;
+    font-weight:600;
+    letter-spacing: -.5px;
+    text-align: center;
+    line-height: 30px;
+    border-radius:15px;
+    text-transform:capitalize;
+    transition:background .2s, box-shadow .2s;
+}
+.hero-btn:hover,
+.secondary-btn:hover
+{
+    text-decoration: none;
+    cursor:pointer;
+}
+
+.hero-btn:active, .hero-btn.is-active,
+.secondary-btn:active, .secondary-btn.is-active
+{
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,.2);
+}
+
+/* =======================================
+	BLUE BTN
+	used with hero or secondary btn classes only!
+   ======================================= */
+
+.blu-btn, .blue-btn {
+color:#f2f2f2;
+background:#1eb9f0;
+}
+
+.blu-btn:hover, .blue-btn:hover,
+.blu-btn:focus, .blue-btn:focus
+{
+    color:#fff;
+    text-decoration: none;
+    background:#00d5ff;
+}
+
+.blu-btn:active, .blu-btn.is-active, .blue-btn:active, .blue-btn.is-active {
+    background: #189ccc;
+}
+
+/* =======================================
+	ORANGE BTN
+	used with hero or secondary btn classes only!
+   ======================================= */
+
+
+.orange-btn {
+color:#f2f2f2;
+background:#f6851f;
+}
+
+.orange-btn:hover,
+.orange-btn:focus
+{
+    color:#fff;
+    background:#ffa200;
+}
+
+.orange-btn:active, .orange-btn.is-active {
+    background:#cc6d1b;
+}
+
+/* =======================================
+    GREEN BTN
+    used with hero or secondary btn classes only!
+   ======================================= */
+
+
+.green-btn {
+color:#f2f2f2;
+background:#37ca5d;
+}
+
+.green-btn:hover,
+.green-btn:focus
+{
+    color:#fff;
+    background:#22e556;
+}
+
+.green-btn:active, .green-btn.is-active {
+    background:#30b353;
+}
+
+
+/* =======================================
+    WHITE BTN
+    used with hero or secondary btn classes only!
+   ======================================= */
+
+.white-btn 
+{
+    border:1px solid #ffffff;
+    background:transparent;
+    color:#fff;
+}
+
+.white-btn:hover,
+.white-btn:focus
+{
+    background:#fff;
+    color:#f6851f;
+}
+/* =======================================
+	MINOR BTN
+	gets no color class, only grey
+	used for most minor items that still deserve a btn
+   ======================================= */
+   
+.subtle-btn, .minor-btn, .tiny-btn {
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    display:inline-block;
+    min-width:100px;
+    text-align: center;
+    color:#737373;
+    border:1px solid #b2b2b2;
+    background:transparent;
+    transition:background .2s, box-shadow .2s;
+    vertical-align: middle;
+    text-transform:capitalize;
+}
+
+.subtle-btn:hover, .minor-btn:hover, .tiny-btn:hover,
+.subtle-btn:focus, .minor-btn:focus, .tiny-btn:focus {
+    color:#f2f2f2;
+    text-decoration: none;
+    background:#b2b2b2;
+    cursor:pointer;
+}
+
+.subtle-btn:active, .minor-btn:active, .tiny-btn:active,
+.subtle-btn.is-active, .minor-btn.is-active, .tiny-btn.is-active
+{   
+    color:#fff;
+    background:#737373;
+    border-color:#737373;
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,.2);
+}
+
+
+
+.subtle-btn {
+    height:38px;
+    font-size:1em;
+    line-height:38px;
+    padding:0 25px;
+    border-radius:20px;
+}
+
+.minor-btn {
+    height:28px;
+    padding:0 15px;
+    line-height: 28px;
+    font-size:.875em;
+    border-radius:15px;
+}
+
+.tiny-btn {
+    min-width:75px;
+    height:20px;
+    padding:0 10px;
+    line-height:20px;
+    font-size:.75em;
+    border-radius:10px;
+}
+
+
+/* =======================================
+	OTHER BTNs
+	Color Classes to add to subtle, minor, tiny buttons above
+	Used to match sizing & style of subtle, minor, tiny above while not being full 3-d buttons
+    Example: Used in landing page grid for designer & publish buttotns
+   ======================================= */
+/* GREEN BTN */
+.minor-btn.green-btn,
+.tiny-btn.green-btn 
+{
+    border-color:#00a43c;
+    color:#fff;
+    text-shadow:0px 1px 2px rgba(0,0,0,.3);
+    background:#01a43e;
+    background: -moz-linear-gradient(top, #33d670 0%, #01a43e 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#33d670), color-stop(100%,#01a43e));
+    background: -webkit-linear-gradient(top, #33d670 0%,#01a43e 100%);
+    background: -o-linear-gradient(top, #33d670 0%,#01a43e 100%);
+    background: -ms-linear-gradient(top, #33d670 0%,#01a43e 100%);
+    background: linear-gradient(to bottom, #33d670 0%,#01a43e 100%);
+    box-shadow: inset 0px 0px 2px 1px rgba(255,255,255,.35);
+}
+
+.minor-btn.green-btn:hover,
+.tiny-btn.green-btn:hover
+{
+    text-shadow:0px 1px 2px rgba(0,0,0,.6);
+    border-color:#009939;
+    background:#00b341;
+    background: -moz-linear-gradient(top, #37e577 0%, #00b341 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#37e577), color-stop(100%,#00b341));
+    background: -webkit-linear-gradient(top, #37e577 0%,#00b341 100%);
+    background: -o-linear-gradient(top, #37e577 0%,#00b341 100%);
+    background: -ms-linear-gradient(top, #37e577 0%,#00b341 100%);
+    background: linear-gradient(to bottom, #37e577 0%,#00b341 100%);
+    box-shadow:inset 0px 0px 2px 1px rgba(255,255,255,.6);
+}
+
+.minor-btn.green-btn:active,
+.tiny-btn.green-btn:active
+{
+    box-shadow:0 1px 2px 1px #fff, inset 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* BLUE BTN */
+.minor-btn.blue-btn 
+{
+    border-color:#007099;
+    color:#fff;
+    text-shadow:0px 1px 2px rgba(0,0,0,.3);
+    background:#016d96;
+    background: -moz-linear-gradient(top, #339fc8 0%, #016d96 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#339fc8), color-stop(100%,#016d96));
+    background: -webkit-linear-gradient(top, #339fc8 0%,#016d96 100%);
+    background: -o-linear-gradient(top, #339fc8 0%,#016d96 100%);
+    background: -ms-linear-gradient(top, #339fc8 0%,#016d96 100%);
+    background: linear-gradient(to bottom, #339fc8 0%,#016d96 100%);
+    box-shadow: inset 0px 0px 2px 1px rgba(255,255,255,.35);
+}
+
+.minor-btn.blue-btn:hover
+{
+    text-shadow:0px 1px 2px rgba(0,0,0,.6);
+    border-color:#006287;
+    background:#00b341;
+    background: -moz-linear-gradient(top, #22aee5 0%, #0080b3 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#22aee5), color-stop(100%,#0080b3));
+    background: -webkit-linear-gradient(top, #22aee5 0%,#0080b3 100%);
+    background: -o-linear-gradient(top, #22aee5 0%,#0080b3 100%);
+    background: -ms-linear-gradient(top, #22aee5 0%,#0080b3 100%);
+    background: linear-gradient(to bottom, #22aee5 0%,#0080b3 100%);
+    box-shadow:inset 0px 0px 2px 1px rgba(255,255,255,.6);
+}
+
+.minor-btn.blue-btn:active 
+{
+    box-shadow:0 1px 2px 1px #fff, inset 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.minor-btn.solid-grey-btn 
+{
+    background:#c6c6c6;
+    border-color:#c6c6c6;
+    color:#f2f2f2;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+/* =======================================
+	SMALL BTN ICONS
+	image / icon for certain buttons
+	used for arrows on button drop downs, 'x' icons on remove / delete etc
+======================================= */
+
+.sm-icon 
+{
+    position: relative;
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background-image:url('/images/small-icon-sprite.png');
+    background-repeat:no-repeat;
+}
+
+    /* -- Retina Display -- */
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (   min--moz-device-pixel-ratio: 2),
+    only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2),
+    only screen and (                min-resolution: 192dpi),
+    only screen and (                min-resolution: 2dppx)  
+    {
+        .sm-icon 
+        {
+            background-image:url('/images/small-icon-sprite@2x.png');
+            background-size:20px 100px;
+        }
+    }
+
+
+.sm-icon.grey-icon.down-icon {background-position:0 0;}
+.sm-icon.grey-icon.up-icon{background-position:0 -20px;}
+.sm-icon.white-icon.down-icon {background-position:0 -40px;}
+.sm-icon.white-icon.up-icon {background-position:0 -60px;}
+.sm-icon.down-icon,
+.sm-icon.up-icon
+{
+    width:12px;
+    margin-left:5px;
+}
+
+.sm-icon.grey-icon.sm-x-icon {background-position:0 -80px;margin-right:5px;}
+
+.subtle-btn:hover .sm-icon.grey-icon.down-icon,
+.minor-btn:hover .sm-icon.grey-icon.down-icon,
+.tiny-btn:hover .sm-icon.grey-icon.down-icon
+{
+    background-position:0 -40px;
+}
+
+.hero-btn,
+.secondary-btn,
+.subtle-btn,
+.minor-btn,
+.tiny-btn
+{
+    margin-right:5px;
+}
+
+.hero-btn:last-child,
+.secondary-btn:last-child,
+.subtle-btn:last-child,
+.minor-btn:last-child,
+.tiny-btn:last-child
+{
+    margin-right:0px;
+}

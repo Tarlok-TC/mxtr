@@ -1,0 +1,169 @@
+﻿
+
+body {background:#d9d9d9;font:normal 100%/1.25em 'Open Sans',  sans-serif;}
+nav > ul {list-style:none;margin:0;padding:0;}
+
+
+/* ==================
+ * BASIC TEXT & HTML ELEMENTS 
+    ==================*/
+
+a {color:#1eb9f0;text-decoration:none;}
+a:hover {text-decoration:underline;}
+.not-bold {font-weight:400 !important;}
+.thin-text, .light-text {font-weight:300 !important;}
+
+.no-list {list-style:none;margin:0px;padding:0px;}
+h3 {margin-bottom:1em;font-weight:normal;}
+.content-container p {margin-bottom: 1.429em;font-size: .875em;line-height: 1.429em;}
+
+/* ==================
+* TEXT MODULES
+    ==================*/
+
+.light-blue-text {color:#1eb9f0;}
+
+.light-grey-text,
+.grey-txt,
+.grey-text
+ {color:#737373;}
+
+.med-grey-text 
+{
+    color:#5c5c5c;
+}
+
+.white-text {color:#fff;}
+.black-text {color:#282828;}
+.user-message {margin:0 -5px 1.429em;padding:5px;font-size:.875em;line-height:1.429em;}
+.red-txt, .red-text {color:#c21000;}
+.green-txt {color:#1abe57;}
+.green-txt-drk {color:#139b4d;}
+.orange-txt, .orange-text {color:#ff8500;}
+.align-left 
+{
+    text-align:left;
+}
+.align-center 
+{
+    text-align:center;
+}
+.text-right,
+.align-right
+ {text-align:right;}
+
+.text-left,
+.align-left { text-align:left;}
+
+.uppercase 
+{
+    text-transform:uppercase;
+}
+
+.green-text 
+{
+    color:#37ca5d;
+}
+
+/* ==================
+* NOTIFICATION MODULE
+    ==================*/
+.notification-bar {position:relative;display:block;margin:0 0 20px;padding:10px 10px 10px 60px;font-size:1.3em;line-height:20px;color:#282828;background:#f2f2f2;border:1px solid #f2f2f2;}
+.notification-bar:before {content:"";position:absolute;display:block;left:0;top:0;width:50px;height:40px;background:url('/images/base-sprite.png') no-repeat left top;}
+.white-shadow-box .notification-bar {background-color:#fff;}
+
+.notification-inline {display:inline-block;margin:0 5px;padding:0 6px;vertical-align:middle;line-height:12px;}
+
+/* ==================
+* CONTENT BOXES
+    ==================*/
+ .hide-overflow {overflow:hidden;}   
+    
+.grey-border-box {-moz-box-sizing:border-box;box-sizing:border-box;position:relative;margin-bottom:5px;padding:5px;border:1px solid #d9d9d9;background-color:#f2f2f2;}
+.grey-hover-box {-moz-box-sizing:border-box;box-sizing:border-box;position:relative;margin-bottom:5px;padding:15px;border:1px solid #d9d9d9;background-color:#f2f2f2;
+ -webkit-transition:background-color .3s, border-color .1s;              
+ -moz-transition:background-color .3s, border-color .1s;              
+ -o-transition:background-color .3s, border-color .1s;              
+ -ms-transition:background-color .3s, border-color .1s;              
+ transition:background-color .3s, border-color .1s;              
+}
+.grey-hover-box:hover {background-color:#fff;border-color:#ffffff;}
+
+.fluid-img 
+{
+    display:inline-block;
+    max-width:100% !important;
+    height:auto;
+    font-size:0;
+    line-height:0;
+    vertical-align:middle;
+}
+
+
+
+/* ==================
+    BUTTONS
+    ==================*/
+.btn-arrow:after {content:"";position:relative;display:inline-block;background-image:url('/images/base-sprite.png');background-repeat:no-repeat;vertical-align:baseline
+                  ;}
+
+/* text buttons */
+.blue-txt-btn {display:inline-block;color:#1eb9f0;}
+.white-txt-btn {display:inline-block;color:#fff;}
+.blue-txt-btn.btn-arrow:after {top:1px;width:8px;height:12px;margin:0 5px;background-position:-78px -54px;}
+.white-txt-btn.btn-arrow:after {top:1px;width:8px;height:12px;margin:0 5px;background-position:-118px -54px;}
+.red-txt-btn {display:inline-block;color:#c12000;font-weight:bold;}
+
+.txt-action {display:inline-block;text-decoration:none;font-weight:bold;}
+.txt-action:hover {text-decoration:underline;}
+.txt-action.btn-arrow:after {width:8px;height:12px;margin:0 5px;background-position:-160px -80px;}
+
+.x-icon:before {content:"";display:inline-block;width:12px;height:11px;margin:0 5px;background:transparent url('/images/base-sprite.png') no-repeat -200px top;vertical-align:middle;}
+.new-window-icon:before {content:"";display:inline-block;width:17px;height:14px;margin:0 5px;vertical-align:middle;background:transparent url('/images/base-sprite.png') no-repeat -180px -60px;}
+
+/* ==================
+    SPRITE
+    For the various icons using the sprite.png 
+    ==================*/
+
+.sprite 
+{
+    background-color:transparent;
+    background-image: url('/images/sprite.png');
+    background-repeat: no-repeat;
+}
+
+    /* -- Retina Display -- */
+    @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (   min--moz-device-pixel-ratio: 2),
+    only screen and (     -o-min-device-pixel-ratio: 2/1),
+    only screen and (        min-device-pixel-ratio: 2),
+    only screen and (                min-resolution: 192dpi),
+    only screen and (                min-resolution: 2dppx)  
+    {
+        .sprite 
+        {
+            background-image:url('/images/sprite@2x.png');
+            background-size:220px 200px;
+
+        }
+
+    }
+/* ==================
+ * NOSCRIPT
+    for users who have disabled javascript 
+    ==================*/
+.noscript {margin:20px auto;width:600px;padding:10px 0 10px 100px;background:url('/images/noscript-error-icon.png') no-repeat left center;}
+.noscript > .noscript-headline {display:block;font-size:1.5em;line-height:30px;}
+.noscript > .noscript-text  {display:block;font-size:.875em;line-height:20px;color:#737373;}
+
+/*  ==================
+    Generic Classes
+    Basic classes to apply anywhere
+    ==================*/
+    
+.hidden
+{
+    display: none;
+}

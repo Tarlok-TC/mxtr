@@ -1,0 +1,88 @@
+@using mxtrAutomation.Common.Extensions
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Web.Common.UI
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Helpers
+@using mxtrAutomation.Common.Codebase
+@using mxtrAutomation.Websites.Platform.Queries
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Models.Shared.ViewData
+
+@model mxtrAutomation.Websites.Platform.Models.Shared.ViewModels.WorkspaceFilterViewModel
+
+@{
+    Html.IncludeJS(JSKind.Angular);
+    Html.IncludeJS(JSKind.AngularUnique);
+    Html.IncludeJS(JSKind.WorkspaceFilter);
+}
+
+@{
+    HtmlString workspaces = new HtmlString(JsonConvert.SerializeObject(Model.Accounts));
+}
+
+
+<script type="text/javascript">
+    var parentAccountArray = [];
+    var appliedAccountsState = [];
+    var _workspaces = @workspaces;
+    var selectedAccountString = "@Model.CurrentAccountIDs";
+
+</script>
+<div class="pull-right">
+    <button id="dvFilterDrpdown" class="btn btn-default filter-drp" type="button" onclick="showHideMenu(this)">
+        <i class="fa fa-search"></i>
+        Filter By Accounts
+        <span id="spnAccountCount" class="badge bg-green">All</span>
+        <span class="caret"></span>
+    </button>
+    <div id="WorkspaceFilter" class="m-report-filters-container" ng-app="reportFilter" ng-controller="ReportFilterCtrl">
+        <div id="AccountFilters" class="m-report-filters-accounts m-report-filter view-container static-position">
+
+            @* -- START DROP CONTAINER *@
+            <div id="account-drop-down" class="m-report-filter-drop-container">
+
+                <span class="m-report-filter-drop-title">Choose the accounts you wish to view</span>
+                <span class="m-report-filter-drop-subtitle"></span>
+
+
+                <div class="m-report-filter-drop-content">
+
+                    @* CHILD LIST *@
+                    <div>
+                        <div class="m-report-filter-child-container">
+                            <div class="m-report-filter-parent">
+                                @*{{parentId}}*@
+                                <span class="filter-check sprite" ng-class="parentClass" ng-click="selectParentAccount(parentId)"></span><span class="filter-list-name" ng-click="selectParentAccount(parentId)">{{parentAccountName}}</span><span ng-if="isChild == true" class="back vw-doc-clk" ng-click="returnToPreviousAccount(parentId)"><span class="grey-left-arrow"></span>back</span>
+                            </div>
+                            <ul class="m-report-filter-list">
+                                <li class="{{account.ChildrenClass}}" data-children="{{account.ChildAccounts.length}}" ng-repeat="account in accounts | filter:accountQuery">
+                                    @*This is id of account {{account.AccountObjectID}}*@
+                                    <div ng-click="selectAccount(account.AccountObjectID, account.SelectedClass)">
+                                        <span class="filter-check" ng-class="account.SelectedClass"></span>
+                                        <span class="filter-list-name">{{account.AccountName}}</span>
+                                    </div>
+                                    <span ng-if="account.ChildrenClass != has-children" class="filter-list-children" ng-click="selectChildAccounts(account.AccountObjectID, account.SelectedChildClass)">
+                                        <span class="filter-check sprite" ng-class="account.SelectedChildClass"></span>
+                                        <span class="filter-list-children-select">Include all child keys [{{account.ChildAccounts.length}}]</span>
+                                        <span class="filter-list-children-view vw-doc-clk" ng-click="setDisplayedFilters(account.AccountObjectID)">View<span class="sprite sprite-arrow"><i class="fa fa-chevron-right"></i></span></span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="m-report-filter-actions text-right cf">
+                    <div class="m-daterange-error text-left">You must select at least 1 account.</div>
+                    <button id="account-apply" name="AccountSubmit" class="btn btn-info" ng-click="applyAccountSelection()">Apply</button>
+                    <button id="account-cancel" name="AccountCancel" class="btn btn-default" ng-click="cancelAccountSelection()">Cancel</button>
+                    <span class="select-all" ng-click="selectAllAccounts(selectAllAccountsStatus)">
+                        <span class="sprite" ng-class="selectAllAccountsStatus"></span>Select All
+                    </span>
+                </div>
+            </div>
+            @* -- END DROP CONTAINER -- *@
+        </div>
+    </div>
+</div>
+

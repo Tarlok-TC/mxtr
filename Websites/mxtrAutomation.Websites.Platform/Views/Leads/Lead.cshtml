@@ -1,0 +1,380 @@
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.Queries
+@using mxtrAutomation.Websites.Platform.Models.Leads.ViewData
+@using Newtonsoft.Json
+
+
+@model mxtrAutomation.Websites.Platform.Models.Leads.ViewModels.LeadViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleScoreBoxes);
+    Html.IncludeJS(JSKind.Lead);
+    //Html.IncludeJS(JSKind.Dashboard);
+}
+@{
+    HtmlString leadEvents = new HtmlString(JsonConvert.SerializeObject(Model.Lead.EventsViewData));
+    HtmlString leadCopiedAccount = new HtmlString(JsonConvert.SerializeObject(Model.Lead.ClonedAccount));
+}
+@section MainContent {
+
+
+    <body>
+        <div class="dashboard_graph">
+            <div class="row">
+                <div class="col-md-12" id="dvRetailer" style="display:none">
+                    <ol class="breadcrumb">
+                        <li><a href="@(new IndexWebQuery())">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@(new RetailersWebQuery())">Retailer Performance</a></li>
+                        <li class="breadcrumb-item"><a href="@(new RetailerWebQuery())?id=@Model.Lead.AccountObjectID"> @Model.Lead.LeadParentAccount </a></li>
+                        <li class="breadcrumb-item active">@Model.Lead.FirstName @Model.Lead.LastName</li>
+                    </ol>
+                </div>
+                <div class="col-md-12" id="dvLead" style="display:none">
+                    <ol class="breadcrumb">
+                        <li><a href="@(new IndexWebQuery())">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@(new LeadsWebQuery())">Contacts</a></li>
+                        <li class="breadcrumb-item active">@Model.Lead.FirstName @Model.Lead.LastName</li>
+                    </ol>
+                </div>
+                <div class="col-md-12" id="dvDealer" style="display:none">
+                    <ol class="breadcrumb">
+                        <li><a href="@(new IndexWebQuery())">Home</a></li>
+                        <li class="breadcrumb-item"><a href="@(new DealerPerformanceWebQuery())">Dealer Performance</a></li>
+                        <li class="breadcrumb-item"><a href="@(new DealerPerformanceDetailWebQuery())?id=@Model.Lead.AccountObjectID"> @Model.Lead.LeadParentAccount </a></li>
+                        <li class="breadcrumb-item active">@Model.Lead.FirstName @Model.Lead.LastName</li>
+                    </ol>
+                </div>
+                <div class="col-md-8">
+                    <h3 class="main-title">@Model.Lead.LeadParentAccount</h3>
+                </div>
+                <div class="profile col-md-12 col-sm-6 col-xs-12">
+                    <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <img class="img-circle  img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="That's me!" />
+                                <p>
+                                    Added
+                                    @{
+                                        int months = Math.Abs((Model.Lead.CreateDate.Month - System.DateTime.Now.Month) + 12 * (Model.Lead.CreateDate.Year - System.DateTime.Now.Year));
+                                        int years = 0;
+                                        //days
+                                        if (months == 0)
+                                        {
+                                            int days = Convert.ToInt32((DateTime.Now - Model.Lead.CreateDate).TotalDays);
+                                            @days <span>days Ago</span>
+                                        }
+                                        //months
+                                        else if (months < 12)
+                                        {
+                                            @months<span> months Ago</span>
+                                        }
+                                        //year
+                                        else
+                                        {
+                                            years = months / 12;
+                                            months = months % 12;
+                                            @years <span>year</span> @months<span> month Ago</span>
+                                        }
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-9">
+                                <h3>
+                                    @Model.Lead.FirstName @Model.Lead.LastName
+                                </h3>
+                                <ul class="list-unstyled user_data">
+                                    <li>
+                                        <i class="fa fa-map-marker user-profile-icon"></i>
+                                        @if (Model.Lead.City == "" && Model.Lead.State == "")
+                                        {
+                                            @:N/A
+                                    }
+                                        else
+                                        {
+                                            @(Model.Lead.City == "" ? "N/A" : Model.Lead.City)<span>,</span> @(Model.Lead.State == "" ? "N/A" : Model.Lead.State)
+                                        }
+                                    </li>
+
+                                    <li>
+                                        <i class="fa fa-envelope user-profile-icon"></i> @(Model.Lead.EmailAddress == "" ? "N/A" : Model.Lead.EmailAddress)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-3 col-xs-12" style="padding: 0px;">
+                                <input id="btnDeleteLead" name="btnDeleteLead" class="btn btn-danger" type="button" value="Delete" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="">
+                                <a href="#tab_Overview" id="Overview_tab" role="tab" data-toggle="tab" aria-expanded="false">Overview</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#tab_LifeOfLead" role="tab" id="LifeOfLead_tab" data-toggle="tab" aria-expanded="false">Life of the lead @*@Model.Lead.LeadScore*@</a>
+                            </li>
+                            @if (!string.IsNullOrEmpty(Model.Lead.SharpspringAccountID) && !string.IsNullOrEmpty(Model.Lead.SharpspringSecretKey))
+                            {
+                                <li role="presentation" class="">
+                                    <a href="#tab_CopyLead" role="tab" id="CopyLead_tab" data-toggle="tab" aria-expanded="false">Action</a>
+                                </li>
+                            }
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade" id="tab_Overview" aria-labelledby="Overview_tab">
+                                <div class="x_content dashboard_graph gray-box">
+                                    <div class="col-lg-12">
+                                        <h3>Lead Information</h3>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Name :</b></div>
+                                            <div class="col-lg-7">@Model.Lead.FirstName @Model.Lead.LastName</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Email :</b></div>
+                                            <div class="col-lg-7">@Model.Lead.EmailAddress</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Address :</b></div>
+                                            <div class="col-lg-7">
+                                                @if (Model.Lead.City == "" && Model.Lead.State == "")
+                                                {
+                                                    @:N/A
+                                            }
+                                                else
+                                                {
+                                                    @(Model.Lead.City == "" ? "N/A" : Model.Lead.City)<span>,</span> @(Model.Lead.State == "" ? "N/A" : Model.Lead.State)
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Company :</b></div>
+                                            <div class="col-lg-7">@Model.Lead.CompanyName</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Joined:</b></div>
+                                            <div class="col-lg-7">@Model.Lead.CreateDate</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Lead Score :</b></div>
+                                            <div class="col-lg-7">@Model.Lead.LeadScore</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2"><b>Lead Status :</b></div>
+                                            <div class="col-lg-7">@Model.Lead.LeadStatus</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_LifeOfLead" aria-labelledby="LifeOfLead_tab">
+                                <h4 class="pull-left col-md-1">Timeline</h4>
+                                <div class="col-md-4">
+                                    <div class="dropdown pull-left" id="ddlEvents">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dvOption" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="true">
+                                            <i class="fa fa-filter" aria-hidden="true"></i>
+                                            Event Filter
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul id="filterMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li>
+                                                <a id="filterAll" onclick="filterEventData(this.id,EventTypeEnum.All,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> All Events
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="filterEmail" onclick="filterEventData(this.id,EventTypeEnum.Email,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Email Events
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="filterFormSubmit" onclick="filterEventData(this.id,EventTypeEnum.FormSubmitted,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Form Submitted
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="filterPageVisit" onclick="filterEventData(this.id,EventTypeEnum.PageVisit,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Web Visits
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a id="filterOpportunity" onclick="filterEventData(this.id,EventTypeEnum.Opportunity,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Opportunity
+                                                </a>
+                                            </li>
+                                            <li role="separator" class="divider"></li>
+                                            <li>
+                                                <a id="filterOther" onclick="filterEventData(this.id,EventTypeEnum.Other,FilterTypeEnum.Event)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa" aria-hidden="true"></i></span> Other Events
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="dropdown pull-left" id="ddlAccounts">
+                                        <button class="btn btn-default dropdown-toggle" type="button" id="dvAccountOption" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="true">
+                                            <i class="fa fa-filter" aria-hidden="true"></i>
+                                            Account Filter
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul id="filterAccountMenu" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li>
+                                                <a id="filterAccountAll" onclick="filterEventData(this.id,EventTypeEnum.AllAccounts,FilterTypeEnum.Account)" class="toggle-link toggle-typeFilter link-active toggle-all-events" data-timeline-event="">
+                                                    <span class="checkbox"><i class="fa fa-check" aria-hidden="true"></i></span> All Account
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+
+                                <div class="x_content dashboard_graph gray-box">
+                                    @*Time line*@
+                                    <div class="x_content no-scrll">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-12 col-xs-12">
+                                                <input type="button" value="Now" class="timeline-button btn-now" title="Move to current time" onclick="moveToCurrentTime();">
+                                                <input type="button" value="Default" class="timeline-button btn-now" title="Adjust visible range to accommodate all events" onclick="adjustVisibleTimeRangeToAccommodateAllEvents();">
+                                            </div>
+                                            <div class="timeline-container col-sm-12 col-md-12 col-xs-12">
+                                                <div id="mytimeline"></div>
+                                                <div class="timeline-controls-container">
+                                                    <div class="timeline-controls">
+                                                        <input type="button" value="" class="timeline-button btn-zoom-in" title="Zoom in" onclick="timeline_control.zoom(0.4);">
+                                                        <input type="button" value="" class="timeline-button btn-zoom-out" title="Zoom out" onclick="timeline_control.zoom(-0.4);">
+
+                                                        <input type="button" value="" class="timeline-button btn-move-left" title="Move left" onclick="timeline_control.move(-0.2);">
+                                                        <input type="button" value="" class="timeline-button btn-move-right" title="Move right" onclick="timeline_control.move(0.2);">
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="mail_list_column events" id="eventcontainer">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*################3*@
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_CopyLead" aria-labelledby="CopyLead_tab">
+                                <div class="x_content dashboard_graph gray-box">
+                                    @*<div class="col-sm-12 margin-btm0">
+                                        <input id="btnDeleteLead" name="btnDeleteLead" class="btn btn-primary" type="button" value="Delete Lead" />
+                                    </div>
+                                    <div class="col-sm-12 margin-btm0">
+                                        <hr />
+                                    </div>*@
+                                    @*----------Parent Dropdown--------------------*@
+                                    @if (Model.Lead.Parent != null && Model.Lead.Parent.Count() > 0)
+                                    {
+                                        if (Model.Lead.ClonedAccount.Count > 0)
+                                        {
+                                            <span>@Model.Lead.FirstName @Model.Lead.LastName copied to @Model.Lead.Parent.FirstOrDefault().Text </span>
+                                        }
+                                        else
+                                        {
+                                            if (!Model.Lead.IsActive)
+                                            {
+                                                <span>Lead is Inactive</span>
+                                            }
+                                            else
+                                            {
+                                                <div>
+                                                    <div class="col-sm-12 margin-btm0">
+                                                        <strong>  Copy @Model.Lead.FirstName @Model.Lead.LastName</strong>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        @Html.DropDownList("CopyToParent", Model.Lead.Parent, "Select Parent Account", new { id = "CopyToParent", @class = "col-sm-5 col-xs-6 select2_single form-control required", data_placeholder = "Select Parent Account" })
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input id="btnCopyToParent" name="btnCopyToParent" class="btn btn-primary" type="button" value="Copy" />
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    @*----------Client Dropdown--------------------*@
+                                    else
+                                    {
+                                        <div>
+                                            @if (Model.Lead.ClonedAccount.Count > 0)
+                                            {
+                                                <div class="col-sm-12 margin-btm0">
+                                                    <strong>
+                                                        @{var last = @Model.Lead.ClonedAccount.Last();}
+                                                        Lead copied to dealers:-
+                                                        <span class="box-common dealers-outer">
+                                                            <ul id="uiClonedAccount">
+                                                                @foreach (var item in Model.Lead.ClonedAccount)
+                                                                {
+                                                                    if (item.Value.Item2 == false)
+                                                                    {
+                                                                        <li id="liClient_@item.Key" class="MakeDisable">@item.Value.Item1<a title="Remove lead"><i class="fa fa-trash pull-right"></i></a></li>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li id="liClient_@item.Key">@item.Value.Item1<a href="javascript:void(0)" onclick="deleteLead('@item.Key','@item.Value.Item3')" title="Remove lead"><i class="fa fa-trash pull-right"></i></a></li>
+                                                                    }
+                                                                }
+                                                            </ul>
+                                                        </span>
+                                                    </strong>
+                                                </div>
+                                                            }
+
+                                            <div class="col-sm-12 margin-btm0">
+                                                <strong>  Copy @Model.Lead.FirstName @Model.Lead.LastName</strong>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @Html.DropDownList("CopyLead", Model.Lead.Clients, "Select Dealer Account", new { id = "CopyLead", @class = "col-sm-5 col-xs-6 select2_single form-control required", data_placeholder = "Select Dealer Account" })
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input id="btnCopyLead" name="btnCopyLead" class="btn btn-primary" type="button" value="Copy" />
+                                            </div>
+                                        </div>
+                                                            }
+                                    <div>
+                                        <div class="user-message col-sm-12 margin-top-10 set-padding-top-btm-10"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+}
+
+@section ScriptContent {
+    <script type="text/javascript">
+        var _leadEvents = @leadEvents;
+        //console.log("=====_leadEvents",_leadEvents);
+        var _leadId = GetParameterValues('id');
+        var _leadCopyUrl = '@(new LeadCopyWebQuery())';
+        var _lstCopiedLeadId = Object.keys(@leadCopiedAccount);
+        var _leadDeleteUrl='@(new LeadDeleteWebQuery())';
+        var _leadsUrl='@(new LeadsWebQuery())';
+        var _retailersUrl='@(new RetailerWebQuery())?id=@Model.Lead.AccountObjectID';
+    </script>
+    <script src="~/Scripts/timeline/jquery.scrollTo.min.js"></script>
+    <script src="~/Scripts/timeline/timeline.js"></script>
+    <script src="~/Scripts/timeline/timelinecustom.js"></script>
+    <link href="~/Scripts/timeline/timeline.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
+    <!-- Include a polyfill for ES6 Promises (optional) for IE11 and Android browser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+    <script src="~/Scripts/popupHandler.js"></script>
+}

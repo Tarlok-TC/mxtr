@@ -1,0 +1,189 @@
+@using mxtrAutomation.Websites.Platform.Queries
+
+@model mxtrAutomation.Websites.Platform.Controllers.ManageMinerViewModel
+
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+//drop down etc if required
+}
+@{
+
+}
+@section MainContent {
+    <body>
+        <div class="dashboard_graph">
+            <div class="row">Delete Audit Trail Logs</div>
+            <br />
+            <div>
+                <div class="row">
+                    <div class="col-sm-3">Enter Date (YYYY-MM-DD)</div>
+                    <div class="col-sm-9">
+                        <input type="text" id="txtSSDeleteDate" />
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-3">
+                        Select Miner type:
+                    </div>
+                    <div class="col-sm-9">
+                        <select id="ddlWhichMiner">
+                            <option value="-1" selected="selected">Select</option>
+                            <option value="0">Sharpspring</option>
+                            <option value="1">BullsEye</option>
+                            <option value="2">Google Analytic</option>
+                            <option value="3">EZShred</option>
+                            <option value="4">EZShred Customer Lists</option>
+                            <option value="5">EZShred Building Lists </option>
+                            <option value="6">EZShred Service Lists</option>
+                            <option value="7">EZShred Misc Lists</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-3"> Select Account:</div>
+                    <div class="col-sm-9" style="overflow:auto; height:300px;">
+                        <table id="chkDealers">
+                            @foreach (var names in @Model.Clients)
+                            {
+                                var checkBoxId = "chk_" + names.ID;
+                                var tdId = "td_" + names.ID;
+                                <table width="100%">
+                                    <tr>
+                                        <td width="2px">
+                                            <input type="checkbox" id="@checkBoxId" class="chkclass" value="@names.ID" />
+                                        </td>
+                                        <td id="@tdId" width="100px">
+                                            @names.Name
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+                            }
+                        </table>
+                    </div>
+                </div>
+                <br />
+                <input type="button" onclick="DeleteAuditTrailLogs()" value="Delete Audit Trail log" />
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Assign domain name</p>
+                        <input type="button" onclick="AssignDomainName()" value="Assign Domain Name" />
+                    </div>
+
+                </div><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><b>Transfer data from EZshredData to Customer and Building tables</b></p>
+                        <p>Customer Count</p>@Model.CustomerCount
+                        <p>Building Count</p>@Model.BuildingCount
+                        <br />
+                        <input type="button" onclick="InsertUpdateBuilding()" value="Insert Update Building" />
+                        <input type="button" onclick="InsertUpdateCustomer()" value="Insert Update Customer" />
+                    </div>
+
+                </div>
+                <hr />
+
+                <p><b>Add Data From Json</b></p>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-sm-3"> Account Object Id </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtAccountObjectId" />
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            Mxtr Object Id
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtMxtrObjectId" />
+                        </div>
+                    </div><br /><br />
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            File Name
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="text" id="txtFileName" />
+                        </div>
+                    </div><br /><br />
+                    <input type="button" onclick="AddUpdateCustomerDataFromJson()" value="Insert Update Customer From Json" />
+                    <input type="button" onclick="AddUpdateBuildingDataFromJson()" value="Insert Update Building From Json" />
+                </div>
+            </div><br /><br /><hr />
+            <p><b>Delete duplicate customer/building</b></p><br />
+            <div class="row">
+                <input type="button" onclick="DeleteDuplicateCustomer()" value="Delete Duplicate Customer" />
+                <input type="button" onclick="DeleteDuplicateBuilding()" value="Delete Duplicate Building" />
+            </div><br /><br /><hr />
+            <p><b>Handle old building data</b></p>
+            <div class="row">
+                <input type="button" onclick="HandleOldBuildingData()" value="Handle old building data" />
+            </div>
+            <br /><br /><hr />
+            <p><b>Assign Opportunity PipeLine Mapping</b></p>
+            <div class="row">
+                <input type="button" onclick="AssignOpportunityPipeLine()" value="Assign Opportunity PipeLine" />
+            </div>
+            <br /><br /><hr />
+            <p><b>Assign Coordinates to All Accounts</b></p>
+            <div class="row">
+                <input type="button" onclick="AssignCoordinatesToAccount()" value="Assign Coordinates" />
+            </div>
+            <br /><br /><hr />
+            <p><b>Add Lead Analytic data</b></p>
+            <div class="row">
+                <input type="button" onclick="AddLeadAnalyticdata()" value="Add Lead Analytic data" />
+            </div>
+            <div class="user-message"></div>
+            <br /><br /><hr />
+            <p><b>Set Lead Update URL</b></p>
+            <div class="row">
+                <input type="text" id="txtsubscribeURL" />
+                <input type="button" onclick="SetSubscribeLeadUpdates()" value="Set Subscribe URL" />
+            </div>
+            <div class="subscribeLeadUpdate-message"></div>
+            <br /><br /><hr />
+            <p><b>Update CRM Lead Data From CSV</b></p>
+            <div class="row">
+                <input type="button" onclick="SSCreateDateFix()" value="Update Data" />
+            </div>
+            <div class="updatecrmlead-message"></div>
+            <br /><br /><hr />
+            <p><b>Update CRM Lead Analytics Data From CSV</b></p>
+            <div class="row">
+                <input type="button" onclick="UpdateCRMLeadAnalyticsFromCSV()" value="Update Data" />
+            </div>
+            <div class="updatecrmleadanalytics-message"></div>
+        </div>
+        <div id="dvdata_processing" style="display:none; "></div>
+    </body>
+}
+
+@section ScriptContent {
+    <script src="~/Scripts/manageminer.js"></script>
+    <script type="text/javascript">
+        var _sharpSpringDeleteLogUrl = '@(new ManageMinerDeleteSharpspringLogWebQuery())';
+        var _assignDomainNameUrl = '@(new AssignDomainWebQuery())';
+        var _insertUpdateBuildingUrl = '@(new InsertUpdateBuildingWebQuery() )';
+        var _insertUpdateCustomerUrl = '@(new InsertUpdateCustomerWebQuery() )';
+        var _addUpdateCustomerDataFromJsonUrl = '@(new AddUpdateCustomerDataFromJsonWebQuery())';
+        var _addUpdateBuildingDataFromJsonUrl = '@(new AddUpdateBuildingDataFromJsonWebQuery())';
+        var _deleteDuplicateCustomerUrl = '@(new DeleteDuplicateCustomerWebQuery() )';
+        var _deleteDuplicateBuildingUrl = '@(new DeleteDuplicateBuildingWebQuery())';
+        var _handleOldBuildingDataUrl = '@(new HandleOldBuildingDataWebQuery())';
+        var _assignOpportunityPipeLineDataUrl = '@(new SetOpportunityPipeLineWebQuery())';
+        var _assignCoordinatesToAccountDataUrl = '@(new AssignCoordinatesToAccountWebQuery())';
+        var _leadAnalyticDataUrl = '@(new LeadAnalyticalWebQuery())';
+        var _subscribeLeadUpdatesUrl = '@(new SubscribeLeadUpdatesWebQuery())';
+        var _ssCreateDateFixDataUrl = '@(new SSCreateDateFixWebQuery())';
+    </script>
+
+}

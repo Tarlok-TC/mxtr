@@ -1,0 +1,68 @@
+@using mxtrAutomation.Common.Extensions
+@using mxtrAutomation.Web.Common.Extensions
+@using mxtrAutomation.Websites.Platform.UI
+
+@model mxtrAutomation.Websites.Platform.Models.Admin.ViewModels.AdminEditAccountViewModel
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.Select2);
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeCss(CssKind.iCheckFlat);
+    Html.IncludeCss(CssKind.Switchery);
+
+    Html.IncludeJS(JSKind.Select2);
+    Html.IncludeJS(JSKind.JQuerySmartWizard);
+    Html.IncludeJS(JSKind.iCheck);
+    Html.IncludeJS(JSKind.Switchery);
+    Html.IncludeJS(JSKind.AccountManagement);
+    Html.IncludeJS(JSKind.Angular);
+}
+
+@section MainContent {
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div id="wizard" class="form_wizard wizard_horizontal">
+                    <ul class="wizard_steps">
+                        <li>
+                            <a href="#step-1">
+                                <span class="step_no">1</span>
+                                <span class="step_descr">Edit Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-2">
+                                <span class="step_no">2</span>
+                                <span class="step_descr">Edit Account Attributes</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#step-3">
+                                <span class="step_no">3</span>
+                                <span class="step_descr">Edit Users</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div id="step-1">
+                        @Html.Partial(ViewKind.AccountProfile, Model.AccountProfile)
+                        <br />
+                    </div>
+                    <div id="step-2">
+                        @Html.Partial(ViewKind.AccountAttributes, Model.AccountAttributes)
+                        <br />
+                    </div>
+                    <div id="step-3">
+                        @Html.Partial(ViewKind.AccountUsers, Model.AccountUsers)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}

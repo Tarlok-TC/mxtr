@@ -1,0 +1,118 @@
+﻿@model mxtrAutomation.Websites.Platform.Models.Index.ViewModels.IndexViewModel
+@using mxtrAutomation.Websites.Platform.UI
+@using mxtrAutomation.Web.Common.Extensions
+@using Newtonsoft.Json
+@using mxtrAutomation.Websites.Platform.Queries
+@using System.Web.Optimization
+
+@{ Layout = "~/Views/Shared/MainLayout.cshtml"; }
+
+@{
+    Html.IncludeCss(CssKind.ModuleForms);
+    Html.IncludeJS(JSKind.MomentJS);
+    Html.IncludeJS(JSKind.IndexActivityReport);
+    @Scripts.Render("~/bundles/vmap")
+}
+
+@{
+    HtmlString mapData = new HtmlString(JsonConvert.SerializeObject(Model.GroupLeadsViewData));
+}
+
+@section MainContent {
+    <div class="row top_tiles gent-bar">
+        @*  <div class="animated flipInY col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                    <div class="icon">
+                        <i class="fa fa-building-o"></i>
+                    </div>
+                    <h3>Total Clients</h3>
+                    <div class="count">2500</div>
+                    <p><span><i class="fa fa-arrow-up"></i></span> 4% from last week</p>
+                </div>
+            </div>*@
+        <div id="campaigns" class="animated flipInY col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="campaigns">
+                <span>
+                    Total Retailers
+                </span>
+                @*<div id="CampaignsCount" class="count">@Model.TotalCampaigns</div>*@
+                <div class="count" id="dvTotalRetailers">@Model.TotalRetailers </div>
+                @*<p>
+                        <span>
+                            <i id="CampaignsDeltaCSS" class="@Model.TotalCampaignsDeltaArrowCss"></i>
+                        </span>
+                        <span id="CampaignsDelta">@Math.Abs(Model.TotalCampaignsDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+            </div>
+        </div>
+        <div id="leads" class="animated flipInY col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="leads">
+                <span>Total Leads</span>
+                <div class="count" id="dvTotalLeads">@Model.TotalLeads</div>
+                @*<div id="LeadsCount" class="count">@Model.TotalLeads</div>*@
+                @*<p>
+                        <span>
+                            <i id="LeadsDeltaCSS" class="@Model.TotalLeadsDeltaArrowCss"></i>
+                        </span>
+                        <span id="LeadsDelta">@Math.Abs(Model.TotalLeadsDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+            </div>
+        </div>
+        <div id="opportunity-value" class="animated flipInY col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <div class="tile-stats link-score-box" data-report="opportunities">
+                <span>Average Lead</span>
+                <div class="count" id="dvAverageLead">@Model.AverageLead</div>
+                @*<div id="OpenOpportunityValue" class="count">@Model.OpenOpportunityValue.ToString("C0")</div>*@
+                @*<p>
+                        <span>
+                            <i id="OpenOpportunityValueDeltaCSS" class="@Model.OpenOpportunityValueDeltaArrowCss"></i>
+                        </span>
+                        <span id="OpenOpportunityValueDelta">@Math.Abs(Model.OpenOpportunityValueDelta).ToString("P0")</span>
+                        during date range
+                    </p>*@
+            </div>
+        </div>
+    </div>
+    <div class="dashboard_graph">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li>Home</li>
+                </ol>
+            </div>
+            <div class="col-xs-12">
+                <h3 class="main-title">Territory Overview</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12 map-keys">
+                    <ul class="inline-list">
+                        <li class="north">North</li>
+                        <li class="south">South</li>
+                        <li class="east">East</li>
+                        <li class="west">West</li>
+                    </ul>
+                </div>
+                <div class="col-md-12" style="padding: 30px">
+                    <div id="usa_map" style="min-height:400px !important;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section ScriptContent {
+    <script type="text/javascript">
+        var _updateDataUrl = '@Model.UpdateDataUrl';
+        var _retailerUrl = '@(new IndexWebQuery())';
+        var _retailersIdentifer = '@ViewBag.DataTableIdentifier';
+        var _mapData = JSON.parse('@mapData');
+    </script>
+
+
+    <script src="~/Scripts/workspace.filter.actions.js"></script>
+}

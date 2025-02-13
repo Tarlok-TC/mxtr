@@ -1,0 +1,134 @@
+﻿/* =======================================
+	Score and Data boxes
+    m-score-boxes.css
+    Used for displaying (usually) numeric data - like website visitors, review counts
+    Contains White & Grey boxes
+   ======================================= */
+
+.white-score-box,
+.grey-score-box,
+.link-score-box
+{
+    /*-webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    text-align: center;
+    width:100%;*/
+}
+
+.white-score-box 
+{
+    margin-bottom:10px;
+    padding:15px 0;
+    background:#fff;
+}
+
+.grey-score-box 
+{
+    margin-bottom:10px;
+    min-height:60px;
+    border:1px solid #cfcfcf;
+    padding:10px 0px 12px;
+    color:#737373;
+}
+
+.widget-box .grey-score-box 
+{
+    border:none;
+}
+
+.score-box-title 
+{
+    display:block;
+    text-transform: uppercase;
+    font-size:.75em;
+    line-height:1.125em;
+    margin-top:5px;
+
+}
+
+.score-box-sub-data
+{
+    text-transform: none;
+}
+
+.white-score-box > .score-box-title,
+.score-box-title.lrg-score 
+{
+    font-size:1.25em;
+    line-height:2em;
+    font-weight:bold;
+}
+
+.grey-score-box > .score-box-title 
+{
+    font-size:.75em;
+}
+
+.score-box-number 
+{
+    display:block;
+    font-weight:700;
+    letter-spacing:-1px;
+    font-size:1.5em;
+    line-height: .75em;
+}
+
+.grey-score-box  .score-box-number 
+{
+    font-size:1.5em;
+    line-height: .75em;
+}
+
+.white-score-box > .score-box-number,
+.score-box-number.lrg-score 
+{
+    font-size:3em;
+    line-height:1em;
+    letter-spacing: -2px;
+}
+
+
+
+/* == NEW CLICKABLE SCORE BOXES == */
+.link-score-box 
+{
+/*    padding:15px 0;
+    border:1px solid #1eb9f0;
+    -moz-transition: background .2s, border-color .2s;
+    -webkit-transition: background .2s, border-color .2s;
+    transition: background .2s, border-color .2s;*/
+}
+
+.link-score-box:hover 
+{
+    cursor:pointer;
+    background-color:#fff;
+    border:1px solid #1eb9f0;
+}
+
+.link-score-box.is-active 
+{
+    position:relative;
+    background:#fff;
+    /*border-color: #fff;*/
+    /*border:1px solid #1eb9f0;*/
+    border:2px solid #E4E4E4;
+}
+
+
+/* == NEW SCORES WITHOUT BOXES == */
+.score-number 
+{
+    display:block;
+    font-size:.875em;
+    line-height:16px;
+    font-weight:bold;   
+}
+
+.score-title 
+{
+    display:block;
+    font-size:.75em;
+    line-height:14px;
+}

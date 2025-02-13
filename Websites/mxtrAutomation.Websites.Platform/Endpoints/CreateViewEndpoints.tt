@@ -1,0 +1,4 @@
+﻿<#@ include file="../../../Projects/mxtrAutomation.Web.Common/Templates/CreateViewEndpoints.tt" #>
+<#
+	CreateViewEndpoints("ViewEndpoints.xml");
+#>

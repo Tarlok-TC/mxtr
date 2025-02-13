@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MainLayoutEndpoints>
+
+  <Endpoint Name="SiteTopNav" Folder="Shared" Type="Partial" />
+
+  <Endpoint Name="Login" Folder="Login" Type="MainLayout" />
+  
+  <Endpoint Name="AdminAddAccount" Folder="Admin" Type="MainLayout" />
+  <Endpoint Name="AdminAccountUserManagement" Folder="Admin" Type="MainLayout" />
+  <Endpoint Name="AdminEditAccount" Folder="Admin" Type="MainLayout" />
+
+  <Endpoint Name="AccountProfile" Folder="Account" Type="Partial" />
+  <Endpoint Name="AccountAttributes" Folder="Account" Type="Partial" />
+  <Endpoint Name="AccountUsers" Folder="Account" Type="Partial" />
+
+  <Endpoint Name="Dashboard" Folder="Dashboard" Type="MainLayout" />
+  
+  <Endpoint Name="WorkspaceFilter" Folder="Shared" Type="Partial" />
+
+  <Endpoint Name="Leads" Folder="Leads" Type="MainLayout" />
+  <Endpoint Name="Lead" Folder="Leads" Type="MainLayout" />
+  <Endpoint Name="Activity" Folder="Activity" Type="MainLayout" />
+  <Endpoint Name="Campaing" Folder="Campaing" Type="MainLayout" />
+  <Endpoint Name="Retailers" Folder="Retailers" Type="MainLayout" />
+  <Endpoint Name="Contacts" Folder="Contacts" Type="MainLayout" />
+  <Endpoint Name="Contact" Folder="Contact" Type="MainLayout" />
+  <Endpoint Name="Email" Folder="Email" Type="MainLayout" />
+  <Endpoint Name="Index" Folder="Index" Type="MainLayout" />
+  <Endpoint Name="Creative" Folder="Email" Type="MainLayout" />
+  <Endpoint Name="DMAPerformance" Folder="DMA" Type="MainLayout" />
+  <Endpoint Name="Detailed" Folder="DMA" Type="MainLayout" />
+  <Endpoint Name="RegionPerformance" Folder="RegionPerformance" Type="MainLayout" />
+  <Endpoint Name="RetailersOverview" Folder="Retailers" Type="MainLayout" />
+
+</MainLayoutEndpoints>

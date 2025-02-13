@@ -1,0 +1,9 @@
+{
+    "Request": "UpdateCustomer",
+    "CustomerID": 2422,
+    "tblCustomers": [
+        {
+            "State": "VT"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "Request": "UpdateBuilding",
+    "BuildingID": 2639,
+    "tblBuilding": [
+        {
+            "State": "VT"
+        }
+    ]
+}
