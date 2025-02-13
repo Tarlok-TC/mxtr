@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Sharpspring", "mxtrAutomation.Sharpspring\mxtrAutomation.Sharpspring.csproj", "{F1BA28C3-ACBD-43E5-9BA4-64CA4552C78D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4510EF12-C630-42B2-B1B6-48A3E94AC06A} = {4510EF12-C630-42B2-B1B6-48A3E94AC06A}
+		{077CB92A-235F-4C47-9838-03210B6DE6DC} = {077CB92A-235F-4C47-9838-03210B6DE6DC}
+		{257EF99B-AB79-4B09-B720-47DE2B400809} = {257EF99B-AB79-4B09-B720-47DE2B400809}
+		{C47E5BA4-4D1F-423F-8CEE-5803AE15475F} = {C47E5BA4-4D1F-423F-8CEE-5803AE15475F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Common", "..\..\Projects\mxtrAutomation.Common\mxtrAutomation.Common.csproj", "{257EF99B-AB79-4B09-B720-47DE2B400809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Corporate.Data", "..\..\Projects\mxtrAutomation.Corporate.Data\mxtrAutomation.Corporate.Data.csproj", "{4510EF12-C630-42B2-B1B6-48A3E94AC06A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Data", "..\..\Projects\mxtrAutomation.Data\mxtrAutomation.Data.csproj", "{C47E5BA4-4D1F-423F-8CEE-5803AE15475F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Web.Common", "..\..\Projects\mxtrAutomation.Web.Common\mxtrAutomation.Web.Common.csproj", "{077CB92A-235F-4C47-9838-03210B6DE6DC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{257EF99B-AB79-4B09-B720-47DE2B400809} = {257EF99B-AB79-4B09-B720-47DE2B400809}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Api", "..\..\Projects\mxtrAutomation.Api\mxtrAutomation.Api.csproj", "{47518546-4925-4926-B65B-93DC6C5D646B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.Bullseye", "mxtrAutomation.Bullseye\mxtrAutomation.Bullseye.csproj", "{33195E68-E5F5-4672-837F-4398A7F5EBB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E06E57CB-E76D-4029-88E5-6F7D0ECDE92C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mxtrAutomation.EZShred", "..\..\..\Proshred\Code\LatestProshred\Apps\mxtrAutomation.Miners\mxtrAutomation.EZShred\mxtrAutomation.EZShred.csproj", "{C502EFB5-BA88-4CDA-80A7-6A52E85D46A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1BA28C3-ACBD-43E5-9BA4-64CA4552C78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1BA28C3-ACBD-43E5-9BA4-64CA4552C78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1BA28C3-ACBD-43E5-9BA4-64CA4552C78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1BA28C3-ACBD-43E5-9BA4-64CA4552C78D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257EF99B-AB79-4B09-B720-47DE2B400809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257EF99B-AB79-4B09-B720-47DE2B400809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257EF99B-AB79-4B09-B720-47DE2B400809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257EF99B-AB79-4B09-B720-47DE2B400809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4510EF12-C630-42B2-B1B6-48A3E94AC06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4510EF12-C630-42B2-B1B6-48A3E94AC06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4510EF12-C630-42B2-B1B6-48A3E94AC06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4510EF12-C630-42B2-B1B6-48A3E94AC06A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C47E5BA4-4D1F-423F-8CEE-5803AE15475F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C47E5BA4-4D1F-423F-8CEE-5803AE15475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C47E5BA4-4D1F-423F-8CEE-5803AE15475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C47E5BA4-4D1F-423F-8CEE-5803AE15475F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077CB92A-235F-4C47-9838-03210B6DE6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077CB92A-235F-4C47-9838-03210B6DE6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077CB92A-235F-4C47-9838-03210B6DE6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077CB92A-235F-4C47-9838-03210B6DE6DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47518546-4925-4926-B65B-93DC6C5D646B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47518546-4925-4926-B65B-93DC6C5D646B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47518546-4925-4926-B65B-93DC6C5D646B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47518546-4925-4926-B65B-93DC6C5D646B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33195E68-E5F5-4672-837F-4398A7F5EBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33195E68-E5F5-4672-837F-4398A7F5EBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33195E68-E5F5-4672-837F-4398A7F5EBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33195E68-E5F5-4672-837F-4398A7F5EBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C502EFB5-BA88-4CDA-80A7-6A52E85D46A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C502EFB5-BA88-4CDA-80A7-6A52E85D46A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C502EFB5-BA88-4CDA-80A7-6A52E85D46A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C502EFB5-BA88-4CDA-80A7-6A52E85D46A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

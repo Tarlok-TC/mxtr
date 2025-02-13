@@ -1,0 +1,38 @@
+﻿<#+
+    void GenerateController(string endpointName, string folderName, string layout, string websiteName)
+    {
+	    string namespaceSuffix = folderName.Replace("/",".");
+#>
+using System.Web.Mvc;
+using mxtrAutomation.Websites.<#=websiteName#>.Models<#=namespaceSuffix#>.ViewModels;
+using mxtrAutomation.Websites.<#=websiteName#>.Queries;
+using mxtrAutomation.Websites.<#=websiteName#>.UI;
+using mxtrAutomation.Websites.<#=websiteName#>.ViewModelAdapters;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.Controllers
+{
+    public class <#=endpointName#>Controller : <#=layout#>ControllerBase
+    {
+        private readonly I<#=endpointName#>ViewModelAdapter _viewModelAdapter;
+
+        public <#=endpointName#>Controller(I<#=endpointName#>ViewModelAdapter viewModelAdapter)
+        {
+            _viewModelAdapter = viewModelAdapter;
+        }
+
+        public ActionResult ViewPage(<#=endpointName#>WebQuery query)
+        {
+            // Get data...
+
+            // Adapt data...
+            <#=endpointName#>ViewModel model =
+                _viewModelAdapter.Build<#=endpointName#>ViewModel();
+
+            // Handle...
+            return View(ViewKind.<#=endpointName#>, model);
+        }
+    }
+}
+<#+
+    }
+#>

@@ -1,0 +1,50 @@
+﻿<#@ assembly name="EnvDTE" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+	void GenerateRoutes(IEnumerable<XElement> endpoints, string websiteName)
+	{
+#>
+using System.Web.Routing;
+using mxtrAutomation.Web.Common.Extensions;
+using mxtrAutomation.Websites.<#=websiteName#>.Controllers;
+using mxtrAutomation.Websites.<#=websiteName#>.Queries;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.App_Start
+{
+    public partial class RouteConfig
+    {
+        static partial void RegisterViewRoutes(RouteCollection routes)
+        {
+<#+
+            foreach (XElement endpoint in endpoints)
+			{
+			    string endpointName = endpoint.Attribute("Name").Value;
+				string type = endpoint.Attribute("Type").Value;
+				string layout = (type == "Partial" || type == "Ajax") ? string.Empty : type;
+
+				if (layout != "")
+				{
+#>
+            routes.MapWebQueryRoute<<#=endpointName#>WebQuery, <#=endpointName#>Controller>(c => c.ViewPage);
+<#+
+                }
+
+				if (type == "Ajax")
+				{
+#>
+            //routes.MapWebQueryRoute<<#=endpointName#>WebQuery, DefaultAjaxController>(c => c.<#=endpointName#>);
+<#+
+                }
+
+			}
+#>
+        }
+    }
+}
+<#+
+    }
+#>

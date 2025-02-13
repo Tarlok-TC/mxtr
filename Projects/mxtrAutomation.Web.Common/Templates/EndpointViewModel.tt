@@ -1,0 +1,21 @@
+﻿<#+
+    void GenerateViewModel(string endpointName, string folderName, string layout, string websiteName)
+    {
+	    string namespaceSuffix = folderName.Replace("/",".");
+#>
+<#+ if (layout != "") { #>
+using mxtrAutomation.Websites.<#=websiteName#>.Models.Shared.ViewModels;
+<#+ } else { #>
+using mxtrAutomation.Web.Common.UI;
+<#+ } #>
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.Models<#=namespaceSuffix#>.ViewModels
+{
+    public class <#=endpointName#>ViewModel : <#=layout#>ViewModelBase
+    {
+
+    }
+}
+<#+
+    }  
+#>

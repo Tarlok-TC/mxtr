@@ -1,0 +1,79 @@
+﻿<#@ include file="SaveOutput.tt" #>
+<#@ include file="EndpointWebQuery.tt" #>
+<#@ include file="EndpointController.tt" #>
+<#@ include file="EndpointViewModel.tt" #>
+<#@ include file="EndpointViewModelAdapter.tt" #>
+<#@ include file="EndpointView.tt" #>
+<#@ include file="EndpointRoute.tt" #>
+<#@ include file="EndpointViewModelAdapterModule.tt" #>
+<#@ include file="EndpointViewKind.tt" #>
+<#@ include file="EndpointViewCollection.tt" #>
+<#+
+
+string websiteName = "";
+
+void CreateViewEndpoints(string endpointXmlFile)
+{
+    this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+
+    Project webProject = GetWebProject();
+
+	websiteName = webProject.Name.Substring("mxtrAutomation.Websites.".Length);;
+
+    string rootDirectory = Path.GetDirectoryName(webProject.FullName);
+	string endpointDirectory = Path.Combine(rootDirectory, "Endpoints");
+
+	XElement xElement = XElement.Load(Path.Combine(endpointDirectory, endpointXmlFile));
+	
+    foreach (var element in xElement.Elements())
+    {
+        string name = element.Attribute("Name").Value;
+        string folder = element.Attribute("Folder").Value;
+		string type = element.Attribute("Type").Value;
+        string layout = (type == "Partial" || type == "Ajax") ? string.Empty : type;
+
+		if (folder != null && folder != "")
+		    folder = "/" + folder;
+
+		if (type != "Partial")
+		{
+			GenerateWebQuery(name, websiteName);
+			SaveOutput("Queries", name + "WebQuery.cs", false);
+        }
+
+		if (layout != "")
+		{
+			GenerateController(name, folder, layout, websiteName);
+			SaveOutput("Controllers", name + "Controller.cs", false);
+		}
+		
+		GenerateViewModel(name, folder, layout, websiteName);
+		SaveOutput("Models" + folder + "/ViewModels", name + "ViewModel.cs", false);
+		GetProjectFolder("Models" + folder + "/ViewData");
+
+		GenerateViewModelAdapter(name, folder, layout, websiteName);
+		SaveOutput("ViewModelAdapters", name + "ViewModelAdapter.cs", false);
+
+		if (type != "Ajax")
+		{
+		    GenerateView(name, folder, layout, websiteName);
+		    SaveOutput("Views" + folder, name + ".cshtml", false);
+		}
+    }
+
+    GenerateRoutes(xElement.Elements(), websiteName);
+	SaveOutput("App_Start", "RouteConfig.cs", "RouteConfig.generated.cs", true);
+
+	GenerateViewModelAdapterModule(xElement.Elements(), websiteName);
+	SaveOutput("Ioc", "ViewModelAdapterModule.cs", "ViewModelAdapterModule.generated.cs", true);
+
+    GenerateViewKinds(xElement.Elements(), websiteName);
+	SaveOutput("UI", "ViewKind.cs", "ViewKind.generated.cs", true);
+
+	GenerateViewCollection(xElement.Elements(), websiteName);
+	SaveOutput("UI", "ViewCollection.cs", "ViewCollection.generated.cs", true);
+
+	//GenerateAjaxController(xElement.Elements(), websiteName);
+	//SaveOutput("Controllers", "DefaultAjaxController.cs", "DefaultAjaxController.generated.cs", false);
+}
+#>

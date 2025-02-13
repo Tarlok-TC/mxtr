@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{077CB92A-235F-4C47-9838-03210B6DE6DC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mxtrAutomation.Web.Common</RootNamespace>
+    <AssemblyName>mxtrAutomation.Web.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Websites\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="mxtrAutomation.Common">
+      <HintPath>..\mxtrAutomation.Common\bin\Debug\mxtrAutomation.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Websites\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionFilters\CustomContentTypeAttribute.cs" />
+    <Compile Include="Attributes\CanonicalAttribute.cs" />
+    <Compile Include="Attributes\RequireEnvironmentAttribute.cs" />
+    <Compile Include="Attributes\RequireLoginAttribute.cs" />
+    <Compile Include="Attributes\SecureEndpointAttribute.cs" />
+    <Compile Include="Authentication\mxtrAutomationFormsIdentity.cs" />
+    <Compile Include="Authentication\mxtrAutomationPrincipal.cs" />
+    <Compile Include="Authentication\ImxtrAutomationIdentity.cs" />
+    <Compile Include="Authentication\ImxtrAutomationPrincipal.cs" />
+    <Compile Include="Enums\DeviceKind.cs" />
+    <Compile Include="Extensions\Base64Extensions.cs" />
+    <Compile Include="Extensions\CookieExtensions.cs" />
+    <Compile Include="Extensions\EndpointExtensions.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
+    <Compile Include="Extensions\JsonExtensions.cs" />
+    <Compile Include="Extensions\QueryExtensions.cs" />
+    <Compile Include="Extensions\RouteCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TagBuilderExtensions.cs" />
+    <Compile Include="Extensions\UriExtensions.cs" />
+    <Compile Include="Extensions\ViewLinkExtensions.cs" />
+    <Compile Include="mxtrAutomationHttpApplication.cs" />
+    <Compile Include="Helpers\AdTrakWebImage.cs" />
+    <Compile Include="Helpers\AjaxLink.cs" />
+    <Compile Include="Helpers\ListItemLink.cs" />
+    <Compile Include="Helpers\LongUri.cs" />
+    <Compile Include="Helpers\PageLink.cs" />
+    <Compile Include="Helpers\SelectableViewLink.cs" />
+    <Compile Include="Helpers\ViewLink.cs" />
+    <Compile Include="Helpers\WebImage.cs" />
+    <Compile Include="HttpHandlers\SiteMapHandler.cs" />
+    <Compile Include="HttpModules\UrlFilterHttpModule.cs" />
+    <Compile Include="Ioc\NinjectDependencyResolver.cs" />
+    <Compile Include="Ioc\WebCommonModule.cs" />
+    <Compile Include="Ioc\WebCommonServiceModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\EmailQueryStringParameter.cs" />
+    <Compile Include="Queries\EndpointFilterAttributeBase.cs" />
+    <Compile Include="Queries\EnumListQueryStringParameter.cs" />
+    <Compile Include="Queries\FacebookWebQuery.cs" />
+    <Compile Include="Queries\FeedburnerWebQuery.cs" />
+    <Compile Include="Queries\GooglePlusWebQuery.cs" />
+    <Compile Include="Queries\GuidListQueryStringParameter.cs" />
+    <Compile Include="Queries\IHave301Redirects.cs" />
+    <Compile Include="Queries\IHaveAStaticView.cs" />
+    <Compile Include="Queries\IUrlParameter.cs" />
+    <Compile Include="Queries\LinkedInWebQuery.cs" />
+    <Compile Include="Queries\ListQueryStringParameter.cs" />
+    <Compile Include="Queries\PinterestWebQuery.cs" />
+    <Compile Include="Queries\QueryBase.cs" />
+    <Compile Include="Queries\QueryParameters.cs" />
+    <Compile Include="Queries\QueryStringParameter.cs" />
+    <Compile Include="Queries\RegexQueryStringParameter.cs" />
+    <Compile Include="Queries\SerializationHelpers.cs" />
+    <Compile Include="Queries\StringListQueryStringParameter.cs" />
+    <Compile Include="Queries\TwitterWebQuery.cs" />
+    <Compile Include="Queries\UrlHashParameter.cs" />
+    <Compile Include="Queries\UrlParameterBase.cs" />
+    <Compile Include="Queries\UrlPathParameter.cs" />
+    <Compile Include="Queries\WebQueryBase.cs" />
+    <Compile Include="Queries\WebQueryRoute.cs" />
+    <Compile Include="Queries\YouTubeWebQuery.cs" />
+    <Compile Include="Services\CacheService.cs" />
+    <Compile Include="Services\ICacheService.cs" />
+    <Compile Include="Services\IHaveSeoInfo.cs" />
+    <Compile Include="Services\ISeoService.cs" />
+    <Compile Include="Services\SeoInfo.cs" />
+    <Compile Include="Services\SeoService.cs" />
+    <Compile Include="Services\SiteMapUrl.cs" />
+    <Compile Include="Templates\CreateViewEndpoints2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateViewEndpoints.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointAjaxController2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointAjaxController.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointController2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointController.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointRoute2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointRoute.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointView2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointView.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointViewCollection2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointViewCollection.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointViewKind2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointViewKind.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointViewModel2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointViewModelAdapter2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointViewModelAdapter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointViewModelAdapterModule2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointViewModelAdapterModule.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\EndpointWebQuery2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EndpointWebQuery.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\SaveOutput2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaveOutput.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UI\BundleKind.cs" />
+    <Compile Include="UI\ClientResourceBase.cs" />
+    <Compile Include="UI\ClientResourceBundleManager.cs" />
+    <Compile Include="UI\ClientResourceCollection.cs" />
+    <Compile Include="UI\CommonCssKind.cs" />
+    <Compile Include="UI\CommonImageKind.cs" />
+    <Compile Include="UI\CommonJSKind.cs" />
+    <Compile Include="UI\CommonViewKind.cs" />
+    <Compile Include="UI\CssCategoryKind.cs" />
+    <Compile Include="UI\CssKindBase.cs" />
+    <Compile Include="UI\CssResource.cs" />
+    <Compile Include="UI\mxtrAutomationControllerBase.cs" />
+    <Compile Include="UI\ImageCategoryKind.cs" />
+    <Compile Include="UI\ImageKindBase.cs" />
+    <Compile Include="UI\ImageResource.cs" />
+    <Compile Include="UI\IncludedResource.cs" />
+    <Compile Include="UI\IViewCollection.cs" />
+    <Compile Include="UI\JSCategoryKind.cs" />
+    <Compile Include="UI\JSKindBase.cs" />
+    <Compile Include="UI\JSResource.cs" />
+    <Compile Include="UI\NavViewData.cs" />
+    <Compile Include="UI\ResourceKindBase.cs" />
+    <Compile Include="UI\ScriptTag.cs" />
+    <Compile Include="UI\ViewCategoryKind.cs" />
+    <Compile Include="UI\ViewKindBase.cs" />
+    <Compile Include="UI\ViewModelBase.cs" />
+    <Compile Include="UI\ViewResource.cs" />
+    <Compile Include="UI\WebViewPageBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Templates\CreateViewEndpoints.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CreateViewEndpoints2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointAjaxController.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointAjaxController2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointController.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointController2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointRoute.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointRoute2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointView.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointView2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointViewCollection.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointViewCollection2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointViewKind.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointViewKind2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointViewModel2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointViewModelAdapter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointViewModelAdapter2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointViewModelAdapterModule.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointViewModelAdapterModule2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\EndpointWebQuery.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EndpointWebQuery2.cs</LastGenOutput>
+    </None>
+    <None Include="Templates\SaveOutput.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SaveOutput2.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

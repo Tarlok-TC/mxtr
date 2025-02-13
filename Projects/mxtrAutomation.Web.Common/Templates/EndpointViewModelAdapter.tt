@@ -1,0 +1,54 @@
+﻿<#+
+    void GenerateViewModelAdapter(string endpointName, string folderName, string layout, string websiteName)
+    {
+	    string namespaceSuffix = folderName.Replace("/",".");
+#>
+using mxtrAutomation.Websites.<#=websiteName#>.Models<#=namespaceSuffix#>.ViewModels;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.ViewModelAdapters
+{
+    public interface I<#=endpointName#>ViewModelAdapter
+    {
+        <#=endpointName#>ViewModel Build<#=endpointName#>ViewModel();
+    }
+
+    public class <#=endpointName#>ViewModelAdapter : I<#=endpointName#>ViewModelAdapter
+    {
+        public <#=endpointName#>ViewModel Build<#=endpointName#>ViewModel()
+        {
+            <#=endpointName#>ViewModel model = new <#=endpointName#>ViewModel();        
+
+<#+
+	if (layout.Contains("Layout"))
+	{
+#>
+            AddPageTitle(model);
+<#+
+	}
+	else
+	{
+#>
+			// Add stuff here...
+<#+
+    }
+#>
+
+            return model;
+        }
+<#+
+	if (layout.Contains("Layout"))
+	{
+#>
+
+        public void AddPageTitle(<#=endpointName#>ViewModel model)
+        {
+            model.PageTitle = "<#=endpointName#>";
+        }
+<#+
+	}
+#>
+    }
+}
+<#+
+    }  
+#>

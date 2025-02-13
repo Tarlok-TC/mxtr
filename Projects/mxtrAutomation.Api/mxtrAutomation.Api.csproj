@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47518546-4925-4926-B65B-93DC6C5D646B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mxtrAutomation.Api</RootNamespace>
+    <AssemblyName>mxtrAutomation.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Websites\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EasyHttp, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Apps\mxtrAutomation.Miners\packages\EasyHttp.1.7.0\lib\net40\EasyHttp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Apis">
+      <HintPath>..\..\Websites\packages\Google.Apis.1.24.1\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.AnalyticsReporting.v4">
+      <HintPath>..\..\Websites\packages\Google.Apis.AnalyticsReporting.v4.1.24.1.798\lib\net45\Google.Apis.AnalyticsReporting.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth">
+      <HintPath>..\..\Websites\packages\Google.Apis.Auth.1.24.1\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices">
+      <HintPath>..\..\Websites\packages\Google.Apis.Auth.1.24.1\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core">
+      <HintPath>..\..\Websites\packages\Google.Apis.Core.1.24.1\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices">
+      <HintPath>..\..\Websites\packages\Google.Apis.1.24.1\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx, Version=2.0.1209.2802, Culture=neutral, PublicKeyToken=315052dd637f8a52, processorArchitecture=MSIL">
+      <HintPath>..\..\Apps\mxtrAutomation.Miners\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\..\Websites\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Zlib.Portable">
+      <HintPath>..\..\Websites\packages\Zlib.Portable.Signed.1.11.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bullseye\BullseyeAccountDataModel.cs" />
+    <Compile Include="Bullseye\BullseyeAccountSearchModel.cs" />
+    <Compile Include="Bullseye\BullseyeApi.cs" />
+    <Compile Include="Bullseye\IBullseyeApi.cs" />
+    <Compile Include="Bullseye\RestSearchResponseLogDataModel.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="EZShred\BuildingDataModel.cs" />
+    <Compile Include="EZShred\CustomerDataModel.cs" />
+    <Compile Include="EZShred\EZShredApi.cs" />
+    <Compile Include="EZShred\IEZShredApi.cs" />
+    <Compile Include="EZShred\TicketsForTheNextDayDataModel.cs" />
+    <Compile Include="EZShred\ZIPDataModel.cs" />
+    <Compile Include="Ioc\ApiAdapterModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BullseyeService.cs" />
+    <Compile Include="Services\EZShredService.cs" />
+    <Compile Include="Services\GoogleReportingService.cs" />
+    <Compile Include="Services\SharpspringService.cs" />
+    <Compile Include="Sharpspring\ActionKind.cs" />
+    <Compile Include="Sharpspring\ISharpspringApi.cs" />
+    <Compile Include="Sharpspring\SharpspringApi.cs" />
+    <Compile Include="Sharpspring\SharpspringGetActiveListDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringCampaignDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringCustomFieldKind.cs" />
+    <Compile Include="Sharpspring\SharpspringDealStageDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringEmailDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringEmailEventDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringEmailJobDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringEventDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringFieldLabelDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringLeadDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringMethodKinds.cs" />
+    <Compile Include="Sharpspring\SharpspringOpportunityDataModel.cs" />
+    <Compile Include="Sharpspring\SharpspringUserProfileDataModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\mxtrAutomation.Common\mxtrAutomation.Common.csproj">
+      <Project>{257ef99b-ab79-4b09-b720-47de2b400809}</Project>
+      <Name>mxtrAutomation.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\mxtrAutomation.Web.Common\mxtrAutomation.Web.Common.csproj">
+      <Project>{077cb92a-235f-4c47-9838-03210b6de6dc}</Project>
+      <Name>mxtrAutomation.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

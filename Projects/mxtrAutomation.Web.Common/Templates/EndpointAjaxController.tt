@@ -1,0 +1,25 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+	void GenerateAjaxController(IEnumerable<XElement> endpoints, string websiteName)
+	{
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using mxtrAutomation.Websites.<#=websiteName#>.Queries;
+using mxtrAutomation.Websites.<#=websiteName#>.ViewModelAdapters;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.Controllers
+{
+    public partial class DefaultAjaxController
+    {
+	}
+}
+<#+
+	}
+#>

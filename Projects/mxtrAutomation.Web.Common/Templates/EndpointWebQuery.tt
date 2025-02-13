@@ -1,0 +1,16 @@
+﻿<#+
+    void GenerateWebQuery(string endpointName, string websiteName)
+    {
+#>
+using mxtrAutomation.Web.Common.Queries;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.Queries
+{
+    public class <#=endpointName#>WebQuery : WebQueryBase
+    {
+        public static readonly string Route = "/<#=endpointName#>";
+    }
+}
+<#+
+    }  
+#>

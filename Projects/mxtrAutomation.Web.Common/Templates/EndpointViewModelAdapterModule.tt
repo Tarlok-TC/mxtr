@@ -1,0 +1,31 @@
+﻿<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#+
+	void GenerateViewModelAdapterModule(IEnumerable<XElement> endpoints, string websiteName)
+	{
+#>
+using mxtrAutomation.Websites.<#=websiteName#>.ViewModelAdapters;
+
+namespace mxtrAutomation.Websites.<#=websiteName#>.Ioc
+{
+    public partial class ViewModelAdapterModule
+    {
+        partial void LoadViews()
+        {
+<#+
+            foreach (XElement endpoint in endpoints)
+			{
+			    string endpointName = endpoint.Attribute("Name").Value;
+#>
+            Bind<I<#=endpointName#>ViewModelAdapter>().To<<#=endpointName#>ViewModelAdapter>().InSingletonScope();
+<#+
+            }
+#>
+        }
+    }
+}
+<#+
+	}
+#>

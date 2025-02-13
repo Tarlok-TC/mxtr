@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{257EF99B-AB79-4B09-B720-47DE2B400809}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>mxtrAutomation.Common</RootNamespace>
+    <AssemblyName>mxtrAutomation.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Websites\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LINQtoCSV">
+      <HintPath>packages\LINQtoCSV.1.5.0.0\lib\net35\LINQtoCSV.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Websites\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adapter\AdapterBase.cs" />
+    <Compile Include="Adapter\AdapterModuleBase.cs" />
+    <Compile Include="Adapter\DataSetAdapter.cs" />
+    <Compile Include="Adapter\IAdapter.cs" />
+    <Compile Include="Adapter\IdentityProjectionAdapter.cs" />
+    <Compile Include="Adapter\IProjection.cs" />
+    <Compile Include="Adapter\IProjectionAdapter.cs" />
+    <Compile Include="Adapter\ProjectionAdapter.cs" />
+    <Compile Include="Attributes\ActiveAttribute.cs" />
+    <Compile Include="Attributes\BoolValueAttribute.cs" />
+    <Compile Include="Attributes\CampaignCategoryLeftAttribute.cs" />
+    <Compile Include="Attributes\CampaignCategoryRightAttribute.cs" />
+    <Compile Include="Attributes\CssClassAttribute.cs" />
+    <Compile Include="Attributes\DisplayAttribute.cs" />
+    <Compile Include="Attributes\FriendlyUrlAttribute.cs" />
+    <Compile Include="Attributes\ReportDateSubtractAttribute.cs" />
+    <Compile Include="Attributes\StringValueAttribute.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Codebase\DevelopmentEnvironment.cs" />
+    <Compile Include="Codebase\EnvironmentBase.cs" />
+    <Compile Include="Codebase\IEnvironment.cs" />
+    <Compile Include="Codebase\ProductionEnvironment.cs" />
+    <Compile Include="Collections\CountedEnumerable.cs" />
+    <Compile Include="Collections\ICountedEnumerable.cs" />
+    <Compile Include="Downloader\DownloaderBase.cs" />
+    <Compile Include="Downloader\DownloaderResponse.cs" />
+    <Compile Include="Downloader\DownloaderResponseStream.cs" />
+    <Compile Include="Downloader\HttpDownloader.cs" />
+    <Compile Include="Downloader\IDownloader.cs" />
+    <Compile Include="Dto\ChartDatasetDataModel.cs" />
+    <Compile Include="Dto\LineChartDataModel.cs" />
+    <Compile Include="Dto\LineChartItem.cs" />
+    <Compile Include="Enums\EZShredDataType.cs" />
+    <Compile Include="Extensions\ClassExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DataSetExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\IntegerExtensions.cs" />
+    <Compile Include="Extensions\PagingExtensions.cs" />
+    <Compile Include="Extensions\PredicateBuilder.cs" />
+    <Compile Include="Extensions\PropertyGetterExtension.cs" />
+    <Compile Include="Extensions\StringBuilderExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="Ioc\CommonAdapterModule.cs" />
+    <Compile Include="Ioc\CommonModule.cs" />
+    <Compile Include="Ioc\CommonServicesModule.cs" />
+    <Compile Include="Ioc\LazyInjected.cs" />
+    <Compile Include="Ioc\NinjectServiceLocator.cs" />
+    <Compile Include="Ioc\ServiceLocator.cs" />
+    <Compile Include="Ioc\ServiceModuleBase.cs" />
+    <Compile Include="Items\CacheBase.cs" />
+    <Compile Include="Items\CustomDataTypeBase.cs" />
+    <Compile Include="Items\DictionaryCacheDictionary.cs" />
+    <Compile Include="Items\EndedItem.cs" />
+    <Compile Include="Items\ICache.cs" />
+    <Compile Include="Items\LazyTypeSpecificCache.cs" />
+    <Compile Include="Items\RuntimeCacheDictionary.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularExpressions.cs" />
+    <Compile Include="Services\DevEmailer.cs" />
+    <Compile Include="Services\EmailerBase.cs" />
+    <Compile Include="Services\IEmailer.cs" />
+    <Compile Include="Tests\UnitTestContext.cs" />
+    <Compile Include="Tests\UnitTestContextWithKernel.cs" />
+    <Compile Include="Utils\AesEncryptor.cs" />
+    <Compile Include="Utils\CipherUtility.cs" />
+    <Compile Include="Utils\ConfigManager.cs" />
+    <Compile Include="Utils\CreditCard.cs" />
+    <Compile Include="Utils\CreditCardType.cs" />
+    <Compile Include="Utils\CsvContext.cs" />
+    <Compile Include="Utils\CsvDataRow.cs" />
+    <Compile Include="Utils\DateRange.cs" />
+    <Compile Include="Utils\DateRangeBase.cs" />
+    <Compile Include="Utils\DateTimeRange.cs" />
+    <Compile Include="Utils\DefaultConfigManager.cs" />
+    <Compile Include="Utils\EnumUtils.cs" />
+    <Compile Include="Utils\FileUtils.cs" />
+    <Compile Include="Utils\mxtrAutomationMath.cs" />
+    <Compile Include="Utils\HashedPassword.cs" />
+    <Compile Include="Utils\Hasher.cs" />
+    <Compile Include="Utils\HtmlElement.cs" />
+    <Compile Include="Utils\HtmlParser.cs" />
+    <Compile Include="Utils\IConfigManager.cs" />
+    <Compile Include="Utils\ILogger.cs" />
+    <Compile Include="Utils\IPhoneNumber.cs" />
+    <Compile Include="Utils\Log4NetLogger.cs" />
+    <Compile Include="Utils\Logger.cs" />
+    <Compile Include="Utils\LoggerBase.cs" />
+    <Compile Include="Utils\MaskedCreditCard.cs" />
+    <Compile Include="Utils\NinjectUtils.cs" />
+    <Compile Include="Utils\NullPhoneNumber.cs" />
+    <Compile Include="Utils\Password.cs" />
+    <Compile Include="Utils\PhoneNumber.cs" />
+    <Compile Include="Utils\Polarity.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\StringValidator.cs" />
+    <Compile Include="Utils\Trend.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

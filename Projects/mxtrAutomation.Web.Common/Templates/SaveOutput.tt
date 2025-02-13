@@ -1,0 +1,98 @@
+﻿<#@ template language="C#" hostspecific="true" #>
+<#@ assembly name="EnvDTE" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ assembly name="System.Xml.Linq" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="EnvDTE" #>
+<#@ import namespace="System.Xml.Linq" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#+
+  void SaveOutput(string folderName, string fileName, bool overwrite)
+  {
+      SaveOutput(folderName, string.Empty, fileName, overwrite);
+  }
+
+  void SaveOutput(string folderName, string parentFileName, string fileName, bool overwrite)
+  {
+	  Project webProject = GetWebProject();
+
+      string templateDirectory = Path.GetDirectoryName(Host.TemplateFile);
+	  string rootDirectory = Path.GetDirectoryName(webProject.FullName);
+	  string folderPath = Path.Combine(rootDirectory, folderName);
+
+	  if (parentFileName != null && parentFileName != string.Empty)
+	      folderName = folderName + "/" + parentFileName;
+
+	  ProjectItem parentFolder = GetProjectFolder(folderName);
+
+	  if (overwrite || !File.Exists(Path.Combine(folderPath, fileName)))
+	  {
+	      File.Delete(Path.Combine(folderPath, fileName));
+
+          string tempFilePath = Path.Combine(templateDirectory, fileName);
+		  File.WriteAllText(tempFilePath, this.GenerationEnvironment.ToString()); 
+		  parentFolder.ProjectItems.AddFromFileCopy(tempFilePath);
+		  File.Delete(tempFilePath);
+      }
+
+      this.GenerationEnvironment.Remove(0, this.GenerationEnvironment.Length);
+  }
+
+    ProjectItem GetProjectFolder(string folderName)
+	{
+        Project webProject = GetWebProject();
+
+		string[] folders = folderName.Split('/');
+
+        ProjectItem currentFolder = webProject.ProjectItems.Item(folders[0]);
+        for (int i = 1; i < folders.Length; i++)
+            currentFolder = GetOrCreateFolder(currentFolder, folders[i]);
+
+		return currentFolder;
+	}
+
+	ProjectItem GetOrCreateFolder(ProjectItem parentFolder, string folderName)
+	{
+	    foreach (ProjectItem item in parentFolder.ProjectItems)
+		{
+            if (item.Name == folderName)
+                return item;
+		}
+
+	    return parentFolder.ProjectItems.AddFolder(folderName);
+	}
+
+	bool HasProperty(Properties properties, string propertyName) {
+		if (properties != null) {
+			foreach (Property item in properties) {
+				if (item != null && item.Name == propertyName)
+					return true;
+			}
+		}
+		return false;
+	}
+
+	Project GetWebProject()
+	{
+	  IServiceProvider serviceProvider = (IServiceProvider)this.Host;
+	  EnvDTE.DTE dte = (EnvDTE.DTE) serviceProvider.GetService(typeof(EnvDTE.DTE));
+
+	  foreach (Project p in dte.Solution.Projects)
+	  {
+		  if (HasProperty(p.Properties, "RootNamespace"))
+		  {
+			  string rootNamespace = p.Properties.Item("RootNamespace").Value.ToString();
+			  
+			  if (rootNamespace.StartsWith("mxtrAutomation.Websites."))
+				  return p;
+		  }
+	  }
+
+	  return null;
+	}
+#>

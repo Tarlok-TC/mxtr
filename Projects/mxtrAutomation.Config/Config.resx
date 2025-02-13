@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="GCT063_AmazoneS3AccessKey" xml:space="preserve">
+    <value>AKIAJGQPXZIOUMOBFRLA</value>
+  </data>
+  <data name="GCT063_AmazoneS3BucketName" xml:space="preserve">
+    <value>mxtrlogobucket-test</value>
+  </data>
+  <data name="GCT063_AmazoneS3SecretAccessKey" xml:space="preserve">
+    <value>tN62uRfg/iJn042M0aTnWyDN5zWThdzHuSp7CNgM</value>
+  </data>
+  <data name="GCT063_AmazoneS3ServiceURL" xml:space="preserve">
+    <value>http://s3-external-1.amazonaws.com</value>
+  </data>
+  <data name="GCT063_BullseyeBaseUrl" xml:space="preserve">
+    <value>http://ws.bullseyelocations.com/RestSearch.svc/</value>
+  </data>
+  <data name="GCT063_BullseyeFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GCT063_ClientId" xml:space="preserve">
+    <value>481417419299-4kp5gue9go2048mg98fksiluijhtbmgh.apps.googleusercontent.com</value>
+  </data>
+  <data name="GCT063_ClientSecret" xml:space="preserve">
+    <value>ZSWJVntrM8C3O3HEaUOvkIcV</value>
+  </data>
+  <data name="GCT063_DoProcessEmail" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="GCT063_Environment" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="GCT063_GAFilePath" xml:space="preserve">
+    <value>~/GAFiles/</value>
+  </data>
+  <data name="GCT063_GAMinerFilePath" xml:space="preserve">
+    <value>D:\GraycellTech\GITProjects\Mxtrautomation\Websites\mxtrAutomation.Websites.Platform\GAFiles\</value>
+  </data>
+  <data name="GCT063_GoogleAnalyticsFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GCT063_Lookback" xml:space="preserve">
+    <value>150</value>
+  </data>
+  <data name="GCT063_MinnerRunMultipleTimes" xml:space="preserve">
+    <value>5:50,13:00,13:30</value>
+  </data>
+  <data name="GCT063_MinnerRunTimeZone" xml:space="preserve">
+    <value>India Standard Time</value>
+  </data>
+  <data name="GCT063_MongoServerSettings" xml:space="preserve">
+    <value>mongodb://localhost/mxtrAutomation</value>
+  </data>
+  <data name="GCT063_SharpspringBaseUrl" xml:space="preserve">
+    <value>https://api.sharpspring.com/pubapi/v1/</value>
+  </data>
+  <data name="GCT063_SharpspringFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="MXTR-Staging_AmazoneS3AccessKey" xml:space="preserve">
+    <value>AKIAJGQPXZIOUMOBFRLA</value>
+  </data>
+  <data name="MXTR-Staging_AmazoneS3BucketName" xml:space="preserve">
+    <value>mxtrlogobucket-test</value>
+  </data>
+  <data name="MXTR-Staging_AmazoneS3SecretAccessKey" xml:space="preserve">
+    <value>tN62uRfg/iJn042M0aTnWyDN5zWThdzHuSp7CNgM</value>
+  </data>
+  <data name="MXTR-Staging_AmazoneS3ServiceURL" xml:space="preserve">
+    <value>http://s3-external-1.amazonaws.com</value>
+  </data>
+  <data name="MXTR-Staging_BullseyeBaseUrl" xml:space="preserve">
+    <value>http://ws.bullseyelocations.com/RestSearch.svc/</value>
+  </data>
+  <data name="MXTR-Staging_BullseyeFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="MXTR-Staging_ClientId" xml:space="preserve">
+    <value>481417419299-eqqt8ffkqbadc79p9fr29loamn2t7s0m.apps.googleusercontent.com</value>
+  </data>
+  <data name="MXTR-Staging_ClientSecret" xml:space="preserve">
+    <value>fIyeNv8Cs7husZBz8qDLrMkH</value>
+  </data>
+  <data name="MXTR-Staging_DoProcessEmail" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="MXTR-Staging_Environment" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="MXTR-Staging_GAFilePath" xml:space="preserve">
+    <value>~/GAFiles/</value>
+  </data>
+  <data name="MXTR-Staging_GAMinerFilePath" xml:space="preserve">
+    <value>D:\GraycellTech\GITProjects\Mxtrautomation\Websites\mxtrAutomation.Websites.Platform\GAFiles\</value>
+  </data>
+  <data name="MXTR-Staging_GoogleAnalyticsFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="MXTR-Staging_Lookback" xml:space="preserve">
+    <value>150</value>
+  </data>
+  <data name="MXTR-Staging_MinnerRunMultipleTimes" xml:space="preserve">
+    <value>00:00,5:00,9:00,16:00,21:00</value>
+  </data>
+  <data name="MXTR-Staging_MinnerRunTimeZone" xml:space="preserve">
+    <value>India Standard Time</value>
+  </data>
+  <data name="MXTR-Staging_MongoServerSettings" xml:space="preserve">
+    <value>mongodb://localhost/mxtrAutomation</value>
+  </data>
+  <data name="MXTR-Staging_SharpspringBaseUrl" xml:space="preserve">
+    <value>https://api.sharpspring.com/pubapi/v1/</value>
+  </data>
+  <data name="MXTR-Staging_SharpspringFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_AmazoneS3AccessKey" xml:space="preserve">
+    <value>AKIAJGQPXZIOUMOBFRLA</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_AmazoneS3BucketName" xml:space="preserve">
+    <value>mxtrlogobucket-test</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_AmazoneS3SecretAccessKey" xml:space="preserve">
+    <value>tN62uRfg/iJn042M0aTnWyDN5zWThdzHuSp7CNgM</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_AmazoneS3ServiceURL" xml:space="preserve">
+    <value>http://s3-external-1.amazonaws.com</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_BullseyeBaseUrl" xml:space="preserve">
+    <value>http://ws.bullseyelocations.com/RestSearch.svc/</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_BullseyeFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_ClientId" xml:space="preserve">
+    <value>1012139051514-u57u7dddgr27ot3s6lf6evpr88b2dt98.apps.googleusercontent.com</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_ClientSecret" xml:space="preserve">
+    <value>917G7s4JYmInYLiyF8sWxT_g</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_DoProcessEmail" xml:space="preserve">
+    <value>True</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_Environment" xml:space="preserve">
+    <value>Development</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_GAFilePath" xml:space="preserve">
+    <value>~/GAFiles/</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_GAMinerFilePath" xml:space="preserve">
+    <value>C:\inetpub\wwwroot\mxtr-automation\Websites\mxtrAutomation.Websites.Platform\GAFiles\</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_GoogleAnalyticsFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_Lookback" xml:space="preserve">
+    <value>150</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_MinnerRunMultipleTimes" xml:space="preserve">
+    <value>5:50,13:00,13:30</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_MinnerRunTimeZone" xml:space="preserve">
+    <value>UTC</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_MongoServerSettings" xml:space="preserve">
+    <value>mongodb://mxtr:k8KH6KjYQuRxwY8dHHsuZ3qBGSF3onJChvLQuES9@52.91.2.172/mxtrAutomation</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_SharpspringBaseUrl" xml:space="preserve">
+    <value>https://api.sharpspring.com/pubapi/v1/</value>
+  </data>
+  <data name="WIN-7R1N18A6JNS_SharpspringFirstRunBackfillMonths" xml:space="preserve">
+    <value>1</value>
+  </data>
+</root>

@@ -1,0 +1,19 @@
+﻿<#+
+    void GenerateView(string endpointName, string folderName, string layout, string websiteName)
+    {
+	    string namespaceSuffix = folderName.Replace("/",".");
+#>
+@model mxtrAutomation.Websites.<#=websiteName#>.Models<#=namespaceSuffix#>.ViewModels.<#=endpointName#>ViewModel
+<#+ if (layout != "") { #>
+
+@{ Layout = "~/Views/Shared/<#=layout#>.cshtml"; }
+<#+ } #>
+
+@section MainContent {
+
+	<h2>I am the <#=endpointName#>.</h2>
+
+}
+<#+
+    }
+#>
